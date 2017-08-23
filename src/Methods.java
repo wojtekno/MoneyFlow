@@ -1,86 +1,80 @@
-import java.util.ArrayList;
+
+import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Methods {
-	Food food;
-	Transport transport = new Transport();
-	Treats treats;
-	Edu edu = new Edu();
-	Expenses expenses = new Expenses();
-	Entertainment entertainment = new Entertainment();
-	List<Products> listOfPurchases = new ArrayList<>();
-	Scanner scan;
-	Random generator;
-	Products products;
-	int numberOfPurchaseFinger;
+	static Products products;
+	// Food food;
+	// Transport transport;
+	// Treats treats;
+	// Edu edu = new Edu();
+	// Expenses expenses;
+	// Entertainment entertainment;
+	// List<Products> listOfPurchases = new ArrayList<>();
+	// Scanner scan;
+	static int numberOfPurchaseFinger;
+
 	Methods() {
-		scan = new Scanner(System.in);
-		generator = new Random();
+		// scan = new Scanner(System.in);
 	}
 
-	void nextPurchase() {
+	static void nextPurchase(List<Products> list, Scanner scan) {
 		int choice;
-		do {
-			System.out.println("choose what you bought\n1-food\n2treats\n\n0-close");
-			 choice = scan.nextInt();
+		// do {
+		System.out.println("choose what you bought\n1-food\n2treats\n\n0-close");
+		choice = scan.nextInt();
 		while (choice != 0) {
 			if (choice == 1) {
-				food = new Food();
-				// food.setCost(generator.nextFloat()) ;
-				// food.setDate((generator.nextInt(11) + 1) + ":" +
-				// (generator.nextInt(30) + 1));
-				listOfPurchases.add(food);
+				list.add(new Food());
 			}
 			if (choice == 2) {
-				treats = new Treats();
-				// food.setCost(generator.nextFloat()) ;
-				// food.setDate((generator.nextInt(11) + 1) + ":" +
-				// (generator.nextInt(30) + 1));
-				listOfPurchases.add(treats);
+				list.add(new Treats());
 			}
 			choice = scan.nextInt();
-			numberOfPurchaseFinger ++;
+			numberOfPurchaseFinger++;
+			System.out.println(numberOfPurchaseFinger);
 		}
-		} while (choice != 0);
-		// System.out.println("You paid: " + cost + " on " + date );
+		// } while (choice != 0);
+
 	}
 
-	 //tworzy tylko 6 objektow, czy 6*9 tylko takie same?
-	 void createListOf54() {
-	 for (int i = 0; i < 9; i++) {
-		 food = new Food();
-		 treats = new Treats();
-	 listOfPurchases.add(new Food());
-	 listOfPurchases.add(edu);
-	 listOfPurchases.add(treats);
-	 listOfPurchases.add(entertainment);
-	 listOfPurchases.add(expenses);
-	 listOfPurchases.add(transport);
-	 }
-	
-	 }
+	// creates 9*6 objects
+	static void createListOf54(List<Products> list) {
+		for (int i = 0; i < 9; i++) {
+			list.add(new Food());
+			list.add(new Edu());
+			list.add(new Treats());
+			list.add(new Entertainment());
+			list.add(new Expenses());
+			list.add(new Transport());
+		}
 
-	void printListOfXItems(int x) {
+	}
+
+	static void printListOfXItems(int x, List<Products> list) {
 		for (int i = 0; i < x; i++) {
-			System.out.println(listOfPurchases.get(i));
+			System.out.println(list.get(i));
 		}
 	}
 
-	void printListMoreExpansiveThanX(int x) {
-		for (int i = 0; i < listOfPurchases.size(); i++) {
-			if (listOfPurchases.get(i).getCost() > x) {
-				System.out.println(listOfPurchases.get(i).getCost());
+	static void printListMoreExpansiveThanX(int x, List<Products> list) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getCost() > x) {
+				System.out.println(list.get(i).getCost());
 			}
 		}
 	}
 
-	void printNumberOfPurchases() {
-		System.out.println("You made " + listOfPurchases.size() + " of purchases");
+	static void printNumberOfPurchases(List<Products> list) {
+		System.out.println("You made " + list.size() + " of purchases");
 	}
-
-	void printProducts() {
-		System.out.println(products);
+	//how to print items from food/treats separately?
+	static void printProducts(List <Products> list) {
+		Iterator <Food> i = list.iterator();
+		while (i.hasNext()) {
+		i.next();
+		
+		}
 	}
 }

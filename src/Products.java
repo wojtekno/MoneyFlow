@@ -15,12 +15,12 @@ public class Products {
 
 	}
 
-	void nextPurchase() {
-		generator = new Random();
-		this.cost = 30 * generator.nextFloat();
-		this.date = (generator.nextInt(11) + 1) + ":" + (generator.nextInt(30) + 1);
-		// System.out.println("You paid: " + cost + " on " + date );
-	}
+//	void nextPurchase() {
+//		generator = new Random();
+//		this.cost = 30 * generator.nextFloat();
+//		this.date = (generator.nextInt(11) + 1) + ":" + (generator.nextInt(30) + 1);
+//		// System.out.println("You paid: " + cost + " on " + date );
+//	}
 
 	public String toString() {
 		return date + " you paid " + cost + " pln for " + this.getClass();
