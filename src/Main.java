@@ -8,7 +8,7 @@ public class Main {
 		ArrayList <Product> list = new ArrayList<>();
 //		Methods Methods = new Methods();
 		Scanner scan = new Scanner(System.in);
-		new WindowTryError();
+		new WindowTryError(list);
 		
 //		MethodAutomatic.printProductsFor(list);
 ////		System.out.println(products);

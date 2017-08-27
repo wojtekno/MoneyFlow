@@ -13,9 +13,9 @@ import javax.swing.JTree;
 
 public class WindowTryError extends JFrame {
 	JFrame f = new JFrame();
-	List<Product> list2 = new ArrayList<>();
+	//List<Product> list2 = new ArrayList<>();
 
-	public WindowTryError() {
+	public WindowTryError(List<Product> list) {
 		JButton food = new JButton("Food");
 		JButton treat = new JButton("Treat");
 		JButton print = new JButton("Print");
@@ -30,11 +30,12 @@ public class WindowTryError extends JFrame {
 		food.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// 1.how to opreate on List<Product> list from Main.class?
+				// 1.how to opreate on List<Product> list from Main.class 
+				//         => I imported it as argument of the constructro :)
 				// 2. how to put values/referenses of clicked button in
 				// Method.User.nextPurchase?
-				MethodUser.nextPurchaseOfFood(list2);
-				label.setText(MethodUser.printBoughtItem(MethodUser.numberOfPurchaseFinger, list2));
+				MethodUser.nextPurchaseOfFood(list);
+				label.setText(MethodUser.printBoughtItem(MethodUser.numberOfPurchaseFinger, list));
 			}
 
 		});
@@ -42,8 +43,8 @@ public class WindowTryError extends JFrame {
 		treat.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				MethodUser.nextPurchuseOfTreat(list2);
-				label.setText(MethodUser.printBoughtItem(MethodUser.numberOfPurchaseFinger, list2));
+				MethodUser.nextPurchuseOfTreat(list);
+				label.setText(MethodUser.printBoughtItem(MethodUser.numberOfPurchaseFinger, list));
 			}
 		});
 			// for some reason you have to click and drag the mouse to the textArea apperas
@@ -52,10 +53,10 @@ public class WindowTryError extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JTextArea area = new JTextArea(String.format("You bought\n %s",
-						MethodUser.printListOfItems2(MethodUser.numberOfPurchaseFinger, list2)));
+						MethodUser.printListOfItems2(MethodUser.numberOfPurchaseFinger, list), 15, 2));
 
 				area.setBounds(20, 280, 300, 300);
-				area.setSize(400, 400);
+//				area.setSize(400, 400);
 				add(area);
 				
 			}
