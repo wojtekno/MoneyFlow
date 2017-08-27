@@ -5,30 +5,27 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		ArrayList <Products> list = new ArrayList<>();
-//		Products products = new Products();
-//		Food food = new Food();
-//		Transport transport = new Transport();
-//		Treats treats = new Treats();
-//		Edu edu = new Edu();
-//		Expenses expenses = new Expenses();
-//		Entertainment entertainment = new Entertainment();
+		ArrayList <Product> list = new ArrayList<>();
 //		Methods Methods = new Methods();
 		Scanner scan = new Scanner(System.in);
-
+		new WindowTryError();
 		
-		Methods.printProducts();
-//		System.out.println(products);
-//		System.out.println(products.getCost());
-		Methods.nextPurchase(list, scan);
-		Methods.printListOfXItems(Methods.numberOfPurchaseFinger, list);
-		Methods.createListOf54(list);
-		Methods.printListOfXItems(9, list);
-//		System.out.println(products);
-		Methods.printListMoreExpansiveThanX(20, list);
-		Methods.printNumberOfPurchases(list);
-		Methods.printListOfXItems(Methods.numberOfPurchaseFinger, list);
-		Methods.printProducts(list);
+//		MethodAutomatic.printProductsFor(list);
+////		System.out.println(products);
+////		System.out.println(products.getCost());
+	//	MethodAutomatic.nextPurchase(list, scan);
+//		MethodAutomatic.printListOfXItems(MethodAutomatic.numberOfPurchaseFinger, list);
+//		MethodAutomatic.createListOf18RandomProducts(list);
+////		Methods.printListOfXItems(4, list);
+////		System.out.println(products);
+////		Methods.printListMoreExpansiveThanX(20, list);
+//		MethodAutomatic.printNumberOfPurchases(list);
+//		MethodAutomatic.printListOfXItems(MethodAutomatic.numberOfPurchaseFinger, list);
+//		//why iterator kills the nextPurchase?
+////		Methods.printProductsIterator(list);
+////		Methods.printProductsFor(list);
+//		MethodAutomatic.printProductsForEach(list);
+//		MethodAutomatic.printProductsIterator(list);
 	}
 
 }

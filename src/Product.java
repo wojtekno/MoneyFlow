@@ -1,13 +1,13 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Products {
+public class Product {
 	private float cost;
 	private String date;
 	Random generator;
 	Scanner scan;
 
-	Products() {
+	Product() {
 		scan = new Scanner(System.in);
 		generator = new Random();
 		this.cost = 30 * generator.nextFloat();
@@ -23,7 +23,7 @@ public class Products {
 //	}
 
 	public String toString() {
-		return date + " you paid " + cost + " pln for " + this.getClass();
+		return date + " you paid " + cost + " pln for " + this.getClass() +"\n";
 	}
 
 	float getCost() {

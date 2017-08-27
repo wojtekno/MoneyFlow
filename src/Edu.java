@@ -1,5 +1,5 @@
 
-public class Edu extends Products{
+public class Edu extends Product{
 
 //	double cost;
 //	String date;

@@ -1,4 +1,4 @@
 
-public class Transport extends Products {
+public class Transport extends Product {
 
 }

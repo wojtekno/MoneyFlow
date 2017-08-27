@@ -1,4 +1,4 @@
 
-public class Entertainment extends Products {
+public class Entertainment extends Product {
 	
 }
