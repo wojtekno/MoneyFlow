@@ -1,5 +1,21 @@
-
+package Products;
 public class Edu extends Product{
+
+	public Edu() {
+		super();
+	}
+	public Edu(float cost) {
+		super(cost);
+		
+	}
+	public Edu(float cost, String date) {
+		super(cost, date);
+		
+	}
+
+	
+	
+	
 
 //	double cost;
 //	String date;

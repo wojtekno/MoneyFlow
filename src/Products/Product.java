@@ -1,18 +1,39 @@
+package Products;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Product {
 	private float cost;
 	private String date;
+	String time;
 	Random generator;
 	Scanner scan;
-
-	Product() {
-		scan = new Scanner(System.in);
+	DateTimeFormatter formatter;
+	
+	public Product() {
+//		scan = new Scanner(System.in);
 		generator = new Random();
 		this.cost = 30 * generator.nextFloat();
 		this.date = (generator.nextInt(11) + 1) + "/" + (generator.nextInt(30) + 1);
 
+	}
+	public Product(float cost) {
+		this.cost = cost;
+		LocalDateTime dateNow = LocalDateTime.now();
+		formatter = DateTimeFormatter.ofPattern("MMM/dd");
+		this.date = dateNow.format(formatter);
+		formatter = DateTimeFormatter.ofPattern("hh:mm");
+		this.time = dateNow.format(formatter);
+			
+	}
+	public Product(float cost, String date) {
+		this.cost = cost;
+		formatter = DateTimeFormatter.ofPattern("MMM/dd");
+		this.date = date;
+//		formatter = DateTimeFormatter.ofPattern("hh:mm");
+//		this.time = dateNow.format(formatter);
 	}
 
 //	void nextPurchase() {
@@ -23,10 +44,10 @@ public class Product {
 //	}
 
 	public String toString() {
-		return date + " you paid " + cost + " pln for " + this.getClass() +"\n";
+		return  date + " - " + time + " you paid " + cost + " pln for " + this.getClass().getSimpleName() +"\n";
 	}
 
-	float getCost() {
+	public float getCost() {
 		return this.cost;
 	}
 

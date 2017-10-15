@@ -1,7 +1,16 @@
+package Methods;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
+import Products.Edu;
+import Products.Entertainment;
+import Products.Expense;
+import Products.Food;
+import Products.Product;
+import Products.Transport;
+import Products.Treat;
 
 public class MethodAutomatic {
 	static Product products;
@@ -45,8 +54,8 @@ public class MethodAutomatic {
 	}
 
 	// creates 9*6 objects
-	static void createListOf18RandomProducts(List<Product> list) {
-		for (int i = 0; i < 3; i++) {
+	public static void createListOf24RandomProducts(List<Product> list) {
+		for (int i = 0; i < 4; i++) {
 			list.add(new Food());
 			list.add(new Edu());
 			list.add(new Treat());
@@ -63,13 +72,13 @@ public class MethodAutomatic {
 		}
 	}
 
-	static void printListMoreExpansiveThanX(int x, List<Product> list) {
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getCost() > x) {
-				System.out.println(list.get(i).getCost());
-			}
-		}
-	}
+//	public static void printListMoreExpansiveThanX(int x, List<Product> list) {
+//		for (int i = 0; i < list.size(); i++) {
+//			if (list.get(i).getCost() > x) {
+//				System.out.println(list.get(i).getCost());
+//			}
+//		}
+//	}
 
 	static void printNumberOfPurchases(List<Product> list) {
 		System.out.println("You made " + list.size() + " of purchases");
