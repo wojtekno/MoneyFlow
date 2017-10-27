@@ -1,24 +1,40 @@
 package Products;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Product {
 	private float cost;
 	private String date;
+	Date date1;
 	String time;
 	Random generator;
 	Scanner scan;
 	DateTimeFormatter formatter;
-	
-	public Product() {
-//		scan = new Scanner(System.in);
-		generator = new Random();
-		this.cost = 30 * generator.nextFloat();
-		this.date = (generator.nextInt(11) + 1) + "/" + (generator.nextInt(30) + 1);
+	Calendar calendar = Calendar.getInstance();
+	String dateFormat = "dd-MM-yy";
+	SimpleDateFormat sformat = new SimpleDateFormat(dateFormat);
 
+	public Product() {
+		generator = new Random();
+		int year = generator.nextInt(2) + 2016;
+		int dayOfYear = generator.nextInt(365) + 1;
+		
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+		this.date1 = calendar.getTime();
+		
+		this.cost = 30 * generator.nextFloat();
+//		this.date = String.valueOf(generator.nextInt(11) + 1) + "/" + String.valueOf((generator.nextInt(30) + 1));
+		// this.date1 = (Date) stringToObject(date);
 	}
+
 	public Product(float cost) {
 		this.cost = cost;
 		LocalDateTime dateNow = LocalDateTime.now();
@@ -26,25 +42,40 @@ public class Product {
 		this.date = dateNow.format(formatter);
 		formatter = DateTimeFormatter.ofPattern("hh:mm");
 		this.time = dateNow.format(formatter);
-			
+		this.date1 = calendar.getTime();
 	}
+
 	public Product(float cost, String date) {
 		this.cost = cost;
 		formatter = DateTimeFormatter.ofPattern("MMM/dd");
 		this.date = date;
-//		formatter = DateTimeFormatter.ofPattern("hh:mm");
-//		this.time = dateNow.format(formatter);
+		// formatter = DateTimeFormatter.ofPattern("hh:mm");
+		// this.time = dateNow.format(formatter);
 	}
 
-//	void nextPurchase() {
-//		generator = new Random();
-//		this.cost = 30 * generator.nextFloat();
-//		this.date = (generator.nextInt(11) + 1) + ":" + (generator.nextInt(30) + 1);
-//		// System.out.println("You paid: " + cost + " on " + date );
-//	}
+	public Product(float cost, Date date1) {
+		this.cost = cost;
+		this.date1 = date1;
+	}
+
+	public String printDate1(Date date1) {
+		return sformat.format(date1);
+	}
+
+	public Object stringToObject(String date) throws ParseException {
+		return sformat.parseObject(date);
+	}
+	// void nextPurchase() {
+	// generator = new Random();
+	// this.cost = 30 * generator.nextFloat();
+	// this.date = (generator.nextInt(11) + 1) + ":" + (generator.nextInt(30) +
+	// 1);
+	// // System.out.println("You paid: " + cost + " on " + date );
+	// }
 
 	public String toString() {
-		return  date + " - " + time + " you paid " + cost + " pln for " + this.getClass().getSimpleName() +"\n";
+		return String.format(" %.2f pln\t" + this.getClass().getSimpleName() + "\t" + 
+				printDate1(date1) + " - " + time +  "\n", cost);
 	}
 
 	public float getCost() {

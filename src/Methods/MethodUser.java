@@ -1,5 +1,7 @@
 package Methods;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import Products.Edu;
@@ -20,31 +22,42 @@ public class MethodUser {
 			list.add(new Food(cost));
 			numberOfPurchaseFinger++;
 			break;
-			// why do I have to import Edu?
-			 case "Edu" :
-			 list.add(new Edu(cost));
-			 numberOfPurchaseFinger++;
-			 break;
+		// why do I have to import Edu?
+		case "Edu":
+			list.add(new Edu(cost));
+			numberOfPurchaseFinger++;
+			break;
 
 		}
 	}
-	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, String date) {
+
+	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
 		switch (selectedProduct) {
-		case "Treats":
-			list.add(new Treat(cost, date));
-			numberOfPurchaseFinger++;
-			break;
+//		case "Treats":
+//			list.add(new Treat(cost, date));
+//			numberOfPurchaseFinger++;
+//			break;
 		case "Food":
-			list.add(new Food(cost, date));
+			list.add(new Food(cost, date1));
 			numberOfPurchaseFinger++;
 			break;
-			// why do I have to import Edu?
-			 case "Edu" :
-			 list.add(new Edu(cost, date));
-			 numberOfPurchaseFinger++;
-			 break;
+//		// why do I have to import Edu?
+//		case "Edu":
+//			list.add(new Edu(cost, date));
+//			numberOfPurchaseFinger++;
+//			break;
 
 		}
+	}
+
+	public static String sumExpenses(List<Product> list) {
+		float sum = 0;
+				
+		for(Product item : list) {
+			sum += item.getCost();
+		}
+
+		return "Total: " + String.valueOf(sum);
 	}
 
 	public static void nextPurchaseOfFood(List<Product> list, float cost) {

@@ -1,5 +1,6 @@
 package Methods;
 
+import java.text.ParseException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -29,7 +30,7 @@ public class MethodAutomatic {
 	}
 
 	// put interactive methods in another class
-	static void nextPurchase(List<Product> list, Scanner scan) {
+	static void nextPurchase(List<Product> list, Scanner scan) throws ParseException {
 		int choice = 1;
 
 		System.out.println("choose what you bought\n1-food 2treats\n0-close");
@@ -54,7 +55,7 @@ public class MethodAutomatic {
 	}
 
 	// creates 9*6 objects
-	public static void createListOf24RandomProducts(List<Product> list) {
+	public static void createListOf24RandomProducts(List<Product> list)  {
 		for (int i = 0; i < 4; i++) {
 			list.add(new Food());
 			list.add(new Edu());
