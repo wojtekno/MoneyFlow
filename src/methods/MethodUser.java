@@ -21,19 +21,19 @@ public class MethodUser {
 	public static int numberOfPurchaseFinger;
 	
 	public static void enumPurch(List<ProductsEnum> listE, float cost, String selectedProduct) {
-		ProductsEnum item = ProductsEnum.Entertainment;
-		item.setCost(cost);
-		System.out.println(item.getCost());
-		listE.add(item);
-		
-		System.out.println(item);
-		
-		item = ProductsEnum.Edu;
-		item.setCost(66);
-		System.out.println(item);
-		listE.add(item);
-		
-		System.out.println(listE);
+//		ProductsEnum item = ProductsEnum.Entertainment;
+//		item.setCost(cost);
+//		System.out.println(item.getCost());
+//		listE.add(item);
+//		
+//		System.out.println(item);
+//		
+//		item = ProductsEnum.Edu;
+//		item.setCost(66);
+//		System.out.println(item);
+//		listE.add(item);
+//		
+//		System.out.println(listE);
 		
 	}
 	

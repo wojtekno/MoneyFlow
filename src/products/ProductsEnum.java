@@ -5,30 +5,21 @@ package products;
 import java.util.Date;
 
 public enum ProductsEnum {
-	Food, 
-	Transport,
-	Treats,
-	Edu,
-	Entertainment,
-	Expenses;
+	FOOD ("Food"),
+	TRANSPORT ("Transportation");
+//	Treats,
+//	Edu,
+//	Entertainment,
+//	Expenses;
 	
-	float cost;
-	Date date;
-	
-		
-	public void setCost(float cost) {
-		this.cost = cost;
+	private String label;
+
+	public String getLabel() {
+		return label;
 	}
-	public float getCost() {
-		return this.cost;
-	}
-	
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	
-	public String toString() {
-		return "\n" + name() + "  " + String.valueOf(this.cost);
+
+	private ProductsEnum(String label) {
+		this.label = label;
 	}
 	
 	
