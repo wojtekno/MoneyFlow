@@ -1,8 +1,5 @@
-import static Methods.MethodAutomatic.createListOf24RandomProducts;
-
-import static Methods.MethodUser.nextPurchase;
-import static Methods.MethodUser.sumExpenses;
-import static Methods.MethodUser.*;
+import static methods.MethodAutomatic.createListOf24RandomProducts;
+import static methods.MethodUser.*;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -24,7 +21,8 @@ import javax.swing.JTextField;
 
 import com.github.lgooddatepicker.components.DatePicker;
 
-import Products.Product;
+import products.Product;
+import products.ProductsEnum;
 
 public class MainPanel extends JPanel {
 	
@@ -45,7 +43,7 @@ public class MainPanel extends JPanel {
 	PickerPanel pickerPanel;
 	DatePicker datePicker;
 	
-	public MainPanel(List<Product> list) {
+	public MainPanel(List<Product> list, List<ProductsEnum> listE) {
 
 		JButton history = new JButton("Hisory");
 		JButton close = new JButton("Close");
@@ -80,35 +78,37 @@ public class MainPanel extends JPanel {
 					cost = 0;
 				}
 				// } while (cost == 0);
-
-				if (cost != 0) {
-
-					if (!date1Flag) {
-						try {
-							nextPurchase(list, cost, selectedProduct);
-						} catch (java.lang.NullPointerException e1) {
-							selectedProduct = "Food";
-							nextPurchase(list, cost, selectedProduct);
-						}
-						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
-
-					} else {
-						try {
-							nextPurchase(list, cost, selectedProduct, date1);
-						} catch (java.lang.NullPointerException e1) {
-							selectedProduct = "Food";
-							nextPurchase(list, cost, selectedProduct, date1);
-							System.out.println("when you buy date is " + date1);
-						}
-						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
-					}
+				enumPurch(listE, cost, selectedProduct);
+				
+//				if (cost != 0) {
+//
+//					if (!date1Flag) {
+//						try {
+//							nextPurchase(list, cost, selectedProduct);
+//						} catch (java.lang.NullPointerException e1) {
+//							selectedProduct = "Food";
+//							nextPurchase(list, cost, selectedProduct);
+//						}
+//						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+//
+//					} else {
+//						try {
+//							nextPurchase(list, cost, selectedProduct, date1);
+//						} catch (java.lang.NullPointerException e1) {
+//							selectedProduct = "Food";
+//							nextPurchase(list, cost, selectedProduct, date1);
+//							System.out.println("when you buy date is " + date1);
+//						}
+//						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+//					}
+//				}
 
 					givesCost.setText("");
 //					date1 = null;
 					date1Flag = false;
 					date = "";
 					cost = 0;
-				}
+				
 			}
 		});
 

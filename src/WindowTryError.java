@@ -1,3 +1,6 @@
+import static methods.MethodAutomatic.*;
+import static methods.MethodUser.*;
+
 import java.awt.Color;
 
 
@@ -21,9 +24,8 @@ import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
-import static Methods.MethodUser.*;
-import static Methods.MethodAutomatic.*;
-import Products.Product;
+import products.Product;
+import products.ProductsEnum;
 
 public class WindowTryError extends JFrame {
 	float cost;
@@ -36,10 +38,10 @@ public class WindowTryError extends JFrame {
 	boolean areaFlag = false;
 	
 	
-	public WindowTryError(ArrayList<Product> list) {
+	public WindowTryError(ArrayList<Product> list, ArrayList<ProductsEnum> listE) {
 		// why area, and areaFlag can't be initialized here(insideconstructor?)
 //		Core.getInstance().mainPanel = new MainPanel(list);
-		Core.getInstance().startPanel = new StartPanel(list);
+		Core.getInstance().startPanel = new StartPanel(list, listE);
 //		add(Core.getInstance().mainPanel);
 		add(Core.getInstance().startPanel);
 		setSize(500, 500);

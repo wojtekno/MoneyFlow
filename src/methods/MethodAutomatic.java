@@ -1,17 +1,17 @@
-package Methods;
+package methods;
 
 import java.text.ParseException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import Products.Edu;
-import Products.Entertainment;
-import Products.Expense;
-import Products.Food;
-import Products.Product;
-import Products.Transport;
-import Products.Treat;
+import products.Edu;
+import products.Entertainment;
+import products.Expense;
+import products.Food;
+import products.Product;
+import products.Transport;
+import products.Treat;
 
 public class MethodAutomatic {
 	static Product products;

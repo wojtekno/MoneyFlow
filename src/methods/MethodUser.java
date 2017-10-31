@@ -1,21 +1,42 @@
-package Methods;
+// create enumPurch which runs all the enumtypes
+
+
+package methods;
 
 import java.util.Date;
 
 import java.util.Iterator;
 import java.util.List;
 
-import Products.Edu;
-import Products.Entertainment;
-import Products.Expense;
-import Products.Food;
-import Products.Product;
-import Products.Transport;
-import Products.Treat;
+import products.Edu;
+import products.Entertainment;
+import products.Expense;
+import products.Food;
+import products.Product;
+import products.ProductsEnum;
+import products.Transport;
+import products.Treat;
 
 public class MethodUser {
 	public static int numberOfPurchaseFinger;
-
+	
+	public static void enumPurch(List<ProductsEnum> listE, float cost, String selectedProduct) {
+		ProductsEnum item = ProductsEnum.Entertainment;
+		item.setCost(cost);
+		System.out.println(item.getCost());
+		listE.add(item);
+		
+		System.out.println(item);
+		
+		item = ProductsEnum.Edu;
+		item.setCost(66);
+		System.out.println(item);
+		listE.add(item);
+		
+		System.out.println(listE);
+		
+	}
+	
 	public static void nextPurchase(List<Product> list, float cost, String selectedProduct) {
 		switch (selectedProduct) {
 		case "Treats":
