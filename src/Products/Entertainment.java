@@ -1,4 +1,7 @@
 package Products;
+
+import java.util.Date;
+
 public class Entertainment extends Product {
 
 	public Entertainment(float cost) {
@@ -9,6 +12,10 @@ public class Entertainment extends Product {
 	public Entertainment() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Entertainment(float cost, Date date1) {
+		super(cost, date1);
 	}
 	
 }

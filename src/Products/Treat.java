@@ -1,4 +1,7 @@
 package Products;
+
+import java.util.Date;
+
 public class Treat extends Product{
 	
 	public Treat() {
@@ -7,7 +10,7 @@ public class Treat extends Product{
 	public Treat(float cost) {
 		super(cost);
 	}
-	public Treat(float cost, String date) {
-		super(cost, date);
+	public Treat(float cost, Date date1) {
+		super(cost, date1);
 	}
 }

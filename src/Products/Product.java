@@ -9,11 +9,11 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Product {
+public abstract class Product {
 	private float cost;
-	private String date;
-	Date date1;
-	String time;
+//	private String date;
+	private Date date1;
+	private String time = "";
 	Random generator;
 	Scanner scan;
 	DateTimeFormatter formatter;
@@ -21,17 +21,19 @@ public class Product {
 	String dateFormat = "dd-MM-yy";
 	SimpleDateFormat sformat = new SimpleDateFormat(dateFormat);
 
-	public Product() {
+	protected Product() {
 		generator = new Random();
 		int year = generator.nextInt(2) + 2016;
 		int dayOfYear = generator.nextInt(365) + 1;
-		
+
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
 		this.date1 = calendar.getTime();
-		
-		this.cost = 30 * generator.nextFloat();
-//		this.date = String.valueOf(generator.nextInt(11) + 1) + "/" + String.valueOf((generator.nextInt(30) + 1));
+		this.cost = (30 * generator.nextFloat());
+
+		// this.time = "";
+		// this.date = String.valueOf(generator.nextInt(11) + 1) + "/" +
+		// String.valueOf((generator.nextInt(30) + 1));
 		// this.date1 = (Date) stringToObject(date);
 	}
 
@@ -39,19 +41,20 @@ public class Product {
 		this.cost = cost;
 		LocalDateTime dateNow = LocalDateTime.now();
 		formatter = DateTimeFormatter.ofPattern("MMM/dd");
-		this.date = dateNow.format(formatter);
+//		this.date = dateNow.format(formatter);
 		formatter = DateTimeFormatter.ofPattern("hh:mm");
+		//convert time without formatter
 		this.time = dateNow.format(formatter);
 		this.date1 = calendar.getTime();
 	}
 
-	public Product(float cost, String date) {
-		this.cost = cost;
-		formatter = DateTimeFormatter.ofPattern("MMM/dd");
-		this.date = date;
-		// formatter = DateTimeFormatter.ofPattern("hh:mm");
-		// this.time = dateNow.format(formatter);
-	}
+//	public Product(float cost, String date) {
+//		this.cost = cost;
+//		formatter = DateTimeFormatter.ofPattern("MMM/dd");
+//		this.date = date;
+//		// formatter = DateTimeFormatter.ofPattern("hh:mm");
+//		// this.time = dateNow.format(formatter);
+//	}
 
 	public Product(float cost, Date date1) {
 		this.cost = cost;
@@ -74,8 +77,14 @@ public class Product {
 	// }
 
 	public String toString() {
-		return String.format(" %.2f pln\t" + this.getClass().getSimpleName() + "\t" + 
-				printDate1(date1) + " - " + time +  "\n", cost);
+		if (this.time.equals("")) {
+			return String.format(" %.2f pln\t" + this.getClass().getSimpleName() + "\t" + printDate1(date1) + "\n",
+					cost);
+		} else {
+			return String.format(
+					" %.2f pln\t" + this.getClass().getSimpleName() + "\t" + printDate1(date1) + " - " + time + "\n",
+					cost);
+		}
 	}
 
 	public float getCost() {
@@ -86,12 +95,12 @@ public class Product {
 		this.cost = cost;
 	}
 
-	String getDate() {
-		return date;
+	Date getDate() {
+		return date1;
 	}
 
-	void setDate(String date) {
-		this.date = date;
+	void setDate(Date date1) {
+		this.date1 = date1;
 	}
 
 }

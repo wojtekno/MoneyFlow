@@ -1,4 +1,7 @@
 package Products;
+
+import java.util.Date;
+
 public class Edu extends Product{
 
 	public Edu() {
@@ -8,8 +11,8 @@ public class Edu extends Product{
 		super(cost);
 		
 	}
-	public Edu(float cost, String date) {
-		super(cost, date);
+	public Edu(float cost, Date date1) {
+		super(cost, date1);
 		
 	}
 

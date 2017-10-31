@@ -1,6 +1,8 @@
 import static Methods.MethodAutomatic.createListOf24RandomProducts;
+
 import static Methods.MethodUser.nextPurchase;
 import static Methods.MethodUser.sumExpenses;
+import static Methods.MethodUser.*;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -8,6 +10,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -279,9 +282,12 @@ public class MainPanel extends JPanel {
 		}
 
 		JButton goBack = new JButton("back");
+		goBack.setAlignmentY(1);
 		// area.setSize(270, 400);
 		// jep.setText(String.format("You bought\n %s \n", list));
-
+		JButton categories = new JButton("Categories");
+		categories.setAlignmentY(TOP_ALIGNMENT);
+		
 		area.setText(String.format("You bought\n %s \n", list));
 		Font font = area.getFont();
 		area.setFont(font.deriveFont(Font.BOLD));
@@ -303,6 +309,19 @@ public class MainPanel extends JPanel {
 
 			}
 		});
+		
+		categories.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				area.setText(sumCategories(list));
+				historyPanel.repaint();
+				
+				
+				
+			}
+		});
+		historyPanel.add(categories);
 		historyPanel.add(goBack);
 		historyPanel.add(scroll);
 		// historyPanel.add(area);
