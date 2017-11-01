@@ -7,11 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import products.Product;
-import products.ProductsEnum;
+import products.Category;
 
 public class StartPanel extends JPanel {
 
-	public StartPanel(ArrayList<Product> list, ArrayList<ProductsEnum> listE) {
+	public StartPanel(ArrayList<Product> list) {
 
 		JButton start = new JButton("Start");
 		start.setBounds(150, 150, 200, 200);
@@ -20,7 +20,7 @@ public class StartPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Core.getInstance().mainPanel = new MainPanel(list, listE);
+				Core.getInstance().mainPanel = new MainPanel(list);
 				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
 
 			}

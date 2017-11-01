@@ -25,7 +25,7 @@ import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 
 import products.Product;
-import products.ProductsEnum;
+import products.Category;
 
 public class WindowTryError extends JFrame {
 	float cost;
@@ -38,10 +38,10 @@ public class WindowTryError extends JFrame {
 	boolean areaFlag = false;
 	
 	
-	public WindowTryError(ArrayList<Product> list, ArrayList<ProductsEnum> listE) {
+	public WindowTryError(ArrayList<Product> list) {
 		// why area, and areaFlag can't be initialized here(insideconstructor?)
 //		Core.getInstance().mainPanel = new MainPanel(list);
-		Core.getInstance().startPanel = new StartPanel(list, listE);
+		Core.getInstance().startPanel = new StartPanel(list);
 //		add(Core.getInstance().mainPanel);
 		add(Core.getInstance().startPanel);
 		setSize(500, 500);

@@ -1,6 +1,5 @@
 // create enumPurch which runs all the enumtypes
 
-
 package methods;
 
 import java.util.Date;
@@ -8,95 +7,63 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import products.Edu;
-import products.Entertainment;
-import products.Expense;
-import products.Food;
 import products.Product;
-import products.ProductsEnum;
-import products.Transport;
-import products.Treat;
+import products.Category;
 
 public class MethodUser {
 	public static int numberOfPurchaseFinger;
-	
-	public static void enumPurch(List<ProductsEnum> listE, float cost, String selectedProduct) {
-//		ProductsEnum item = ProductsEnum.Entertainment;
-//		item.setCost(cost);
-//		System.out.println(item.getCost());
-//		listE.add(item);
-//		
-//		System.out.println(item);
-//		
-//		item = ProductsEnum.Edu;
-//		item.setCost(66);
-//		System.out.println(item);
-//		listE.add(item);
-//		
-//		System.out.println(listE);
+
+	public static void categoryPurchuse(List<Product> list, float cost, String selectedProduct) {
+		for (Category item : Category.values()) {
+			if (selectedProduct.equals(item.getLabel())) {
+				list.add(new Product(item.getLabel(), cost));
+			};
+			
+		}
 		
 	}
-	
-	public static void nextPurchase(List<Product> list, float cost, String selectedProduct) {
-		switch (selectedProduct) {
-		case "Treats":
-			list.add(new Treat(cost));
-			numberOfPurchaseFinger++;
-			break;
-		case "Food":
-			list.add(new Food(cost));
-			numberOfPurchaseFinger++;
-			break;
-		// why do I have to import Edu?
-		case "Edu":
-			list.add(new Edu(cost));
-			numberOfPurchaseFinger++;
-			break;
-		case "Entertainment":
-			list.add(new Entertainment(cost));
-			break;
-		case "Expense":
-			list.add(new Expense(cost));
-			break;
-		case "Transport":
-			list.add(new Transport(cost));
-			break;
 
-		}
-	}
-
+//	public static void nextPurchase(List<Product> list, float cost, String selectedProduct) {
+//		switch (selectedProduct) {
+//		case "Treats":
+//			list.add(new Treat(cost));
+//			numberOfPurchaseFinger++;
+//			break;
+//		case "Food":
+//			list.add(new Food(cost));
+//			numberOfPurchaseFinger++;
+//			break;
+//		// why do I have to import Edu?
+//		case "Edu":
+//			list.add(new Edu(cost));
+//			numberOfPurchaseFinger++;
+//			break;
+//		case "Entertainment":
+//			list.add(new Entertainment(cost));
+//			break;
+//		case "Expense":
+//			list.add(new Expense(cost));
+//			break;
+//		case "Transport":
+//			list.add(new Transport(cost));
+//			break;
+//
+//		}
+//	}
+//
 	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
-		switch (selectedProduct) {
-		case "Treats":
-			list.add(new Treat(cost, date1));
-			numberOfPurchaseFinger++;
-			break;
-		case "Food":
-			list.add(new Food(cost, date1));
-			numberOfPurchaseFinger++;
-			break;
-		// why do I have to import Edu?
-		case "Edu":
-			list.add(new Edu(cost, date1));
-			numberOfPurchaseFinger++;
-			break;
-		case "Entertainment":
-			list.add(new Entertainment(cost, date1));
-			break;
-		case "Expense":
-			list.add(new Expense(cost, date1));
-			break;
-		case "Transport":
-			list.add(new Transport(cost, date1));
-			break;
-
+		for (Category item : Category.values()) {
+			if (selectedProduct.equals(item.getLabel())) {
+				list.add(new Product(item.getLabel(), cost, date1));
+			};
+			
 		}
 	}
 
 	// change it so it allows to save only 2 decimals
 	public static String sumExpenses(List<Product> list) {
 		float sum = 0;
-
+		
 		for (Product item : list) {
 			sum += item.getCost();
 		}
@@ -104,30 +71,32 @@ public class MethodUser {
 		// return "Total: " + String.valueOf(sum);
 		return String.format("Total %.2f", sum);
 	}
-
+	
+	
+//	hot to do it smart, scallable?
 	public static String sumCategories(List<Product> list) {
 		float foodSum = 0, eduSum = 0, expenseSum = 0, treatsSum = 0;
 		float transportSum = 0, entertainmentSum = 0;
 		Iterator<Product> itr = list.iterator();
 		while (itr.hasNext()) {
 			Product item = itr.next();
-			if (item.getClass().getSimpleName().equals("Food")) {
+			if (item.getLabel().equals(Category.FOOD.getLabel())) {
 				foodSum += item.getCost();
-			} else if (item.getClass().getSimpleName().equals("Treat")) {
+			} else if (item.getLabel().equals(Category.TRREATS.getLabel())) {
 				treatsSum += item.getCost();
-			} else if (item.getClass().getSimpleName().equals("Edu")) {
+			} else if (item.getLabel().equals(Category.EDU.getLabel())) {
 				eduSum += item.getCost();
-			} else if (item.getClass().getSimpleName().equals("Expense")) {
+			} else if (item.getLabel().equals(Category.EXPENSES.getLabel())) {
 				expenseSum += item.getCost();
-			} else if (item.getClass().getSimpleName().equals("Transport")) {
+			} else if (item.getLabel().equals(Category.TRANSPORT.getLabel())) {
 				transportSum += item.getCost();
-			} else if (item.getClass().getSimpleName().equals("Entertainment")) {
+			} else if (item.getLabel().equals(Category.ENTERTAIN.getLabel())) {
 				entertainmentSum += item.getCost();
 			}
 		}
-		return String.format(
-				"Food: %.2f\nTreats: %.2f\nEdu: %.2f\nExpenses: %.2f\nTransport: %.2f\nEntertainment: %.2f\n\n" + sumExpenses(list), foodSum,
-				treatsSum, eduSum, expenseSum, transportSum, entertainmentSum );
+		return String
+				.format("Food: %.2f\nTreats: %.2f\nEdu: %.2f\nExpenses: %.2f\nTransport: %.2f\nEntertainment: %.2f\n\n"
+						+ sumExpenses(list), foodSum, treatsSum, eduSum, expenseSum, transportSum, entertainmentSum);
 
 	}
 
@@ -149,10 +118,11 @@ public class MethodUser {
 	// numberOfPurchaseFinger++;
 	// }
 
-//	public static void nextPurchuseOfTreat(List<Product> list, float cost, Date date1) {
-//		list.add(new Treat(cost, date1));
-//		numberOfPurchaseFinger++;
-//	}
+	// public static void nextPurchuseOfTreat(List<Product> list, float cost,
+	// Date date1) {
+	// list.add(new Treat(cost, date1));
+	// numberOfPurchaseFinger++;
+	// }
 
 	public String printName() {
 		// String name = this.getClass().getName();

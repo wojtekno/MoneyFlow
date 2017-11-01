@@ -10,11 +10,12 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
-public abstract class Product {
+public class Product {
 	private float cost;
-//	private String date;
+	// private String date;
 	private Date date1;
 	private String time = "";
+	private String label;
 	Random generator;
 	Scanner scan;
 	DateTimeFormatter formatter;
@@ -22,7 +23,8 @@ public abstract class Product {
 	String dateFormat = "dd-MM-yy";
 	SimpleDateFormat sformat = new SimpleDateFormat(dateFormat);
 
-	protected Product() {
+	public Product(String label) {
+		this.label = label;
 		generator = new Random();
 		int year = generator.nextInt(2) + 2016;
 		int dayOfYear = generator.nextInt(365) + 1;
@@ -38,24 +40,32 @@ public abstract class Product {
 		// this.date1 = (Date) stringToObject(date);
 	}
 
-	public Product(float cost) {
+	public Product(String label, float cost, Date date1) {
+		super();
+		this.cost = cost;
+		this.date1 = date1;
+		this.label = label;
+	}
+
+	public Product(String label, float cost) {
 		this.cost = cost;
 		LocalDateTime dateNow = LocalDateTime.now();
 		formatter = DateTimeFormatter.ofPattern("MMM/dd");
-//		this.date = dateNow.format(formatter);
+		// this.date = dateNow.format(formatter);
 		formatter = DateTimeFormatter.ofPattern("hh:mm");
-		//convert time without formatter
+		// convert time without formatter
 		this.time = dateNow.format(formatter);
 		this.date1 = calendar.getTime();
+		this.label = label;
 	}
 
-//	public Product(float cost, String date) {
-//		this.cost = cost;
-//		formatter = DateTimeFormatter.ofPattern("MMM/dd");
-//		this.date = date;
-//		// formatter = DateTimeFormatter.ofPattern("hh:mm");
-//		// this.time = dateNow.format(formatter);
-//	}
+	// public Product(float cost, String date) {
+	// this.cost = cost;
+	// formatter = DateTimeFormatter.ofPattern("MMM/dd");
+	// this.date = date;
+	// // formatter = DateTimeFormatter.ofPattern("hh:mm");
+	// // this.time = dateNow.format(formatter);
+	// }
 
 	public Product(float cost, Date date1) {
 		this.cost = cost;
@@ -77,15 +87,21 @@ public abstract class Product {
 	// // System.out.println("You paid: " + cost + " on " + date );
 	// }
 
+	// public String toString() {
+	// if (this.time.equals("")) {
+	// return String.format(" %.2f pln\t" + this.getClass().getSimpleName() +
+	// "\t" + printDate1(date1) + "\n",
+	// cost);
+	// } else {
+	// return String.format(
+	// " %.2f pln\t" + this.getClass().getSimpleName() + "\t" +
+	// printDate1(date1) + " - " + time + "\n",
+	// cost);
+	// }
+	// }
+
 	public String toString() {
-		if (this.time.equals("")) {
-			return String.format(" %.2f pln\t" + this.getClass().getSimpleName() + "\t" + printDate1(date1) + "\n",
-					cost);
-		} else {
-			return String.format(
-					" %.2f pln\t" + this.getClass().getSimpleName() + "\t" + printDate1(date1) + " - " + time + "\n",
-					cost);
-		}
+		return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\n", cost);
 	}
 
 	public float getCost() {
@@ -102,6 +118,10 @@ public abstract class Product {
 
 	void setDate(Date date1) {
 		this.date1 = date1;
+	}
+
+	public String getLabel() {
+		return label;
 	}
 
 }

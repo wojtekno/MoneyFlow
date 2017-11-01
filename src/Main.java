@@ -3,16 +3,16 @@ import java.util.List;
 import java.util.Scanner;
 
 import products.Product;
-import products.ProductsEnum;
+import products.Category;
 
 public class Main {
 
 	public static void main(String[] args) {
 		ArrayList<Product> list = new ArrayList<Product>();
-		ArrayList<ProductsEnum> listE = new ArrayList();
+		ArrayList<Category> listE = new ArrayList();
 		// Methods Methods = new Methods();
 		// Scanner scan = new Scanner(System.in);
-		Core.getInstance().window = new WindowTryError(list, listE);
+		Core.getInstance().window = new WindowTryError(list);
 
 		// MethodAutomatic.printProductsFor(list);
 		//// System.out.println(products);

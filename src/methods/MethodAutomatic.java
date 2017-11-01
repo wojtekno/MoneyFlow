@@ -1,28 +1,18 @@
+// create method which prints list of items from shoosen category
+
 package methods;
 
 import java.text.ParseException;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import products.Edu;
-import products.Entertainment;
-import products.Expense;
-import products.Food;
+import products.Category;
 import products.Product;
-import products.Transport;
-import products.Treat;
 
 public class MethodAutomatic {
 	static Product products;
-	// Food food;
-	// Transport transport;
-	// Treats treats;
-	// Edu edu = new Edu();
-	// Expenses expenses;
-	// Entertainment entertainment;
-	// List<Products> listOfPurchases = new ArrayList<>();
-	// Scanner scan;
 	static int numberOfPurchaseFinger;
 
 	MethodAutomatic() {
@@ -38,10 +28,10 @@ public class MethodAutomatic {
 			choice = scan.nextInt();
 
 			if (choice == 1) {
-				list.add(new Food());
+				list.add(new Product(Category.values()[0].getLabel()));
 			}
 			if (choice == 2) {
-				list.add(new Treat());
+				list.add(new Product(Category.values()[2].getLabel()));
 			}
 			if (choice != 0) {
 				numberOfPurchaseFinger++;
@@ -57,12 +47,11 @@ public class MethodAutomatic {
 	// creates 9*6 objects
 	public static void createListOf24RandomProducts(List<Product> list)  {
 		for (int i = 0; i < 4; i++) {
-			list.add(new Food());
-			list.add(new Edu());
-			list.add(new Treat());
-			list.add(new Entertainment());
-			list.add(new Expense());
-			list.add(new Transport());
+			for (Category item : Category.values()) {
+				list.add(new Product(item.getLabel()));	
+			}
+			
+			
 		}
 
 	}
@@ -89,7 +78,7 @@ public class MethodAutomatic {
 	static void printProductsIterator(List<Product> list) {
 		Iterator<Product> i = list.iterator();
 		while (i.hasNext()) {
-			if (i instanceof Food) {
+			if (i.next().getLabel().equals("Food")) {
 				System.out.println(i.next());
 			}
 
@@ -98,7 +87,7 @@ public class MethodAutomatic {
 
 	static void printProductsForEach(List<Product> list) {
 		for (Product p : list) {
-			if (p instanceof Food) {
+			if (p.getLabel().equals("Food")) {
 				System.out.println(p);
 			}
 		}
@@ -107,7 +96,7 @@ public class MethodAutomatic {
 
 	static void printProductsFor(List<Product> list) {
 		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) instanceof Food) {
+			if (list.get(i).getLabel().equals("Food")) {
 				System.out.println(list.get(i));
 			}
 		}

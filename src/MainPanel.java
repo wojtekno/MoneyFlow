@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -22,16 +23,16 @@ import javax.swing.JTextField;
 import com.github.lgooddatepicker.components.DatePicker;
 
 import products.Product;
-import products.ProductsEnum;
+import products.Category;
 
 public class MainPanel extends JPanel {
-	
+
 	float cost;
 	String date = "";
 	static Date date1;
 	static boolean date1Flag;
 	String selectedProduct;
-//	JPanel panel = new JPanel();
+	// JPanel panel = new JPanel();
 	// List<Product> list2 = new ArrayList<>();
 	JPanel datePanel;
 	private boolean datePanelFlag;
@@ -42,13 +43,21 @@ public class MainPanel extends JPanel {
 	JEditorPane jep;
 	PickerPanel pickerPanel;
 	DatePicker datePicker;
-	
-	public MainPanel(List<Product> list, List<ProductsEnum> listE) {
+
+	public MainPanel(List<Product> list) {
 
 		JButton history = new JButton("Hisory");
 		JButton close = new JButton("Close");
 		JLabel label = new JLabel();
-		String[] products = { "Food", "Treats", "Edu", "Entertainment", "Expenses", "Transport" };
+		// String[] products = { "Food", "Treats", "Edu", "Entertainment",
+		// "Expenses", "Transport" };
+		// /does it work?
+		String[] products = new String[Category.values().length];
+		Category[] labels = Category.values();
+		for (int i = 0; i < Category.values().length; i++) {
+			products[i] = labels[i].getLabel();
+		}
+
 		JComboBox productChoice = new JComboBox<>(products);
 		JTextField givesCost = new JTextField();
 		JButton ok = new JButton("OK");
@@ -77,39 +86,40 @@ public class MainPanel extends JPanel {
 					label.setText("You didn't give a price");
 					cost = 0;
 				}
-				// } while (cost == 0);
-				enumPurch(listE, cost, selectedProduct);
-				
-//				if (cost != 0) {
-//
-//					if (!date1Flag) {
-//						try {
-//							nextPurchase(list, cost, selectedProduct);
-//						} catch (java.lang.NullPointerException e1) {
-//							selectedProduct = "Food";
-//							nextPurchase(list, cost, selectedProduct);
-//						}
-//						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
-//
-//					} else {
-//						try {
-//							nextPurchase(list, cost, selectedProduct, date1);
-//						} catch (java.lang.NullPointerException e1) {
-//							selectedProduct = "Food";
-//							nextPurchase(list, cost, selectedProduct, date1);
-//							System.out.println("when you buy date is " + date1);
-//						}
-//						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
-//					}
-//				}
+				// // } while (cost == 0);
 
-					givesCost.setText("");
-//					date1 = null;
-					date1Flag = false;
-					date = "";
-					cost = 0;
-				
+				if (cost != 0) {
+
+					if (!date1Flag) {
+						try {
+							categoryPurchuse(list, cost, selectedProduct);
+
+						} catch (java.lang.NullPointerException e1) {
+							selectedProduct = "Food";
+							categoryPurchuse(list, cost, selectedProduct);
+						}
+						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+
+					} else {
+						try {
+							nextPurchase(list, cost, selectedProduct, date1);
+						} catch (java.lang.NullPointerException e1) {
+							selectedProduct = "Food";
+							nextPurchase(list, cost, selectedProduct, date1);
+//							System.out.println("when you buy date is " + date1);
+						}
+						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+					}
+				}
+
+				givesCost.setText("");
+				// date1 = null;
+				date1Flag = false;
+				date = "";
+				cost = 0;
+
 			}
+
 		});
 
 		productChoice.addActionListener(new ActionListener() {
@@ -134,7 +144,7 @@ public class MainPanel extends JPanel {
 				// here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 				pickerPanel = new PickerPanel();
 				Core.getInstance().window.changePanel(pickerPanel);
-//				changeDatePanel(list, label);
+				// changeDatePanel(list, label);
 			}
 
 		});
@@ -216,7 +226,7 @@ public class MainPanel extends JPanel {
 		l1 = new JLabel("Put a date");
 		bOK = new JButton("OK");
 		bToday = new JButton("Today");
-		
+
 		datePanel.add(datePicker);
 		datePanel.setBounds(40, 80, 420, 340);
 		datePanel.setBackground(Color.red);
@@ -256,7 +266,7 @@ public class MainPanel extends JPanel {
 				date = "";
 				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
 				if (cost != 0) {
-					nextPurchase(list, cost, selectedProduct);
+					categoryPurchuse(list, cost, selectedProduct);
 				} else {
 					label.setText("You didn't give a price");
 				}
@@ -287,12 +297,12 @@ public class MainPanel extends JPanel {
 		// jep.setText(String.format("You bought\n %s \n", list));
 		JButton categories = new JButton("Categories");
 		categories.setAlignmentY(TOP_ALIGNMENT);
-		
+
 		area.setText(String.format("You bought\n %s \n", list));
 		Font font = area.getFont();
 		area.setFont(font.deriveFont(Font.BOLD));
-		area.append(String.valueOf(MainPanel.date1));
-//		area.append(String.valueOf(obj));
+//		area.append(String.valueOf(MainPanel.date1));
+		// area.append(String.valueOf(obj));
 		area.append(sumExpenses(list));
 		area.setEditable(false);
 
@@ -309,16 +319,14 @@ public class MainPanel extends JPanel {
 
 			}
 		});
-		
+
 		categories.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				area.setText(sumCategories(list));
 				historyPanel.repaint();
-				
-				
-				
+
 			}
 		});
 		historyPanel.add(categories);
