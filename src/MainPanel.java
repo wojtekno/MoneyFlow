@@ -32,17 +32,17 @@ public class MainPanel extends JPanel {
 	static Date date1;
 	static boolean date1Flag;
 	String selectedProduct;
-	// JPanel panel = new JPanel();
 	// List<Product> list2 = new ArrayList<>();
-	JPanel datePanel;
-	private boolean datePanelFlag;
-	JTextArea area;
-	private boolean areaFlag = false;
-	JPanel historyPanel;
-	private boolean historyPanelFlag;
-	JEditorPane jep;
-	PickerPanel pickerPanel;
-	DatePicker datePicker;
+	
+	JButton history;
+	JButton close;
+	JButton random;
+	JButton changeDate;
+	JLabel label;
+	JComboBox productChoice;
+	
+	private boolean historyPanelFlag; 
+	private boolean datePickerPanelFlag;
 
 	public MainPanel(List<Product> list) {
 
@@ -71,7 +71,7 @@ public class MainPanel extends JPanel {
 		givesCost.setBounds(150, 80, 100, 40);
 		changeDate.setBounds(40, 80, 100, 40);
 		ok.setBounds(270, 80, 100, 40);
-		random.setBounds(350, 10, 50, 20);
+		random.setBounds(300, 10, 100, 20);
 
 		ok.addActionListener(new ActionListener() {
 			// jak rozwiazac kiedy nic nie jest wpisane w givescost
@@ -106,7 +106,8 @@ public class MainPanel extends JPanel {
 						} catch (java.lang.NullPointerException e1) {
 							selectedProduct = "Food";
 							nextPurchase(list, cost, selectedProduct, date1);
-//							System.out.println("when you buy date is " + date1);
+							// System.out.println("when you buy date is " +
+							// date1);
 						}
 						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
 					}
@@ -133,18 +134,18 @@ public class MainPanel extends JPanel {
 			}
 		});
 
-		// posprzataj
-		// zmien na okreslony format daty
-		// zeby sie nie drukowala godzina "null"
-
+		// take example from this panel switsh :)
 		changeDate.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-				pickerPanel = new PickerPanel();
-				Core.getInstance().window.changePanel(pickerPanel);
-				// changeDatePanel(list, label);
+				// take example from this panelSWIthch
+				if (!datePickerPanelFlag) {
+					Core.getInstance().datePickerPanel = new DatePickerPanel();
+					datePickerPanelFlag = true;
+				}
+				Core.getInstance().window.changePanel(Core.getInstance().datePickerPanel);
+
 			}
 
 		});
@@ -153,25 +154,13 @@ public class MainPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!areaFlag) {
-					area = new JTextArea(25, 25);
-					// add(area);
-					areaFlag = true;
-					historyPanel(area, list);
-				} else {
-					area.setText(String.format("You bought\n %s \n", list));
-					area.append(sumExpenses(list));
-					historyPanel.repaint();
-					historyPanel.revalidate();
-					Core.getInstance().window.changePanel(historyPanel);
+				if (!historyPanelFlag) {
+					Core.getInstance().historyPanel = new HistoryPanel(list);
+					historyPanelFlag = true;
 				}
 
-				// area.setText((String.format("You bought\n %s",
-				// printListOfItems(numberOfPurchaseFinger, list))));
-				// area.setText(String.format("You bought\n %s \n", list));
-				// area.setBounds(20, 280, 450, 300);
-				// area.setSize(400, 400);
-				repaint();
+				Core.getInstance().historyPanel.repaintTextArea(list);
+				Core.getInstance().window.changePanel((JPanel) Core.getInstance().historyPanel);
 
 			}
 		});
@@ -210,142 +199,4 @@ public class MainPanel extends JPanel {
 
 	}
 
-	void changeDatePanel(List<Product> list, JLabel label) {
-		if (!datePanelFlag) {
-			datePanel = new JPanel();
-			datePanelFlag = true;
-			datePicker = new DatePicker();
-		}
-
-		JTextField t1;
-		JLabel l1;
-		JButton bOK;
-		JButton bToday;
-
-		t1 = new JTextField();
-		l1 = new JLabel("Put a date");
-		bOK = new JButton("OK");
-		bToday = new JButton("Today");
-
-		datePanel.add(datePicker);
-		datePanel.setBounds(40, 80, 420, 340);
-		datePanel.setBackground(Color.red);
-		t1.setBounds(150, 80, 100, 40);
-		l1.setBounds(150, 40, 100, 40);
-		bOK.setBounds(150, 120, 100, 40);
-		bToday.setBounds(260, 80, 100, 40);
-		datePanel.add(t1);
-		datePanel.add(l1);
-		datePanel.add(bOK);
-		datePanel.add(bToday);
-
-		bOK.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				date = t1.getText();
-				System.out.println(date);
-
-				datePanel.setVisible(false);
-				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
-				// dateFrame.dispose();
-
-				if (cost != 0) {
-					nextPurchase(list, cost, selectedProduct, date1);
-				} else {
-					label.setText("You didn't give a price");
-				}
-			}
-
-		});
-
-		bToday.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				date = "";
-				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
-				if (cost != 0) {
-					categoryPurchuse(list, cost, selectedProduct);
-				} else {
-					label.setText("You didn't give a price");
-				}
-			}
-		});
-
-		datePanel.setLayout(null);
-		datePanel.setVisible(true);
-		Core.getInstance().window.changePanel(datePanel);
-		// dateFrame.setVisible(false);
-		// dateFrame.dispose();
-
-	}
-
-	// I want sum to be bold
-	void historyPanel(JTextArea area, List<Product> list) {
-
-		if (!historyPanelFlag) {
-			historyPanel = new JPanel();
-			jep = new JEditorPane();
-			historyPanelFlag = true;
-
-		}
-
-		JButton goBack = new JButton("back");
-		goBack.setAlignmentY(1);
-		// area.setSize(270, 400);
-		// jep.setText(String.format("You bought\n %s \n", list));
-		JButton categories = new JButton("Categories");
-		categories.setAlignmentY(TOP_ALIGNMENT);
-
-		area.setText(String.format("You bought\n %s \n", list));
-		Font font = area.getFont();
-		area.setFont(font.deriveFont(Font.BOLD));
-//		area.append(String.valueOf(MainPanel.date1));
-		// area.append(String.valueOf(obj));
-		area.append(sumExpenses(list));
-		area.setEditable(false);
-
-		JScrollPane scroll = new JScrollPane(area);
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		// scroll.setSize(200, 100);
-		// goBack.setBounds(260, 280, 100, 40);
-		goBack.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
-				// historyPanel.setVisible(false);
-
-			}
-		});
-
-		categories.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				area.setText(sumCategories(list));
-				historyPanel.repaint();
-
-			}
-		});
-		historyPanel.add(categories);
-		historyPanel.add(goBack);
-		historyPanel.add(scroll);
-		// historyPanel.add(area);
-
-		historyPanel.setSize(300, 500);
-		historyPanel.repaint();
-		historyPanel.revalidate();
-		historyPanel.setLayout(new FlowLayout());
-		historyPanel.setVisible(true);
-
-		Core.getInstance().window.changePanel(historyPanel);
-
-	}
-
-	// to ogarniamy!!!
-	void startPanel() {
-
-	}
 }

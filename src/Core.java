@@ -6,6 +6,9 @@ public class Core {
 	public MainPanel mainPanel;
 	public JPanel panel;
 	public JPanel startPanel;
+	public HistoryPanel historyPanel;
+	public CategoriesPanel categoriesPanel;
+	public JPanel datePickerPanel;
 	private Core() {
 		
 	}

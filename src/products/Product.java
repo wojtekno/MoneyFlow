@@ -1,3 +1,5 @@
+// use the same formatter for date and time 
+
 package products;
 
 import java.text.ParseException;
@@ -20,7 +22,7 @@ public class Product {
 	Scanner scan;
 	DateTimeFormatter formatter;
 	Calendar calendar = Calendar.getInstance();
-	String dateFormat = "dd-MM-yy";
+	String dateFormat = "dd-MMM-yyyy";
 	SimpleDateFormat sformat = new SimpleDateFormat(dateFormat);
 
 	public Product(String label) {
@@ -101,7 +103,11 @@ public class Product {
 	// }
 
 	public String toString() {
+		if(time.equals("")) {
 		return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\n", cost);
+		} else {
+			return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\t" + time + "\n", cost);
+		}
 	}
 
 	public float getCost() {

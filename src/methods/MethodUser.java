@@ -2,6 +2,7 @@
 
 package methods;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.util.Iterator;
@@ -17,53 +18,56 @@ public class MethodUser {
 		for (Category item : Category.values()) {
 			if (selectedProduct.equals(item.getLabel())) {
 				list.add(new Product(item.getLabel(), cost));
-			};
-			
+			}
+			;
+
 		}
-		
+
 	}
 
-//	public static void nextPurchase(List<Product> list, float cost, String selectedProduct) {
-//		switch (selectedProduct) {
-//		case "Treats":
-//			list.add(new Treat(cost));
-//			numberOfPurchaseFinger++;
-//			break;
-//		case "Food":
-//			list.add(new Food(cost));
-//			numberOfPurchaseFinger++;
-//			break;
-//		// why do I have to import Edu?
-//		case "Edu":
-//			list.add(new Edu(cost));
-//			numberOfPurchaseFinger++;
-//			break;
-//		case "Entertainment":
-//			list.add(new Entertainment(cost));
-//			break;
-//		case "Expense":
-//			list.add(new Expense(cost));
-//			break;
-//		case "Transport":
-//			list.add(new Transport(cost));
-//			break;
-//
-//		}
-//	}
-//
+	// public static void nextPurchase(List<Product> list, float cost, String
+	// selectedProduct) {
+	// switch (selectedProduct) {
+	// case "Treats":
+	// list.add(new Treat(cost));
+	// numberOfPurchaseFinger++;
+	// break;
+	// case "Food":
+	// list.add(new Food(cost));
+	// numberOfPurchaseFinger++;
+	// break;
+	// // why do I have to import Edu?
+	// case "Edu":
+	// list.add(new Edu(cost));
+	// numberOfPurchaseFinger++;
+	// break;
+	// case "Entertainment":
+	// list.add(new Entertainment(cost));
+	// break;
+	// case "Expense":
+	// list.add(new Expense(cost));
+	// break;
+	// case "Transport":
+	// list.add(new Transport(cost));
+	// break;
+	//
+	// }
+	// }
+	//
 	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
 		for (Category item : Category.values()) {
 			if (selectedProduct.equals(item.getLabel())) {
 				list.add(new Product(item.getLabel(), cost, date1));
-			};
-			
+			}
+			;
+
 		}
 	}
 
 	// change it so it allows to save only 2 decimals
 	public static String sumExpenses(List<Product> list) {
 		float sum = 0;
-		
+
 		for (Product item : list) {
 			sum += item.getCost();
 		}
@@ -71,9 +75,8 @@ public class MethodUser {
 		// return "Total: " + String.valueOf(sum);
 		return String.format("Total %.2f", sum);
 	}
-	
-	
-//	hot to do it smart, scallable?
+
+	// hot to do it smart, scallable?
 	public static String sumCategories(List<Product> list) {
 		float foodSum = 0, eduSum = 0, expenseSum = 0, treatsSum = 0;
 		float transportSum = 0, entertainmentSum = 0;
@@ -98,6 +101,16 @@ public class MethodUser {
 				.format("Food: %.2f\nTreats: %.2f\nEdu: %.2f\nExpenses: %.2f\nTransport: %.2f\nEntertainment: %.2f\n\n"
 						+ sumExpenses(list), foodSum, treatsSum, eduSum, expenseSum, transportSum, entertainmentSum);
 
+	}
+	
+	public List<Product> printProductsFromChoosenCategory (String selectedProduct, List<Product> list ) {
+		List <Product> productsFromCategory = new ArrayList<Product>();
+		for (Product item : list) {
+			if (item.getLabel().equals(selectedProduct)) {
+				productsFromCategory.add(item);
+			}
+		}
+		return productsFromCategory;
 	}
 
 	// public static void nextPurchaseOfFood(List<Product> list, float cost) {
