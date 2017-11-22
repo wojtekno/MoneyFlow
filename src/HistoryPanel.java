@@ -1,7 +1,7 @@
 
 //scroll doesnt work
 
-import static methods.MethodUser.sumExpenses;
+import static methods.MethodUser.*;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -32,7 +32,8 @@ public class HistoryPanel extends JPanel implements TextPanel {
 		categoriesPanelButton = new JButton("Categories");
 		categoriesPanelButton.setAlignmentY(TOP_ALIGNMENT);
 		textArea = new JTextArea(25, 25);
-		textArea.setText(String.format("You bought\n %s \n", list));
+//		textArea.setText("");
+//		printHistoryPanel(textArea, list);
 		
 		scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -78,7 +79,8 @@ public class HistoryPanel extends JPanel implements TextPanel {
 
 	@Override
 	public void repaintTextArea(List<Product> list) {
-		textArea.setText(String.format("You bought\n %s \n", list));
+		textArea.setText("");
+		printHistoryPanel(textArea, list);
 		textArea.append(sumExpenses(list));
 	}
 

@@ -120,6 +120,13 @@ public class MethodUser {
 			
 		}
 	}
+	
+	public static void printHistoryPanel (JTextArea textArea, List<Product> list) {
+		for (Product item : list) {
+//			textArea.append(String.format("%d) %.2f\t%s\t%s\n" ,(list.indexOf(item)+1), item.getCost(), item.getLabel(), item.printDate1(null)));
+			textArea.append(String.format("%d) %s", (list.indexOf(item)+1), item.toString())); 
+		}
+	}
 
 	// public static void nextPurchaseOfFood(List<Product> list, float cost) {
 	//

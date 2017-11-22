@@ -157,11 +157,10 @@ public class MainPanel extends JPanel {
 				if (!historyPanelFlag) {
 					Core.getInstance().historyPanel = new HistoryPanel(list);
 					historyPanelFlag = true;
-				}
-
+				} 
 				Core.getInstance().historyPanel.repaintTextArea(list);
 				Core.getInstance().window.changePanel((JPanel) Core.getInstance().historyPanel);
-
+				
 			}
 		});
 		close.addActionListener(new ActionListener() {

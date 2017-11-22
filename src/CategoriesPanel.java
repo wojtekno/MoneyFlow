@@ -1,6 +1,5 @@
 import static methods.MethodUser.*;
 
-
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,53 +27,45 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 	public CategoriesPanel(List<Product> list) {
 		goBack = new JButton("back");
 		goBack.setAlignmentY(1);
-		categories = new String[Category.values().length];
-		for (int i = 0; i < categories.length; i++) {
-			categories[i] = Category.values()[i].getLabel();
+		categories = new String[Category.values().length + 1];
+		categories[0] = "General";
+		for (int i = 1; i < categories.length; i++) {
+			categories[i] = Category.values()[i - 1].getLabel();
 		}
-		
-		chooseCategory = new JComboBox(categories);
-		
-		textArea = new JTextArea(25, 25);
-		textArea.setText(sumCategories(list));
 
+		chooseCategory = new JComboBox(categories);
+
+		textArea = new JTextArea(25, 25);
+		
 		Font font = textArea.getFont();
 		textArea.setFont(font.deriveFont(Font.BOLD));
 		textArea.setEditable(false);
 
 		JScrollPane scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		
+
 		chooseCategory.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectedCategory = chooseCategory.getSelectedItem().toString();
-				System.out.println(selectedCategory);
-				textArea.setText("");
-				printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, list));
-				
+				if (selectedCategory.equals("General")) {
+					textArea.setText(sumCategories(list));
+				} else {
+					textArea.setText("");
+					printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, list));
+				}
 			}
 		});
+		
 		goBack.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Core.getInstance().window.changePanel((JPanel) Core.getInstance().historyPanel);
-				// Core.getInstance().window.changePanel(historyPanel);
-				// historyPanel.setVisible(false);
-
-				// textArea.setText(String.format("You bought\n %s \n", list));
-				// textArea.append(sumExpenses(list));
-				// historyPanel.add(scroll);
-				// historyPanel.repaint();
-				// historyPanel.revalidate();
-				//// Core.getInstance().window.changePanel(Core.getInstance().historyPanel);
-				// Core.getInstance().window.changePanel(historyPanel);
 			}
 		});
-		
-		
+
 		add(chooseCategory);
 		add(goBack);
 		add(scroll);
