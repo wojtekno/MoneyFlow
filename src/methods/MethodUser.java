@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JTextArea;
+
 import products.Product;
 import products.Category;
 
@@ -103,7 +105,7 @@ public class MethodUser {
 
 	}
 	
-	public List<Product> printProductsFromChoosenCategory (String selectedProduct, List<Product> list ) {
+	public static List<Product> getProductsFromChoosenCategory (String selectedProduct, List<Product> list ) {
 		List <Product> productsFromCategory = new ArrayList<Product>();
 		for (Product item : list) {
 			if (item.getLabel().equals(selectedProduct)) {
@@ -111,6 +113,12 @@ public class MethodUser {
 			}
 		}
 		return productsFromCategory;
+	}
+	public static void printProductsFromChoosenCategory (JTextArea textArea, List<Product> list) {
+		for (Product item : list) {
+			textArea.append(String.format("%d) %.2f\t%s\n" ,(list.indexOf(item)+1), item.getCost(), item.printDate1(null)));
+			
+		}
 	}
 
 	// public static void nextPurchaseOfFood(List<Product> list, float cost) {

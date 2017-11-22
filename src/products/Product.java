@@ -75,7 +75,7 @@ public class Product {
 	}
 
 	public String printDate1(Date date1) {
-		return sformat.format(date1);
+		return sformat.format(this.date1);
 	}
 
 	public Object stringToObject(String date) throws ParseException {
