@@ -2,7 +2,7 @@ import javax.swing.JPanel;
 
 public class Core {
 	
-	public WindowTryError window;
+	public Window window;
 	public MainPanel mainPanel;
 	public JPanel panel;
 	public JPanel startPanel;

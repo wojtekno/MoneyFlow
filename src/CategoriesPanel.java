@@ -36,7 +36,7 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 		chooseCategory = new JComboBox(categories);
 
 		textArea = new JTextArea(25, 25);
-		
+
 		Font font = textArea.getFont();
 		textArea.setFont(font.deriveFont(Font.BOLD));
 		textArea.setEditable(false);
@@ -54,10 +54,11 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 				} else {
 					textArea.setText("");
 					printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, list));
+					textArea.append(sumExpenses(getProductsFromChoosenCategory(selectedCategory, list)));
 				}
 			}
 		});
-		
+
 		goBack.addActionListener(new ActionListener() {
 
 			@Override
@@ -80,6 +81,7 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 	@Override
 	public void repaintTextArea(List<Product> list) {
 		textArea.setText(sumCategories(list));
+		
 
 	}
 }

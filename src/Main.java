@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+
+
 
 import products.Product;
 import products.Category;
@@ -9,29 +9,11 @@ public class Main {
 
 	public static void main(String[] args) {
 		ArrayList<Product> list = new ArrayList<Product>();
-		ArrayList<Category> listE = new ArrayList();
-		// Methods Methods = new Methods();
+			// Methods Methods = new Methods();
 		// Scanner scan = new Scanner(System.in);
-		Core.getInstance().window = new WindowTryError(list);
+		Core.getInstance().window = new Window(list);
 
-		// MethodAutomatic.printProductsFor(list);
-		//// System.out.println(products);
-		//// System.out.println(products.getCost());
-		// MethodAutomatic.nextPurchase(list, scan);
-		// MethodAutomatic.printListOfXItems(MethodAutomatic.numberOfPurchaseFinger,
-		// list);
-		// MethodAutomatic.createListOf18RandomProducts(list);
-		//// Methods.printListOfXItems(4, list);
-		//// System.out.println(products);
-		//// Methods.printListMoreExpansiveThanX(20, list);
-		// MethodAutomatic.printNumberOfPurchases(list);
-		// MethodAutomatic.printListOfXItems(MethodAutomatic.numberOfPurchaseFinger,
-		// list);
-		// //why iterator kills the nextPurchase?
-		//// Methods.printProductsIterator(list);
-		//// Methods.printProductsFor(list);
-		// MethodAutomatic.printProductsForEach(list);
-		// MethodAutomatic.printProductsIterator(list);
+		
 	}
 
 }

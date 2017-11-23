@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import products.Product;
 
-public class WindowTryError extends JFrame {
+public class Window extends JFrame {
 	float cost;
 	String date = "";
 	String selectedProduct;
@@ -15,7 +15,7 @@ public class WindowTryError extends JFrame {
 	JTextArea area;
 	boolean areaFlag = false;
 
-	public WindowTryError(ArrayList<Product> list) {
+	public Window(ArrayList<Product> list) {
 		// why area, and areaFlag can't be initialized here(insideconstructor?)
 		// Core.getInstance().mainPanel = new MainPanel(list);
 		Core.getInstance().startPanel = new StartPanel(list);

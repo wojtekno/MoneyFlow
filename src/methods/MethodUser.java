@@ -75,11 +75,34 @@ public class MethodUser {
 		}
 
 		// return "Total: " + String.valueOf(sum);
-		return String.format("Total %.2f", sum);
+		return String.format("\nTotal %.2f", sum);
+	}
+
+	public static String sumCategories(List<Product> list) {
+		String s = "";
+		float[] totals = new float[Category.values().length];
+		for (Product item : list) {
+			int i = 0;
+			for (Category cat : Category.values()) {
+				if (item.getLabel().equals(cat.getLabel())) {
+					totals[i] += item.getCost();
+				}
+				i++;
+			}
+		}
+		
+		int j = 0;
+		for (Category cat : Category.values()) {
+
+			s += String.format("%s\t%.2f\n", cat.getLabel(), totals[j]);
+			j++;
+		}
+		s += sumExpenses(list);
+		return s;
 	}
 
 	// hot to do it smart, scallable?
-	public static String sumCategories(List<Product> list) {
+	public static String sumCategories1(List<Product> list) {
 		float foodSum = 0, eduSum = 0, expenseSum = 0, treatsSum = 0;
 		float transportSum = 0, entertainmentSum = 0;
 		Iterator<Product> itr = list.iterator();
@@ -104,9 +127,9 @@ public class MethodUser {
 						+ sumExpenses(list), foodSum, treatsSum, eduSum, expenseSum, transportSum, entertainmentSum);
 
 	}
-	
-	public static List<Product> getProductsFromChoosenCategory (String selectedProduct, List<Product> list ) {
-		List <Product> productsFromCategory = new ArrayList<Product>();
+
+	public static List<Product> getProductsFromChoosenCategory(String selectedProduct, List<Product> list) {
+		List<Product> productsFromCategory = new ArrayList<Product>();
 		for (Product item : list) {
 			if (item.getLabel().equals(selectedProduct)) {
 				productsFromCategory.add(item);
@@ -114,17 +137,21 @@ public class MethodUser {
 		}
 		return productsFromCategory;
 	}
-	public static void printProductsFromChoosenCategory (JTextArea textArea, List<Product> list) {
+
+	public static void printProductsFromChoosenCategory(JTextArea textArea, List<Product> list) {
 		for (Product item : list) {
-			textArea.append(String.format("%d) %.2f\t%s\n" ,(list.indexOf(item)+1), item.getCost(), item.printDate1(null)));
-			
+			textArea.append(
+					String.format("%d) %.2f\t%s\n", (list.indexOf(item) + 1), item.getCost(), item.printDate1(null)));
+
 		}
 	}
-	
-	public static void printHistoryPanel (JTextArea textArea, List<Product> list) {
+
+	public static void printHistoryPanel(JTextArea textArea, List<Product> list) {
 		for (Product item : list) {
-//			textArea.append(String.format("%d) %.2f\t%s\t%s\n" ,(list.indexOf(item)+1), item.getCost(), item.getLabel(), item.printDate1(null)));
-			textArea.append(String.format("%d) %s", (list.indexOf(item)+1), item.toString())); 
+			// textArea.append(String.format("%d) %.2f\t%s\t%s\n"
+			// ,(list.indexOf(item)+1), item.getCost(), item.getLabel(),
+			// item.printDate1(null)));
+			textArea.append(String.format("%d) %s", (list.indexOf(item) + 1), item.toString()));
 		}
 	}
 
