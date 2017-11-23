@@ -1,3 +1,5 @@
+//implement note - so when you click ok notes is incorporated to the product
+
 import static methods.MethodAutomatic.createListOf24RandomProducts;
 import static methods.MethodUser.*;
 
@@ -34,52 +36,57 @@ public class MainPanel extends JPanel {
 	String selectedProduct;
 	// List<Product> list2 = new ArrayList<>();
 	
+	JButton okButton;
 	JButton history;
 	JButton close;
 	JButton random;
 	JButton changeDate;
 	JLabel label;
-	JComboBox productChoice;
+	JComboBox productChoiceCB;
+	JTextField giveCostTF;
+	JTextField noteTF;
 	
 	private boolean historyPanelFlag; 
 	private boolean datePickerPanelFlag;
 
 	public MainPanel(List<Product> list) {
 
-		JButton history = new JButton("Hisory");
-		JButton close = new JButton("Close");
-		JLabel label = new JLabel();
-		// String[] products = { "Food", "Treats", "Edu", "Entertainment",
-		// "Expenses", "Transport" };
-		// /does it work?
+		history = new JButton("History");
+		close = new JButton("Close");
+		label = new JLabel();
+		
 		String[] products = new String[Category.values().length];
 		Category[] labels = Category.values();
 		for (int i = 0; i < Category.values().length; i++) {
 			products[i] = labels[i].getLabel();
 		}
 
-		JComboBox productChoice = new JComboBox<>(products);
-		JTextField givesCost = new JTextField();
-		JButton ok = new JButton("OK");
-		JButton changeDate = new JButton("Not today?");
-		JButton random = new JButton("Gen.Rand");
+		productChoiceCB = new JComboBox<>(products);
+		noteTF = new JTextField("quick note");
+		giveCostTF = new JTextField("give a price");
+		okButton = new JButton("OK");
+		changeDate = new JButton("Not today?");
+		random = new JButton("Gen.Rand");
+		
+		
 
 		history.setBounds(10, 300, 100, 40);
-		close.setBounds(150, 180, 100, 40);
+		close.setBounds(150, 200, 100, 40);
 		label.setBounds(150, 40, 300, 40);
-		productChoice.setBounds(150, 140, 100, 20);
-		givesCost.setBounds(150, 80, 100, 40);
-		changeDate.setBounds(40, 80, 100, 40);
-		ok.setBounds(270, 80, 100, 40);
+//		productChoiceCB.setBounds(150, 140, 100, 20);
+		productChoiceCB.setBounds(40, 80, 100, 40);
+		giveCostTF.setBounds(150, 80, 100, 40);
+		changeDate.setBounds(270, 140, 100, 40);
+		okButton.setBounds(270, 80, 100, 40);
 		random.setBounds(300, 10, 100, 20);
-
-		ok.addActionListener(new ActionListener() {
+		noteTF.setBounds(150, 140, 100, 40);
+		okButton.addActionListener(new ActionListener() {
 			// jak rozwiazac kiedy nic nie jest wpisane w givescost
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// do {
 				try {
-					cost = Float.parseFloat(givesCost.getText());
+					cost = Float.parseFloat(giveCostTF.getText());
 				}
 
 				catch (java.lang.NumberFormatException a) {
@@ -98,7 +105,7 @@ public class MainPanel extends JPanel {
 							selectedProduct = "Food";
 							categoryPurchuse(list, cost, selectedProduct);
 						}
-						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+						label.setText("you bought " + selectedProduct + " for " + giveCostTF.getText());
 
 					} else {
 						try {
@@ -109,11 +116,11 @@ public class MainPanel extends JPanel {
 							// System.out.println("when you buy date is " +
 							// date1);
 						}
-						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+						label.setText("you bought " + selectedProduct + " for " + giveCostTF.getText());
 					}
 				}
 
-				givesCost.setText("");
+				giveCostTF.setText("");
 				// date1 = null;
 				date1Flag = false;
 				date = "";
@@ -123,11 +130,11 @@ public class MainPanel extends JPanel {
 
 		});
 
-		productChoice.addActionListener(new ActionListener() {
+		productChoiceCB.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				selectedProduct = (String) productChoice.getItemAt(productChoice.getSelectedIndex());
+				selectedProduct = (String) productChoiceCB.getItemAt(productChoiceCB.getSelectedIndex());
 				// label.setText(selectedProduct);
 				// label.setText("You bought " +
 				// productChoice.getItemAt(productChoice.getSelectedIndex()));
@@ -183,14 +190,15 @@ public class MainPanel extends JPanel {
 			}
 
 		});
-
+		
+		add(noteTF);
 		add(random);
 		add(history);
 		add(close);
 		add(label);
-		add(productChoice);
-		add(givesCost);
-		add(ok);
+		add(productChoiceCB);
+		add(giveCostTF);
+		add(okButton);
 		add(changeDate);
 		setSize(400, 400);
 		setLayout(null);

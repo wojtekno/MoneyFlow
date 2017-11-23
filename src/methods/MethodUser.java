@@ -27,35 +27,6 @@ public class MethodUser {
 
 	}
 
-	// public static void nextPurchase(List<Product> list, float cost, String
-	// selectedProduct) {
-	// switch (selectedProduct) {
-	// case "Treats":
-	// list.add(new Treat(cost));
-	// numberOfPurchaseFinger++;
-	// break;
-	// case "Food":
-	// list.add(new Food(cost));
-	// numberOfPurchaseFinger++;
-	// break;
-	// // why do I have to import Edu?
-	// case "Edu":
-	// list.add(new Edu(cost));
-	// numberOfPurchaseFinger++;
-	// break;
-	// case "Entertainment":
-	// list.add(new Entertainment(cost));
-	// break;
-	// case "Expense":
-	// list.add(new Expense(cost));
-	// break;
-	// case "Transport":
-	// list.add(new Transport(cost));
-	// break;
-	//
-	// }
-	// }
-	//
 	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
 		for (Category item : Category.values()) {
 			if (selectedProduct.equals(item.getLabel())) {
@@ -66,15 +37,11 @@ public class MethodUser {
 		}
 	}
 
-	// change it so it allows to save only 2 decimals
 	public static String sumExpenses(List<Product> list) {
 		float sum = 0;
-
 		for (Product item : list) {
 			sum += item.getCost();
 		}
-
-		// return "Total: " + String.valueOf(sum);
 		return String.format("\nTotal %.2f", sum);
 	}
 
@@ -90,10 +57,9 @@ public class MethodUser {
 				i++;
 			}
 		}
-		
+
 		int j = 0;
 		for (Category cat : Category.values()) {
-
 			s += String.format("%s\t%.2f\n", cat.getLabel(), totals[j]);
 			j++;
 		}
@@ -101,7 +67,7 @@ public class MethodUser {
 		return s;
 	}
 
-	// hot to do it smart, scallable?
+	// hot to do it smart, scallable -> sumCategories
 	public static String sumCategories1(List<Product> list) {
 		float foodSum = 0, eduSum = 0, expenseSum = 0, treatsSum = 0;
 		float transportSum = 0, entertainmentSum = 0;
@@ -155,35 +121,7 @@ public class MethodUser {
 		}
 	}
 
-	// public static void nextPurchaseOfFood(List<Product> list, float cost) {
-	//
-	// list.add(new Food(cost));
-	// numberOfPurchaseFinger++;
-	// }
-	//
-	// public static void nextPurchaseOfFood(List<Product> list, float cost,
-	// String date) {
-	//
-	// list.add(new Food(cost, date));
-	// numberOfPurchaseFinger++;
-	// }
-	//
-	// public static void nextPurchuseOfTreat(List<Product> list, float cost) {
-	// list.add(new Treat(cost));
-	// numberOfPurchaseFinger++;
-	// }
-
-	// public static void nextPurchuseOfTreat(List<Product> list, float cost,
-	// Date date1) {
-	// list.add(new Treat(cost, date1));
-	// numberOfPurchaseFinger++;
-	// }
-
-	public String printName() {
-		// String name = this.getClass().getName();
-		return this.getClass().getName();
-	}
-
+	
 	public static String printListOfItems(int numberOfPurchaseFinger, List<Product> list2) {
 		for (int i = 0; i < numberOfPurchaseFinger; i++) {
 			// System.out.println(list2.get(i));

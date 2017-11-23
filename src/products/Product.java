@@ -18,6 +18,7 @@ public class Product {
 	private Date date1;
 	private String time = "";
 	private String label;
+	private String note = "";
 	Random generator;
 	Scanner scan;
 	DateTimeFormatter formatter;
@@ -47,6 +48,14 @@ public class Product {
 		this.cost = cost;
 		this.date1 = date1;
 		this.label = label;
+	}
+
+	public Product(String label, float cost, Date date1, String note) {
+		super();
+		this.cost = cost;
+		this.date1 = date1;
+		this.label = label;
+		this.note = note;
 	}
 
 	public Product(String label, float cost) {
@@ -103,10 +112,16 @@ public class Product {
 	// }
 
 	public String toString() {
-		if(time.equals("")) {
-		return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\n", cost);
+		if (time.equals("")) {
+			return String.format(" %.2f pln\t%s\t%s\n", cost, label, printDate1(date1) );
 		} else {
-			return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\t" + time + "\n", cost);
+			if (note.equals("")) {
+				return String.format(" %.2f pln\t%s\t%s\t%s\n", cost, label, printDate1(date1), time );
+//				return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\t" + time + "\n", cost);
+			} else {
+				return String.format(" %.2f pln\t%s\t%s\t%s\t%s\n", cost, label, printDate1(date1), time, note );
+//				return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\t" + time + "\n", cost);
+			}
 		}
 	}
 
