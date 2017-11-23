@@ -34,6 +34,7 @@ public class MainPanel extends JPanel {
 	static Date date1;
 	static boolean date1Flag;
 	String selectedProduct;
+	String note;
 	// List<Product> list2 = new ArrayList<>();
 	
 	JButton okButton;
@@ -84,6 +85,7 @@ public class MainPanel extends JPanel {
 			// jak rozwiazac kiedy nic nie jest wpisane w givescost
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				note = noteTF.getText();
 				// do {
 				try {
 					cost = Float.parseFloat(giveCostTF.getText());
@@ -99,27 +101,27 @@ public class MainPanel extends JPanel {
 
 					if (!date1Flag) {
 						try {
-							categoryPurchuse(list, cost, selectedProduct);
+							categoryPurchuse(list, cost, selectedProduct, note);
 
 						} catch (java.lang.NullPointerException e1) {
 							selectedProduct = "Food";
-							categoryPurchuse(list, cost, selectedProduct);
+							categoryPurchuse(list, cost, selectedProduct, note);
 						}
 						label.setText("you bought " + selectedProduct + " for " + giveCostTF.getText());
 
 					} else {
 						try {
-							nextPurchase(list, cost, selectedProduct, date1);
+							nextPurchase(list, cost, selectedProduct, date1, note);
 						} catch (java.lang.NullPointerException e1) {
 							selectedProduct = "Food";
-							nextPurchase(list, cost, selectedProduct, date1);
+							nextPurchase(list, cost, selectedProduct, date1, note);
 							// System.out.println("when you buy date is " +
 							// date1);
 						}
 						label.setText("you bought " + selectedProduct + " for " + giveCostTF.getText());
 					}
 				}
-
+				noteTF.setText("");
 				giveCostTF.setText("");
 				// date1 = null;
 				date1Flag = false;

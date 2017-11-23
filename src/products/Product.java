@@ -69,6 +69,19 @@ public class Product {
 		this.date1 = calendar.getTime();
 		this.label = label;
 	}
+	
+	public Product(String label, float cost, String note) {
+		this.cost = cost;
+		LocalDateTime dateNow = LocalDateTime.now();
+		formatter = DateTimeFormatter.ofPattern("MMM/dd");
+		// this.date = dateNow.format(formatter);
+		formatter = DateTimeFormatter.ofPattern("hh:mm");
+		// convert time without formatter
+		this.time = dateNow.format(formatter);
+		this.date1 = calendar.getTime();
+		this.label = label;
+		this.note = note;
+	}
 
 	// public Product(float cost, String date) {
 	// this.cost = cost;

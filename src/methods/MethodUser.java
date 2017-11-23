@@ -26,11 +26,32 @@ public class MethodUser {
 		}
 
 	}
+	
+	public static void categoryPurchuse(List<Product> list, float cost, String selectedProduct, String note) {
+		for (Category item : Category.values()) {
+			if (selectedProduct.equals(item.getLabel())) {
+				list.add(new Product(item.getLabel(), cost, note));
+			}
+			;
+
+		}
+
+	}
 
 	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
 		for (Category item : Category.values()) {
 			if (selectedProduct.equals(item.getLabel())) {
 				list.add(new Product(item.getLabel(), cost, date1));
+			}
+			;
+
+		}
+	}
+	
+	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1, String note) {
+		for (Category item : Category.values()) {
+			if (selectedProduct.equals(item.getLabel())) {
+				list.add(new Product(item.getLabel(), cost, date1, note));
 			}
 			;
 
