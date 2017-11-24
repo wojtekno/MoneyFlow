@@ -13,7 +13,13 @@ import javax.swing.JTextArea;
 import products.Product;
 import products.Category;
 
-public class MethodUser {
+public class Model {
+	
+	List<Product> list;
+	
+	public Model () {
+		list = new ArrayList<Product>();
+	}
 	public static int numberOfPurchaseFinger;
 
 	public static void categoryPurchuse(List<Product> list, float cost, String selectedProduct) {
@@ -27,35 +33,6 @@ public class MethodUser {
 
 	}
 
-	// public static void nextPurchase(List<Product> list, float cost, String
-	// selectedProduct) {
-	// switch (selectedProduct) {
-	// case "Treats":
-	// list.add(new Treat(cost));
-	// numberOfPurchaseFinger++;
-	// break;
-	// case "Food":
-	// list.add(new Food(cost));
-	// numberOfPurchaseFinger++;
-	// break;
-	// // why do I have to import Edu?
-	// case "Edu":
-	// list.add(new Edu(cost));
-	// numberOfPurchaseFinger++;
-	// break;
-	// case "Entertainment":
-	// list.add(new Entertainment(cost));
-	// break;
-	// case "Expense":
-	// list.add(new Expense(cost));
-	// break;
-	// case "Transport":
-	// list.add(new Transport(cost));
-	// break;
-	//
-	// }
-	// }
-	//
 	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
 		for (Category item : Category.values()) {
 			if (selectedProduct.equals(item.getLabel())) {

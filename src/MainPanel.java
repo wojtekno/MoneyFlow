@@ -1,5 +1,5 @@
 import static methods.MethodAutomatic.createListOf24RandomProducts;
-import static methods.MethodUser.*;
+import static methods.Model.*;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -44,7 +44,7 @@ public class MainPanel extends JPanel {
 	private boolean historyPanelFlag; 
 	private boolean datePickerPanelFlag;
 
-	public MainPanel(List<Product> list) {
+	public MainPanel() {
 
 		JButton history = new JButton("Hisory");
 		JButton close = new JButton("Close");
@@ -72,118 +72,118 @@ public class MainPanel extends JPanel {
 		changeDate.setBounds(40, 80, 100, 40);
 		ok.setBounds(270, 80, 100, 40);
 		random.setBounds(300, 10, 100, 20);
-
-		ok.addActionListener(new ActionListener() {
-			// jak rozwiazac kiedy nic nie jest wpisane w givescost
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// do {
-				try {
-					cost = Float.parseFloat(givesCost.getText());
-				}
-
-				catch (java.lang.NumberFormatException a) {
-					label.setText("You didn't give a price");
-					cost = 0;
-				}
-				// // } while (cost == 0);
-
-				if (cost != 0) {
-
-					if (!date1Flag) {
-						try {
-							categoryPurchuse(list, cost, selectedProduct);
-
-						} catch (java.lang.NullPointerException e1) {
-							selectedProduct = "Food";
-							categoryPurchuse(list, cost, selectedProduct);
-						}
-						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
-
-					} else {
-						try {
-							nextPurchase(list, cost, selectedProduct, date1);
-						} catch (java.lang.NullPointerException e1) {
-							selectedProduct = "Food";
-							nextPurchase(list, cost, selectedProduct, date1);
-							// System.out.println("when you buy date is " +
-							// date1);
-						}
-						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
-					}
-				}
-
-				givesCost.setText("");
-				// date1 = null;
-				date1Flag = false;
-				date = "";
-				cost = 0;
-
-			}
-
-		});
-
-		productChoice.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				selectedProduct = (String) productChoice.getItemAt(productChoice.getSelectedIndex());
-				// label.setText(selectedProduct);
-				// label.setText("You bought " +
-				// productChoice.getItemAt(productChoice.getSelectedIndex()));
-			}
-		});
-
-		// take example from this panel switsh :)
-		changeDate.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// take example from this panelSWIthch
-				if (!datePickerPanelFlag) {
-					Core.getInstance().datePickerPanel = new DatePickerPanel();
-					datePickerPanelFlag = true;
-				}
-				Core.getInstance().window.changePanel(Core.getInstance().datePickerPanel);
-
-			}
-
-		});
-
-		history.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (!historyPanelFlag) {
-					Core.getInstance().historyPanel = new HistoryPanel(list);
-					historyPanelFlag = true;
-				} 
-				Core.getInstance().historyPanel.repaintTextArea(list);
-				Core.getInstance().window.changePanel((JPanel) Core.getInstance().historyPanel);
-				
-			}
-		});
-		close.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				// f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				// garbage collector
-				// dispose();
-				System.exit(0);
-			}
-
-		});
-
-		random.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				createListOf24RandomProducts(list);
-
-			}
-
-		});
-
+//
+//		ok.addActionListener(new ActionListener() {
+//			// jak rozwiazac kiedy nic nie jest wpisane w givescost
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// do {
+//				try {
+//					cost = Float.parseFloat(givesCost.getText());
+//				}
+//
+//				catch (java.lang.NumberFormatException a) {
+//					label.setText("You didn't give a price");
+//					cost = 0;
+//				}
+//				// // } while (cost == 0);
+//
+//				if (cost != 0) {
+//
+//					if (!date1Flag) {
+//						try {
+//							categoryPurchuse(list, cost, selectedProduct);
+//
+//						} catch (java.lang.NullPointerException e1) {
+//							selectedProduct = "Food";
+//							categoryPurchuse(list, cost, selectedProduct);
+//						}
+//						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+//
+//					} else {
+//						try {
+//							nextPurchase(list, cost, selectedProduct, date1);
+//						} catch (java.lang.NullPointerException e1) {
+//							selectedProduct = "Food";
+//							nextPurchase(list, cost, selectedProduct, date1);
+//							// System.out.println("when you buy date is " +
+//							// date1);
+//						}
+//						label.setText("you bought " + selectedProduct + " for " + givesCost.getText());
+//					}
+//				}
+//
+//				givesCost.setText("");
+//				// date1 = null;
+//				date1Flag = false;
+//				date = "";
+//				cost = 0;
+//
+//			}
+//
+//		});
+//
+//		productChoice.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				selectedProduct = (String) productChoice.getItemAt(productChoice.getSelectedIndex());
+//				// label.setText(selectedProduct);
+//				// label.setText("You bought " +
+//				// productChoice.getItemAt(productChoice.getSelectedIndex()));
+//			}
+//		});
+//
+//		// take example from this panel switsh :)
+//		changeDate.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				// take example from this panelSWIthch
+//				if (!datePickerPanelFlag) {
+//					Core.getInstance().datePickerPanel = new DatePickerPanel();
+//					datePickerPanelFlag = true;
+//				}
+//				Core.getInstance().window.changePanel(Core.getInstance().datePickerPanel);
+//
+//			}
+//
+//		});
+//
+//		history.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if (!historyPanelFlag) {
+//					Core.getInstance().historyPanel = new HistoryPanel(list);
+//					historyPanelFlag = true;
+//				} 
+//				Core.getInstance().historyPanel.repaintTextArea(list);
+//				Core.getInstance().window.changePanel((JPanel) Core.getInstance().historyPanel);
+//				
+//			}
+//		});
+//		close.addActionListener(new ActionListener() {
+//
+//			public void actionPerformed(ActionEvent e) {
+//				// f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//				// garbage collector
+//				// dispose();
+//				System.exit(0);
+//			}
+//
+//		});
+//
+//		random.addActionListener(new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				createListOf24RandomProducts(list);
+//
+//			}
+//
+//		});
+//
 		add(random);
 		add(history);
 		add(close);

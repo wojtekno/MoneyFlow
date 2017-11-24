@@ -18,7 +18,7 @@ public class Window extends JFrame {
 	public Window(ArrayList<Product> list) {
 		// why area, and areaFlag can't be initialized here(insideconstructor?)
 		// Core.getInstance().mainPanel = new MainPanel(list);
-		Core.getInstance().startPanel = new StartPanel(list);
+		Core.getInstance().startPanel = new StartPanel();
 		// add(Core.getInstance().mainPanel);
 		add(Core.getInstance().startPanel);
 		setSize(500, 500);

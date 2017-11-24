@@ -1,4 +1,4 @@
-import static methods.MethodUser.*;
+import static methods.Model.*;
 
 import java.awt.FlowLayout;
 import java.awt.Font;

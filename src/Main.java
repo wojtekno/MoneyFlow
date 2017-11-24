@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
-
-
+import methods.Model;
 import products.Product;
 import products.Category;
 
 public class Main {
 
 	public static void main(String[] args) {
+		
+		Model model = new Model();
 		ArrayList<Product> list = new ArrayList<Product>();
 			// Methods Methods = new Methods();
 		// Scanner scan = new Scanner(System.in);

@@ -10,25 +10,32 @@ import products.Product;
 import products.Category;
 
 public class StartPanel extends JPanel {
+	
+	JButton startButton;
+	public StartPanel() {
 
-	public StartPanel(ArrayList<Product> list) {
+		startButton = new JButton("Start");
+		startButton.setBounds(150, 150, 200, 200);
 
-		JButton start = new JButton("Start");
-		start.setBounds(150, 150, 200, 200);
-
-		start.addActionListener(new ActionListener() {
+		
+		startButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Core.getInstance().mainPanel = new MainPanel(list);
+				Core.getInstance().mainPanel = new MainPanel();
 				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
 
 			}
 		});
 
-		add(start);
+		add(startButton);
 		setSize(500, 500);
 		setLayout(null);
 		setVisible(true);
+	}
+	
+	public void addStartButtonListener (ActionListener listenForStartButton) {
+		startButton.addActionListener(listenForStartButton);
+		
 	}
 }
