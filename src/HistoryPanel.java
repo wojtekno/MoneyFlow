@@ -80,7 +80,7 @@ public class HistoryPanel extends JPanel implements TextPanel {
 	@Override
 	public void repaintTextArea(List<Product> list) {
 		textArea.setText("");
-		printHistoryPanel(textArea, list);
+		printAllProducts(textArea, list);
 		textArea.append(sumExpenses(list));
 	}
 

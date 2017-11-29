@@ -6,21 +6,18 @@ import javax.swing.JTextArea;
 import products.Product;
 
 public class Window extends JFrame {
-	float cost;
-	String date = "";
-	String selectedProduct;
+	
 	JFrame f = new JFrame();
-	// List<Product> list2 = new ArrayList<>();
 	JDialog dateFrame;
 	JTextArea area;
 	boolean areaFlag = false;
 
-	public Window(ArrayList<Product> list) {
+	public Window() {
 		// why area, and areaFlag can't be initialized here(insideconstructor?)
 		// Core.getInstance().mainPanel = new MainPanel(list);
-		Core.getInstance().startPanel = new StartPanel();
+//		Core.getInstance().startPanel = new StartPanel();
 		// add(Core.getInstance().mainPanel);
-		add(Core.getInstance().startPanel);
+//		add(Core.getInstance().startPanel);
 		setSize(500, 500);
 		setLayout(null);
 		setVisible(true);

@@ -4,28 +4,25 @@ import java.awt.event.ActionListener;
 import methods.Model;
 
 public class StartPanelController {
+	Window window;
 	StartPanel startPanel;
 	Model model;
 	
-	public StartPanelController (StartPanel startPanel, Model model) {
-		this.startPanel = startPanel;
+	public StartPanelController (Model model) {
 		this.model = model;
-		this.startPanel.addStartButtonListener(new StartButtonListener());
+//		Core.getInstance().window = new Window();
+		window = new Window();
+		startPanel = new StartPanel(this);
+//		Core.getInstance().window.changePanel(startPanel);		
+		window.changePanel(startPanel);		
 	}
+	
+	public void didClickStart() {
+		MainPanelController mainPanelController = new MainPanelController(model, window);
+	}
+	
 	
 	
 }
 
-class StartButtonListener implements ActionListener {
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-		Core.getInstance().mainPanel = new MainPanel();
-		Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
-
-		
-	}
-	
-	
-}

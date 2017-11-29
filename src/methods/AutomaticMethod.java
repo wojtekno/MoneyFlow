@@ -11,14 +11,26 @@ import java.util.Scanner;
 import products.Category;
 import products.Product;
 
-public class MethodAutomatic {
+public class AutomaticMethod {
 	static Product products;
 	static int numberOfPurchaseFinger;
 
-	MethodAutomatic() {
+	AutomaticMethod() {
 		// scan = new Scanner(System.in);
 	}
+	
+	// creates 9*6 objects
+	public static void createListOf24RandomProducts(List<Product> list)  {
+		for (int i = 0; i < 4; i++) {
+			for (Category item : Category.values()) {
+				list.add(new Product(item.getLabel()));	
+			}
+			
+			
+		}
 
+	}
+	
 	// put interactive methods in another class
 	static void nextPurchase(List<Product> list, Scanner scan) throws ParseException {
 		int choice = 1;
@@ -44,17 +56,7 @@ public class MethodAutomatic {
 
 	}
 
-	// creates 9*6 objects
-	public static void createListOf24RandomProducts(List<Product> list)  {
-		for (int i = 0; i < 4; i++) {
-			for (Category item : Category.values()) {
-				list.add(new Product(item.getLabel()));	
-			}
-			
-			
-		}
 
-	}
 
 	static void printListOfXItems(int x, List<Product> list) {
 		for (int i = 0; i < x; i++) {

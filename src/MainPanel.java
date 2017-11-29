@@ -1,4 +1,4 @@
-import static methods.MethodAutomatic.createListOf24RandomProducts;
+import static methods.AutomaticMethod.createListOf24RandomProducts;
 import static methods.Model.*;
 
 import java.awt.Color;
@@ -34,21 +34,24 @@ public class MainPanel extends JPanel {
 	String selectedProduct;
 	// List<Product> list2 = new ArrayList<>();
 	
-	JButton history;
-	JButton close;
-	JButton random;
-	JButton changeDate;
+	JComboBox productChoiceCB;
+	JButton okButton;
+	JButton changeDateButton;
+	JButton genRandomButton;
+	JButton historyButton;
+	JButton closeButton;
 	JLabel label;
 	JComboBox productChoice;
+	JTextField costTF;
 	
 	private boolean historyPanelFlag; 
 	private boolean datePickerPanelFlag;
 
 	public MainPanel() {
 
-		JButton history = new JButton("Hisory");
-		JButton close = new JButton("Close");
-		JLabel label = new JLabel();
+		historyButton = new JButton("Hisory");
+		closeButton = new JButton("Close");
+		label = new JLabel();
 		// String[] products = { "Food", "Treats", "Edu", "Entertainment",
 		// "Expenses", "Transport" };
 		// /does it work?
@@ -58,20 +61,20 @@ public class MainPanel extends JPanel {
 			products[i] = labels[i].getLabel();
 		}
 
-		JComboBox productChoice = new JComboBox<>(products);
-		JTextField givesCost = new JTextField();
-		JButton ok = new JButton("OK");
-		JButton changeDate = new JButton("Not today?");
-		JButton random = new JButton("Gen.Rand");
+		JComboBox productChoiceCB = new JComboBox<>(products);
+		costTF = new JTextField();
+		JButton okButton = new JButton("OK");
+		JButton changeDateButton = new JButton("Not today?");
+		JButton genRandomButton = new JButton("Gen.Rand");
 
-		history.setBounds(10, 300, 100, 40);
-		close.setBounds(150, 180, 100, 40);
+		historyButton.setBounds(10, 300, 100, 40);
+		closeButton.setBounds(150, 180, 100, 40);
 		label.setBounds(150, 40, 300, 40);
-		productChoice.setBounds(150, 140, 100, 20);
-		givesCost.setBounds(150, 80, 100, 40);
-		changeDate.setBounds(40, 80, 100, 40);
-		ok.setBounds(270, 80, 100, 40);
-		random.setBounds(300, 10, 100, 20);
+		productChoiceCB.setBounds(150, 140, 100, 20);
+		costTF.setBounds(150, 80, 100, 40);
+		changeDateButton.setBounds(40, 80, 100, 40);
+		okButton.setBounds(270, 80, 100, 40);
+		genRandomButton.setBounds(300, 10, 100, 20);
 //
 //		ok.addActionListener(new ActionListener() {
 //			// jak rozwiazac kiedy nic nie jest wpisane w givescost
@@ -184,18 +187,25 @@ public class MainPanel extends JPanel {
 //
 //		});
 //
-		add(random);
-		add(history);
-		add(close);
+		add(genRandomButton);
+		add(historyButton);
+		add(closeButton);
 		add(label);
-		add(productChoice);
-		add(givesCost);
-		add(ok);
-		add(changeDate);
+		add(productChoiceCB);
+		add(costTF);
+		add(okButton);
+		add(changeDateButton);
 		setSize(400, 400);
 		setLayout(null);
 		setVisible(true);
 
 	}
 
+	public float getCost() {
+		return Float.parseFloat(costTF.getText());
+	}
+	
+	public void addOkButtonListener(ActionListener listenForOkButton) {
+		okButton.addActionListener(listenForOkButton);		
+	}
 }

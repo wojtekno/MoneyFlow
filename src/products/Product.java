@@ -73,6 +73,11 @@ public class Product {
 		this.cost = cost;
 		this.date1 = date1;
 	}
+	
+	public Product(float cost) {
+		this.cost = cost;
+		this.label = "no Label";
+	}
 
 	public String printDate1(Date date1) {
 		return sformat.format(this.date1);
@@ -81,27 +86,8 @@ public class Product {
 	public Object stringToObject(String date) throws ParseException {
 		return sformat.parseObject(date);
 	}
-	// void nextPurchase() {
-	// generator = new Random();
-	// this.cost = 30 * generator.nextFloat();
-	// this.date = (generator.nextInt(11) + 1) + ":" + (generator.nextInt(30) +
-	// 1);
-	// // System.out.println("You paid: " + cost + " on " + date );
-	// }
-
-	// public String toString() {
-	// if (this.time.equals("")) {
-	// return String.format(" %.2f pln\t" + this.getClass().getSimpleName() +
-	// "\t" + printDate1(date1) + "\n",
-	// cost);
-	// } else {
-	// return String.format(
-	// " %.2f pln\t" + this.getClass().getSimpleName() + "\t" +
-	// printDate1(date1) + " - " + time + "\n",
-	// cost);
-	// }
-	// }
-
+	
+	
 	public String toString() {
 		if(time.equals("")) {
 		return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\n", cost);

@@ -14,23 +14,37 @@ import products.Product;
 import products.Category;
 
 public class Model {
+
+	public List<Product> list;
+	public boolean listFlag;
+
+	public static int numberOfPurchaseFinger;
 	
-	List<Product> list;
-	
-	public Model () {
+	public Model() {
 		list = new ArrayList<Product>();
 	}
-	public static int numberOfPurchaseFinger;
+
+	
+
+	// delete after completion
+	public void buyItemNew(float cost) {
+			list.add(new Product(cost));
+	}
+
+	public void buyItemNew(float cost, String selectedProduct, Date date1) {
+		for (Category item : Category.values()) {
+			if (selectedProduct.equals(item.getLabel())) {
+				list.add(new Product(item.getLabel(), cost, date1));
+			}
+		}
+	}
 
 	public static void categoryPurchuse(List<Product> list, float cost, String selectedProduct) {
 		for (Category item : Category.values()) {
 			if (selectedProduct.equals(item.getLabel())) {
 				list.add(new Product(item.getLabel(), cost));
 			}
-			;
-
 		}
-
 	}
 
 	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
@@ -38,19 +52,15 @@ public class Model {
 			if (selectedProduct.equals(item.getLabel())) {
 				list.add(new Product(item.getLabel(), cost, date1));
 			}
-			;
-
 		}
 	}
 
 	// change it so it allows to save only 2 decimals
 	public static String sumExpenses(List<Product> list) {
 		float sum = 0;
-
 		for (Product item : list) {
 			sum += item.getCost();
 		}
-
 		// return "Total: " + String.valueOf(sum);
 		return String.format("\nTotal %.2f", sum);
 	}
@@ -67,7 +77,7 @@ public class Model {
 				i++;
 			}
 		}
-		
+
 		int j = 0;
 		for (Category cat : Category.values()) {
 
@@ -79,7 +89,7 @@ public class Model {
 	}
 
 	// hot to do it smart, scallable?
-	public static String sumCategories1(List<Product> list) {
+	public static String sumCategoriesOld(List<Product> list) {
 		float foodSum = 0, eduSum = 0, expenseSum = 0, treatsSum = 0;
 		float transportSum = 0, entertainmentSum = 0;
 		Iterator<Product> itr = list.iterator();
@@ -123,7 +133,7 @@ public class Model {
 		}
 	}
 
-	public static void printHistoryPanel(JTextArea textArea, List<Product> list) {
+	public static void printAllProducts(JTextArea textArea, List<Product> list) {
 		for (Product item : list) {
 			// textArea.append(String.format("%d) %.2f\t%s\t%s\n"
 			// ,(list.indexOf(item)+1), item.getCost(), item.getLabel(),

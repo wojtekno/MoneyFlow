@@ -9,10 +9,13 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Model model = new Model();
-		ArrayList<Product> list = new ArrayList<Product>();
+//		StartPanel startPanel = new StartPanel();
+//		Core.getInstance().window = new Window();
+		StartPanelController startPanelController = new StartPanelController(model); 
+//		ArrayList<Product> list = new ArrayList<Product>();
 			// Methods Methods = new Methods();
 		// Scanner scan = new Scanner(System.in);
-		Core.getInstance().window = new Window(list);
+		
 
 		
 	}

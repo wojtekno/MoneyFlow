@@ -5,7 +5,7 @@ public class Core {
 	public Window window;
 	public MainPanel mainPanel;
 	public JPanel panel;
-	public JPanel startPanel;
+	public StartPanel startPanel;
 	public HistoryPanel historyPanel;
 	public CategoriesPanel categoriesPanel;
 	public JPanel datePickerPanel;
