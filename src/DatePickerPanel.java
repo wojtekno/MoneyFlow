@@ -17,8 +17,14 @@ import org.jdatepicker.impl.UtilDateModel;
 import net.codejava.swing.DateLabelFormatter;
 
 public class DatePickerPanel extends JPanel {
-
-	public DatePickerPanel() {
+	
+	MainController controller;
+	
+	JLabel label;
+	JButton okButton;
+	
+	public DatePickerPanel(MainController controller) {
+		this.controller = controller;
 		// JPanel pickerPanel = new JPanel();
 //		Core.getInstance().datePickerPanel = new JPanel();
 		UtilDateModel model = new UtilDateModel();
@@ -27,27 +33,27 @@ public class DatePickerPanel extends JPanel {
 
 		// = selectedDate;
 
-		JLabel label1 = new JLabel("Choose a date from the callendar");
-		JButton okButton = new JButton("OK");
+		label = new JLabel("Choose a date from the callendar");
+		okButton = new JButton("OK");
 
 		okButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainPanel.date1 = (Date) datePicker.getModel().getValue();
-				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
-				if (MainPanel.date1 == null) {
-					MainPanel.date1Flag = false;
+				controller.setDate((Date) datePicker.getModel().getValue());
+				controller.changePanel(controller.getMainPanel());
+				if (controller.getDate() == null) {
+					controller.setDateFlag(false);
 				} else {
-					MainPanel.date1Flag = true;
+					controller.setDateFlag(true);
 				}
 			}
 		});
 
-		label1.setSize(200, 100);
+		label.setSize(200, 100);
 		setSize(300, 300);
 		add(okButton);
-		add(label1);
+		add(label);
 		add(datePicker);
 		setLayout(new FlowLayout());
 		setVisible(true);

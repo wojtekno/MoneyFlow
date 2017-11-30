@@ -18,7 +18,7 @@ public class StartPanelController {
 	}
 	
 	public void didClickStart() {
-		MainPanelController mainPanelController = new MainPanelController(model, window);
+		MainController mainPanelController = new MainController(model, window);
 	}
 	
 	

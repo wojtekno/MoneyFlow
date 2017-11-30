@@ -1,5 +1,5 @@
 
-//scroll doesnt work
+//resolve the list issue
 
 import static methods.Model.*;
 
@@ -18,70 +18,75 @@ import products.Product;
 
 public class HistoryPanel extends JPanel implements TextPanel {
 
+	MainController controller;
 	JPanel historyPanelThis;
 	JButton categoriesPanelButton;
-	JButton goBack;
+	JButton goBackButton;
 	public JTextArea textArea;
 	JScrollPane scroll;
 	boolean categoriesPanelFlag;
 
-	public HistoryPanel(List<Product> list) {
-		
-		goBack = new JButton("back");
-		goBack.setAlignmentY(1);
+	public HistoryPanel(MainController conroller) {
+		this.controller = conroller;
+
+		goBackButton = new JButton("back");
+		goBackButton.setAlignmentY(1);
 		categoriesPanelButton = new JButton("Categories");
 		categoriesPanelButton.setAlignmentY(TOP_ALIGNMENT);
 		textArea = new JTextArea(25, 25);
-//		textArea.setText("");
-//		printHistoryPanel(textArea, list);
-		
+		// textArea.setText("");
+		// printHistoryPanel(textArea, list);
+
 		scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
 		Font font = textArea.getFont();
 		textArea.setFont(font.deriveFont(Font.BOLD));
-		textArea.append(sumExpenses(list));
 		textArea.setEditable(false);
 
-		goBack.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
-
-			}
-		});
-
-		categoriesPanelButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (!categoriesPanelFlag) {
-					Core.getInstance().categoriesPanel = new CategoriesPanel(list);
-					categoriesPanelFlag = true;
-				}
-				Core.getInstance().categoriesPanel.repaintTextArea(list);
-				Core.getInstance().window.changePanel(Core.getInstance().categoriesPanel);
-
-			}
-		});
+		goBackButton.addActionListener(new GoBackButtonListener());
+		categoriesPanelButton.addActionListener(new CategoriesPanelButtonListener());
 
 		add(categoriesPanelButton);
-		add(goBack);
+		add(goBackButton);
 		add(scroll);
 		setSize(300, 500);
 		repaint();
 		revalidate();
 		setLayout(new FlowLayout());
 		setVisible(true);
-		
+
 	}
 
+	
 	@Override
 	public void repaintTextArea(List<Product> list) {
 		textArea.setText("");
 		printAllProducts(textArea, list);
 		textArea.append(sumExpenses(list));
+	}
+
+	
+	class GoBackButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			controller.changePanel(controller.getMainPanel());
+		}
+	}
+
+	
+	class CategoriesPanelButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (!categoriesPanelFlag) {
+				controller.createCategoriesPanel();
+				categoriesPanelFlag = true;
+			}
+			controller.getCategoriesPanel().repaintTextArea(controller.getModel().list);
+			controller.changePanel(controller.getCategoriesPanel());
+		}
 	}
 
 }

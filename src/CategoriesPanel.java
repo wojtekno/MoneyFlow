@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -17,24 +18,20 @@ import products.Product;
 
 public class CategoriesPanel extends JPanel implements TextPanel {
 
+	MainController controller;
 	JTextArea textArea;
-	JButton goBack;
-	JComboBox chooseCategory;
+	JButton goBackButton;
+	JComboBox<String> chooseCategoryCB;
 	JScrollPane scroll;
-	String[] categories;
 	String selectedCategory;
 
-	public CategoriesPanel(List<Product> list) {
-		goBack = new JButton("back");
-		goBack.setAlignmentY(1);
-		categories = new String[Category.values().length + 1];
-		categories[0] = "General";
-		for (int i = 1; i < categories.length; i++) {
-			categories[i] = Category.values()[i - 1].getLabel();
-		}
+	public CategoriesPanel(MainController controller, List<Product> list) {
+		this.controller = controller;
 
-		chooseCategory = new JComboBox(categories);
-
+		goBackButton = new JButton("back");
+		goBackButton.setAlignmentY(1);
+		chooseCategoryCB = new JComboBox<String>(setChooseCategoryCB());
+		selectedCategory = chooseCategoryCB.getItemAt(0).toString();
 		textArea = new JTextArea(25, 25);
 
 		Font font = textArea.getFont();
@@ -44,31 +41,11 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 		JScrollPane scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		chooseCategory.addActionListener(new ActionListener() {
+		chooseCategoryCB.addActionListener(new ChooseCategoriyCBListener());
+		goBackButton.addActionListener(new GoBackButtonListener());
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				selectedCategory = chooseCategory.getSelectedItem().toString();
-				if (selectedCategory.equals("General")) {
-					textArea.setText(sumCategories(list));
-				} else {
-					textArea.setText("");
-					printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, list));
-					textArea.append(sumExpenses(getProductsFromChoosenCategory(selectedCategory, list)));
-				}
-			}
-		});
-
-		goBack.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Core.getInstance().window.changePanel((JPanel) Core.getInstance().historyPanel);
-			}
-		});
-
-		add(chooseCategory);
-		add(goBack);
+		add(chooseCategoryCB);
+		add(goBackButton);
 		add(scroll);
 		setSize(300, 500);
 		repaint();
@@ -81,7 +58,40 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 	@Override
 	public void repaintTextArea(List<Product> list) {
 		textArea.setText(sumCategories(list));
-		
+	}
+
+	public String[] setChooseCategoryCB() {
+		String[] categories = new String[Category.values().length + 1];
+		categories[0] = "General";
+		for (int i = 1; i < categories.length; i++) {
+			categories[i] = Category.values()[i - 1].getLabel();
+		}
+		return categories;
+	}
+
+	class GoBackButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			controller.changePanel(controller.getHistoryPanel());
+
+		}
+
+	}
+
+	class ChooseCategoriyCBListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			selectedCategory = chooseCategoryCB.getSelectedItem().toString();
+			if (selectedCategory.equals("General")) {
+				textArea.setText(sumCategories(controller.getModel().list));
+			} else {
+				textArea.setText("");
+				printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, controller.getModel().list));
+				textArea.append(sumExpenses(getProductsFromChoosenCategory(selectedCategory, controller.getModel().list)));
+			}
+		}
 
 	}
 }
