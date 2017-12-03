@@ -255,7 +255,7 @@ public class MainPanel extends JPanel {
 				cost = Float.parseFloat(costTF.getText());
 				
 			} catch (java.lang.NumberFormatException a) {
-				JOptionPane.showMessageDialog(new JFrame(), "Wrog price format, put decimal, different than 0");
+				JOptionPane.showMessageDialog(controller.getWindow(), "Wrog price format, put decimal, different than 0");
 				label.setText("Enter a price");
 			}
 			
@@ -268,7 +268,7 @@ public class MainPanel extends JPanel {
 						 selectedItem, cost));
 			} else if (cost == 0) {
 			} else if (cost < 0 ) {
-				JOptionPane.showMessageDialog(new JFrame(),  "Wrong proce format: can't be negative");
+				JOptionPane.showMessageDialog(controller.getWindow(),  "Wrong proce format: can't be negative");
 			}
 			label.setText("");
 			date1 = null;
