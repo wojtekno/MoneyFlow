@@ -1,6 +1,6 @@
 // create method which prints list of items from shoosen category
 
-package methods;
+package modelPackage;
 
 import java.text.ParseException;
 

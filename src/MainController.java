@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.swing.JPanel;
 
-import methods.Model;
+import modelPackage.Model;
 
 public class MainController {
 	private Window window;
@@ -90,14 +90,14 @@ public class MainController {
 	}
 	
 	
-	public boolean isDateFlag () {
-		return mainPanel.isDate1Flag();
-	}
-	
-	
-	public void setDateFlag (boolean dateFlag) {
-		mainPanel.setDate1Flag(dateFlag);
-	}
+//	public boolean isDateFlag () {
+//		return mainPanel.isDate1Flag();
+//	}
+//	
+//	
+//	public void setDateFlag (boolean dateFlag) {
+//		mainPanel.setDate1Flag(dateFlag);
+//	}
 	
 	
 	public void createDatePicker() {
@@ -119,6 +119,8 @@ public class MainController {
 		window.changePanel(panel);
 	}
 	
-	
+	public void saveItem(String selectedItem, float cost, Date date) {
+		model.nextPurchase(selectedItem, cost, date);
+	}
 }
 

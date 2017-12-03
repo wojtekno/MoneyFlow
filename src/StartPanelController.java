@@ -1,7 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import methods.Model;
+import modelPackage.Model;
 
 public class StartPanelController {
 	Window window;

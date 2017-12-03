@@ -1,6 +1,6 @@
 // create enumPurch which runs all the enumtypes
 
-package methods;
+package modelPackage;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,16 +19,14 @@ public class Model {
 	public boolean listFlag;
 
 	public static int numberOfPurchaseFinger;
-	
+
 	public Model() {
 		list = new ArrayList<Product>();
 	}
 
-	
-
 	// delete after completion
 	public void buyItemNew(float cost) {
-			list.add(new Product(cost));
+		list.add(new Product(cost));
 	}
 
 	public void buyItemNew(float cost, String selectedProduct, Date date1) {
@@ -47,7 +45,7 @@ public class Model {
 		}
 	}
 
-	public static void nextPurchase(List<Product> list, float cost, String selectedProduct, Date date1) {
+	public void nextPurchase(String selectedProduct, float cost, Date date1) {
 		for (Category item : Category.values()) {
 			if (selectedProduct.equals(item.getLabel())) {
 				list.add(new Product(item.getLabel(), cost, date1));

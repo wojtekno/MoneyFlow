@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-import methods.Model;
+import modelPackage.Model;
 import products.Product;
 import products.Category;
 

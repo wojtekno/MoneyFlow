@@ -19,7 +19,7 @@ import net.codejava.swing.DateLabelFormatter;
 public class DatePickerPanel extends JPanel {
 	
 	MainController controller;
-	
+	JDatePickerImpl datePicker;
 	JLabel label;
 	JButton okButton;
 	
@@ -42,11 +42,14 @@ public class DatePickerPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				controller.setDate((Date) datePicker.getModel().getValue());
 				controller.changePanel(controller.getMainPanel());
-				if (controller.getDate() == null) {
-					controller.setDateFlag(false);
-				} else {
-					controller.setDateFlag(true);
-				}
+//				if (controller.getDate() == null) {
+//					controller.setDateFlag(false);
+//				} else {
+//					controller.setDateFlag(true);
+//				}
+				datePicker.getModel().setValue(null);
+//				System.out.println(datePicker.getModel().getValue());
+				datePicker.getJFormattedTextField().setText("");
 			}
 		});
 

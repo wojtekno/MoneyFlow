@@ -1,8 +1,8 @@
+
 //set okButtonListener :)
 
-import static methods.AutomaticMethod.createListOf24RandomProducts;
-
-import static methods.Model.*;
+import static modelPackage.AutomaticMethod.createListOf24RandomProducts;
+import static modelPackage.Model.*;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -17,7 +17,9 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -34,11 +36,11 @@ public class MainPanel extends JPanel {
 	DatePickerPanel datePickerPanel;
 	private boolean datePickerPanelFlag;
 
-	float cost;
+	private float cost;
 	String date;
 	private Date date1;
-	private boolean date1Flag;
-	String selectedItem;
+//	private boolean date1Flag;
+	private String selectedItem;
 	// List<Product> list2 = new ArrayList<>();
 
 	JButton okButton;
@@ -83,7 +85,7 @@ public class MainPanel extends JPanel {
 		changeDateButton.addActionListener(new ChangeDateButtonListener());
 		historyButton.addActionListener(new HistoryButtonListener());
 		genRandomButton.addActionListener(new GenRandomButtonListener());
-	
+
 		//
 		// ok.addActionListener(new ActionListener() {
 		// // jak rozwiazac kiedy nic nie jest wpisane w givescost
@@ -200,7 +202,7 @@ public class MainPanel extends JPanel {
 		//
 		// });
 		//
-		
+
 		add(genRandomButton);
 		add(historyButton);
 		add(closeButton);
@@ -223,13 +225,13 @@ public class MainPanel extends JPanel {
 		this.date1 = date1;
 	}
 
-	public boolean isDate1Flag() {
-		return date1Flag;
-	}
-
-	public void setDate1Flag(boolean date1Flag) {
-		this.date1Flag = date1Flag;
-	}
+//	public boolean isDate1Flag() {
+//		return date1Flag;
+//	}
+//
+//	public void setDate1Flag(boolean date1Flag) {
+//		this.date1Flag = date1Flag;
+//	}
 
 	public float getCost() {
 		return Float.parseFloat(costTF.getText());
@@ -248,13 +250,31 @@ public class MainPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			
 			try {
 				cost = Float.parseFloat(costTF.getText());
-				label.setText(String.format("You bought %s for %.2f", selectedItem, cost));
+				
 			} catch (java.lang.NumberFormatException a) {
-				// cost = 0;
+				JOptionPane.showMessageDialog(new JFrame(), "Wrog price format, put decimal, different than 0");
 				label.setText("Enter a price");
 			}
+			
+			System.out.println("cost: " + cost);
+			System.out.println("date: " + date1);
+			
+			if (cost > 0) {
+				controller.saveItem(selectedItem, cost, date1);
+				label.setText(String.format("You bought %s for %.2f",
+						 selectedItem, cost));
+			} else if (cost == 0) {
+			} else if (cost < 0 ) {
+				JOptionPane.showMessageDialog(new JFrame(),  "Wrong proce format: can't be negative");
+			}
+			label.setText("");
+			date1 = null;
+			cost = 0;
+			costTF.setText("");
+
 		}
 	}
 
@@ -282,6 +302,8 @@ public class MainPanel extends JPanel {
 				controller.createDatePicker();
 				datePickerPanelFlag = true;
 			}
+//			System.out.println(controller.getDatePickerPanel().datePicker.getModel().getValue());
+//			controller.getDatePickerPanel().datePicker.getModel().setDate(1,0,0);
 			controller.changePanel(controller.getDatePickerPanel());
 		}
 	}
@@ -304,8 +326,8 @@ public class MainPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			createListOf24RandomProducts(controller.getModel().list);
-			
+
 		}
-		
+
 	}
 }

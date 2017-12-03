@@ -1,4 +1,4 @@
-import static methods.Model.*;
+import static modelPackage.Model.*;
 
 import java.awt.FlowLayout;
 import java.awt.Font;

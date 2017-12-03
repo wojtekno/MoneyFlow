@@ -18,7 +18,7 @@ public class Product {
 	private Date date1;
 	private String time = "";
 	private String label;
-	Random generator;
+	Random generator = new Random();
 	Scanner scan;
 	DateTimeFormatter formatter;
 	Calendar calendar = Calendar.getInstance();
@@ -27,7 +27,6 @@ public class Product {
 
 	public Product(String label) {
 		this.label = label;
-		generator = new Random();
 		int year = generator.nextInt(2) + 2016;
 		int dayOfYear = generator.nextInt(365) + 1;
 
@@ -45,8 +44,19 @@ public class Product {
 	public Product(String label, float cost, Date date1) {
 		super();
 		this.cost = cost;
-		this.date1 = date1;
 		this.label = label;
+		if (date1 == null) {
+			LocalDateTime dateNow = LocalDateTime.now();
+			formatter = DateTimeFormatter.ofPattern("MMM/dd");
+			// this.date = dateNow.format(formatter);
+			formatter = DateTimeFormatter.ofPattern("hh:mm");
+			// convert time without formatter
+			this.time = dateNow.format(formatter);
+			this.date1 = calendar.getTime();
+		} else {
+			this.date1 = date1;
+		}
+		
 	}
 
 	public Product(String label, float cost) {
@@ -73,7 +83,7 @@ public class Product {
 		this.cost = cost;
 		this.date1 = date1;
 	}
-	
+
 	public Product(float cost) {
 		this.cost = cost;
 		this.label = "no Label";
@@ -86,11 +96,10 @@ public class Product {
 	public Object stringToObject(String date) throws ParseException {
 		return sformat.parseObject(date);
 	}
-	
-	
+
 	public String toString() {
-		if(time.equals("")) {
-		return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\n", cost);
+		if (time.equals("")) {
+			return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\n", cost);
 		} else {
 			return String.format(" %.2f pln\t" + label + "\t" + printDate1(date1) + "\t" + time + "\n", cost);
 		}
