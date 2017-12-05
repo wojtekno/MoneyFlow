@@ -7,6 +7,6 @@ import products.Product;
 public interface TextPanel {
 	JTextArea textArea = new JTextArea(25,25);
 	
-	public void repaintTextArea(List<Product> list);
+	public void repaintTextArea();
 	
 }

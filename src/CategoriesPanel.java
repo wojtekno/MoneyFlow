@@ -1,12 +1,14 @@
+/*
+ * Panel printing products from chosen category, and its total cost
+ */
 import static modelPackage.Model.*;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
-import javax.swing.Action;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -14,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import products.Category;
-import products.Product;
+
 
 public class CategoriesPanel extends JPanel implements TextPanel {
 
@@ -25,7 +27,7 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 	JScrollPane scroll;
 	String selectedCategory;
 
-	public CategoriesPanel(MainController controller, List<Product> list) {
+	public CategoriesPanel(MainController controller) {
 		this.controller = controller;
 
 		goBackButton = new JButton("back");
@@ -56,8 +58,8 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 	}
 
 	@Override
-	public void repaintTextArea(List<Product> list) {
-		textArea.setText(sumCategories(list));
+	public void repaintTextArea() {
+		textArea.setText(sumCategories(controller.getModel().getListOfBoughtProducts()));
 	}
 
 	public String[] setChooseCategoryCB() {
@@ -85,11 +87,11 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 		public void actionPerformed(ActionEvent e) {
 			selectedCategory = chooseCategoryCB.getSelectedItem().toString();
 			if (selectedCategory.equals("General")) {
-				textArea.setText(sumCategories(controller.getModel().list));
+				textArea.setText(sumCategories(controller.getModel().getListOfBoughtProducts()));
 			} else {
 				textArea.setText("");
-				printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, controller.getModel().list));
-				textArea.append(sumExpenses(getProductsFromChoosenCategory(selectedCategory, controller.getModel().list)));
+				printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, controller.getModel().getListOfBoughtProducts()));
+				textArea.append(sumExpenses(getProductsFromChoosenCategory(selectedCategory, controller.getModel().getListOfBoughtProducts())));
 			}
 		}
 

@@ -1,3 +1,8 @@
+/*
+ * I used to hold here references to the all panels
+ * before I implemented MVC pattern
+ */
+
 import javax.swing.JPanel;
 
 public class Core {

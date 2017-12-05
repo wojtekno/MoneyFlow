@@ -60,10 +60,10 @@ public class HistoryPanel extends JPanel implements TextPanel {
 
 	
 	@Override
-	public void repaintTextArea(List<Product> list) {
+	public void repaintTextArea() {
 		textArea.setText("");
-		printAllProducts(textArea, list);
-		textArea.append(sumExpenses(list));
+		printAllProducts(textArea, controller.getModel().getListOfBoughtProducts());
+		textArea.append(sumExpenses(controller.getModel().getListOfBoughtProducts()));
 	}
 
 	
@@ -84,7 +84,7 @@ public class HistoryPanel extends JPanel implements TextPanel {
 				controller.createCategoriesPanel();
 				categoriesPanelFlag = true;
 			}
-			controller.getCategoriesPanel().repaintTextArea(controller.getModel().list);
+			controller.getCategoriesPanel().repaintTextArea();
 			controller.changePanel(controller.getCategoriesPanel());
 		}
 	}

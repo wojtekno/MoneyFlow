@@ -1,47 +1,34 @@
 
-//set okButtonListener :)
-
+/* 
+ * Main  Panel
+ */
 import static modelPackage.AutomaticMethod.createListOf24RandomProducts;
-import static modelPackage.Model.*;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.github.lgooddatepicker.components.DatePicker;
-
-import products.Product;
 import products.Category;
 
 public class MainPanel extends JPanel {
 
 	MainController controller;
-	DatePickerPanel datePickerPanel;
-	private boolean datePickerPanelFlag;
 
+	// inform if Panels have been already created
+	private boolean datePickerPanelFlag;
+	private boolean historyPanelFlag;
+
+	/* variables describing products */
 	private float cost;
-	String date;
 	private Date date1;
-//	private boolean date1Flag;
-	private String selectedItem;
-	// List<Product> list2 = new ArrayList<>();
+	private String selectedCategory;
 
 	JButton okButton;
 	JButton changeDateButton;
@@ -52,13 +39,11 @@ public class MainPanel extends JPanel {
 	JComboBox<String> chooseCategoryCB;
 	JTextField costTF;
 
-	private boolean historyPanelFlag;
-
 	public MainPanel(MainController controller) {
 
 		this.controller = controller;
 
-		historyButton = new JButton("Hisory");
+		historyButton = new JButton("History");
 		closeButton = new JButton("Close");
 		label = new JLabel();
 		chooseCategoryCB = new JComboBox<>(setChooseCategoryCB());
@@ -68,7 +53,8 @@ public class MainPanel extends JPanel {
 		changeDateButton = new JButton("Not today?");
 		genRandomButton = new JButton("Gen.Rand");
 
-		selectedItem = chooseCategoryCB.getItemAt(0).toString();
+		// assigning variable to the first item from the list
+		selectedCategory = chooseCategoryCB.getItemAt(0).toString();
 
 		historyButton.setBounds(10, 300, 100, 40);
 		closeButton.setBounds(150, 180, 100, 40);
@@ -225,18 +211,11 @@ public class MainPanel extends JPanel {
 		this.date1 = date1;
 	}
 
-//	public boolean isDate1Flag() {
-//		return date1Flag;
-//	}
-//
-//	public void setDate1Flag(boolean date1Flag) {
-//		this.date1Flag = date1Flag;
-//	}
-
 	public float getCost() {
 		return Float.parseFloat(costTF.getText());
 	}
 
+	// assigning values to the ComboBox
 	private String[] setChooseCategoryCB() {
 		String[] products = new String[Category.values().length];
 		Category[] labels = Category.values();
@@ -246,30 +225,35 @@ public class MainPanel extends JPanel {
 		return products;
 	}
 
+	/*
+	 * making sure that all the variables date, cost, selectedItem hold proper
+	 * values and passing them to the controller and then to the list
+	 */
 	class OkButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 			try {
 				cost = Float.parseFloat(costTF.getText());
-				
+
 			} catch (java.lang.NumberFormatException a) {
-				JOptionPane.showMessageDialog(controller.getWindow(), "Wrog price format, put decimal, different than 0");
+				JOptionPane.showMessageDialog(controller.getWindow(),
+						"Wrog price format, put decimal, different than 0");
 				label.setText("Enter a price");
 			}
-			
-			System.out.println("cost: " + cost);
-			System.out.println("date: " + date1);
-			
+
+			// System.out.println("cost: " + cost);
+			// System.out.println("date: " + date1);
+
 			if (cost > 0) {
-				controller.saveItem(selectedItem, cost, date1);
-				label.setText(String.format("You bought %s for %.2f",
-						 selectedItem, cost));
+				controller.saveItem(selectedCategory, cost, date1);
+				label.setText(String.format("You bought %s for %.2f", selectedCategory, cost));
 			} else if (cost == 0) {
-			} else if (cost < 0 ) {
-				JOptionPane.showMessageDialog(controller.getWindow(),  "Wrong proce format: can't be negative");
+			} else if (cost < 0) {
+				JOptionPane.showMessageDialog(controller.getWindow(), "Wrong proce format: can't be negative");
 			}
+			// setting fields and variables to the desired state
 			label.setText("");
 			date1 = null;
 			cost = 0;
@@ -282,7 +266,7 @@ public class MainPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			selectedItem = chooseCategoryCB.getSelectedItem().toString();
+			selectedCategory = chooseCategoryCB.getSelectedItem().toString();
 		}
 	}
 
@@ -302,8 +286,6 @@ public class MainPanel extends JPanel {
 				controller.createDatePicker();
 				datePickerPanelFlag = true;
 			}
-//			System.out.println(controller.getDatePickerPanel().datePicker.getModel().getValue());
-//			controller.getDatePickerPanel().datePicker.getModel().setDate(1,0,0);
 			controller.changePanel(controller.getDatePickerPanel());
 		}
 	}
@@ -316,16 +298,16 @@ public class MainPanel extends JPanel {
 				controller.createHistoryPanel();
 				historyPanelFlag = true;
 			}
-			controller.getHistoryPanel().repaintTextArea(controller.getModel().list);
+			controller.getHistoryPanel().repaintTextArea();
 			controller.changePanel(controller.getHistoryPanel());
 		}
 	}
-
+//	for the purpose of testing, creates few products from each category, with a semi-random date and cost
 	class GenRandomButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			createListOf24RandomProducts(controller.getModel().list);
+			createListOf24RandomProducts(controller.getModel().getListOfBoughtProducts());
 
 		}
 
