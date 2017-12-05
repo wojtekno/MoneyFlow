@@ -76,7 +76,7 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			controller.changePanel(controller.getHistoryPanel());
-
+			chooseCategoryCB.setSelectedIndex(0);
 		}
 
 	}
