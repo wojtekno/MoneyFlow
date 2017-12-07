@@ -1,13 +1,13 @@
+/*
+ * Start Panel is a panel with a start button.
+ * After clicking start we go to the MainPanel of application
+ */
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import products.Product;
-import products.Category;
 
 public class StartPanel extends JPanel {
 	
@@ -40,8 +40,8 @@ public class StartPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			controller.didClickStart();
+						controller.didClickStart();
+						
 //			Core.getInstance().mainPanel = new MainPanel();
 //			Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
 

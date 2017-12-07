@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Product {
 	private float cost;
@@ -18,29 +17,15 @@ public class Product {
 	private Date date1;
 	private String time = "";
 	private String label;
-	Random generator = new Random();
-	Scanner scan;
+	Random generator = new Random();  // initialize it here? or in product constructor?
 	DateTimeFormatter formatter;
-	Calendar calendar = Calendar.getInstance();
-	String dateFormat = "dd-MMM-yyyy";
-	SimpleDateFormat sformat = new SimpleDateFormat(dateFormat);
+	Calendar calendar = Calendar.getInstance(); //same Q as above!
+	String dateFormat = "dd-MMM-yyyy"; // same Q
+	SimpleDateFormat sformat = new SimpleDateFormat(dateFormat);  // same Q
 
-	public Product(String label) {
-		this.label = label;
-		int year = generator.nextInt(2) + 2016;
-		int dayOfYear = generator.nextInt(365) + 1;
-
-		calendar.set(Calendar.YEAR, year);
-		calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-		this.date1 = calendar.getTime();
-		this.cost = (30 * generator.nextFloat());
-
-		// this.time = "";
-		// this.date = String.valueOf(generator.nextInt(11) + 1) + "/" +
-		// String.valueOf((generator.nextInt(30) + 1));
-		// this.date1 = (Date) stringToObject(date);
-	}
-
+	/*
+	 * main constructor
+	 */
 	public Product(String label, float cost, Date date1) {
 		super();
 		this.cost = cost;
@@ -58,6 +43,27 @@ public class Product {
 		}
 		
 	}
+	
+	/*
+	 * used to create random product -> used generating "database"
+	 */
+	public Product(String label) {
+		this.label = label;
+		int year = generator.nextInt(2) + 2016;
+		int dayOfYear = generator.nextInt(365) + 1;
+
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+		this.date1 = calendar.getTime();
+		this.cost = (30 * generator.nextFloat());
+
+		// this.time = "";
+		// this.date = String.valueOf(generator.nextInt(11) + 1) + "/" +
+		// String.valueOf((generator.nextInt(30) + 1));
+		// this.date1 = (Date) stringToObject(date);
+	}
+
+	
 
 	public Product(String label, float cost) {
 		this.cost = cost;

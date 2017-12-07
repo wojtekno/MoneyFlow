@@ -100,7 +100,11 @@ public class MainController {
 		window.changePanel(panel);
 	}
 
-	public void saveItem(String selectedItem, float cost, Date date) {
-		model.nextPurchase(selectedItem, cost, date);
+	/*
+	 * Gets all the needed values (selectedCategory, cost, date)
+	 * and invokes method which creates the product and stores it on the listOfProducts
+	 */
+	public void saveItem(String selectedCategory, float cost, Date date) {
+		model.nextPurchase(selectedCategory, cost, date);
 	}
 }

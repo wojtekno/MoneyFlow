@@ -1,8 +1,9 @@
-import java.util.List;
+/*
+ * interface for panels with JtextArea
+ */
 
 import javax.swing.JTextArea;
 
-import products.Product;
 
 public interface TextPanel {
 	JTextArea textArea = new JTextArea(25,25);

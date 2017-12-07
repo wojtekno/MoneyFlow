@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -16,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import products.Category;
-
 
 public class CategoriesPanel extends JPanel implements TextPanel {
 
@@ -62,6 +60,9 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 		textArea.setText(sumCategories(controller.getModel().getListOfBoughtProducts()));
 	}
 
+	/*
+	 * Assigns values to the chooseCategoryCB.
+	 */
 	public String[] setChooseCategoryCB() {
 		String[] categories = new String[Category.values().length + 1];
 		categories[0] = "General";
@@ -90,8 +91,10 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 				textArea.setText(sumCategories(controller.getModel().getListOfBoughtProducts()));
 			} else {
 				textArea.setText("");
-				printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory, controller.getModel().getListOfBoughtProducts()));
-				textArea.append(sumExpenses(getProductsFromChoosenCategory(selectedCategory, controller.getModel().getListOfBoughtProducts())));
+				printProductsFromChoosenCategory(textArea, getProductsFromChoosenCategory(selectedCategory,
+						controller.getModel().getListOfBoughtProducts()));
+				textArea.append(sumExpenses(getProductsFromChoosenCategory(selectedCategory,
+						controller.getModel().getListOfBoughtProducts())));
 			}
 		}
 

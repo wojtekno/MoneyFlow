@@ -1,4 +1,6 @@
-
+/*
+ * HistoryPanel is used to print history of bought products.
+ */
 //resolve the list issue
 
 import static modelPackage.Model.*;
@@ -19,7 +21,6 @@ import products.Product;
 public class HistoryPanel extends JPanel implements TextPanel {
 
 	MainController controller;
-	JPanel historyPanelThis;
 	JButton categoriesPanelButton;
 	JButton goBackButton;
 	public JTextArea textArea;
@@ -34,9 +35,7 @@ public class HistoryPanel extends JPanel implements TextPanel {
 		categoriesPanelButton = new JButton("Categories");
 		categoriesPanelButton.setAlignmentY(TOP_ALIGNMENT);
 		textArea = new JTextArea(25, 25);
-		// textArea.setText("");
-		// printHistoryPanel(textArea, list);
-
+		
 		scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 

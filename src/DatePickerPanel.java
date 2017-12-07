@@ -1,4 +1,6 @@
-//change date so if you choose the next time is again null
+/*
+ * Panel used to choose a date if it's different than today.
+ */
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -25,13 +27,9 @@ public class DatePickerPanel extends JPanel {
 	
 	public DatePickerPanel(MainController controller) {
 		this.controller = controller;
-		// JPanel pickerPanel = new JPanel();
-//		Core.getInstance().datePickerPanel = new JPanel();
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, new Properties());
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-
-		// = selectedDate;
 
 		label = new JLabel("Choose a date from the callendar");
 		okButton = new JButton("OK");
@@ -42,14 +40,17 @@ public class DatePickerPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				controller.setDate((Date) datePicker.getModel().getValue());
 				controller.changePanel(controller.getMainPanel());
+				datePicker.getModel().setValue(null);
+				datePicker.getJFormattedTextField().setText("");
+				
 //				if (controller.getDate() == null) {
 //					controller.setDateFlag(false);
 //				} else {
 //					controller.setDateFlag(true);
 //				}
-				datePicker.getModel().setValue(null);
+				
 //				System.out.println(datePicker.getModel().getValue());
-				datePicker.getJFormattedTextField().setText("");
+				
 			}
 		});
 

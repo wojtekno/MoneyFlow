@@ -10,7 +10,8 @@ public enum Category {
 	TRREATS ("Treats"),
 	EDU ("Education"),
 	ENTERTAIN ("Entertainment"),
-	EXPENSES ("Expenses");
+	EXPENSES ("Expenses"),
+	CLOTHES ("Clothes");
 	
 	private String label;
 

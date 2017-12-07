@@ -1,5 +1,10 @@
-// unify methods in terms of returning types and objects you put inside
-// should they be static?
+/*
+ * Database of the app.
+ * listOfBoughtProducts stores all the bought products.
+ */
+
+// unify methods in terms of arguments and returning types 
+// should they be static?  -> they cannot be static, right?!
 
 package modelPackage;
 
@@ -29,7 +34,7 @@ public class Model {
 	}
 
 	/*
-	 * main method which lets us save products to the list
+	 * main method, saves products to the list
 	 */
 	public void nextPurchase(String selectedProduct, float cost, Date date1) {
 		for (Category item : Category.values()) {
@@ -52,7 +57,7 @@ public class Model {
 	}
 
 	/*
-	 * it prints total cost of all products
+	 *  prints total cost of all products
 	 */
 	// change it so it allows to save only 2 decimals
 	public static String sumExpenses(List<Product> list) {
