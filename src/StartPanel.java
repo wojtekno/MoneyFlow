@@ -2,9 +2,7 @@
  * Start Panel is a panel with a start button.
  * After clicking start we go to the MainPanel of application
  */
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -19,7 +17,7 @@ public class StartPanel extends JPanel {
 		
 		startButton = new JButton("Start");
 		startButton.setBounds(150, 150, 200, 200);
-		startButton.addActionListener(new StartButtonListener());
+		startButton.addActionListener(new ClickStartListener(controller));
 		// startButton.addActionListener(new ActionListener() {
 		//
 		// @Override
@@ -36,15 +34,5 @@ public class StartPanel extends JPanel {
 		setVisible(true);
 	}
 
-	class StartButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-						controller.didClickStart();
-						
-//			Core.getInstance().mainPanel = new MainPanel();
-//			Core.getInstance().window.changePanel(Core.getInstance().mainPanel);
-
-		}
-	}
+	
 }

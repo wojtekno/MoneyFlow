@@ -1,4 +1,5 @@
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.util.Date;
 
@@ -13,8 +14,13 @@ public class MainController {
 	private MainPanel mainPanel;
 	private Model model;
 	private DatePickerPanel datePickerPanel;
-	private HistoryPanel historyPanel;
+	private HistoryPanel historyPanel = null;
 	private CategoriesPanel categoriesPanel;
+	
+	String selectedCategory;
+	float cost;
+	Date date1;
+	
 
 	public MainController(Model model, Window window) {
 		this.window = window;
@@ -73,14 +79,7 @@ public class MainController {
 		this.categoriesPanel = categoriesPanel;
 	}
 
-	public void setDate(Date date1) {
-		mainPanel.setDate1(date1);
-	}
-
-	public Date getDate() {
-		return mainPanel.getDate1();
-	}
-
+	
 	/*
 	 * methods creating Panels
 	 */
@@ -101,8 +100,8 @@ public class MainController {
 	}
 
 	/*
-	 * Gets all the needed values (selectedCategory, cost, date)
-	 * and invokes method which creates the product and stores it on the listOfProducts
+	 * Gets all the needed values (selectedCategory, cost, date) and invokes
+	 * method which creates the product and stores it on the listOfProducts
 	 */
 	public void saveItem(String selectedCategory, float cost, Date date) {
 		model.nextPurchase(selectedCategory, cost, date);

@@ -1,22 +1,17 @@
+
 /*
  * HistoryPanel is used to print history of bought products.
  */
-//resolve the list issue
 
 import static modelPackage.Model.*;
 
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
-import products.Product;
 
 public class HistoryPanel extends JPanel implements TextPanel {
 
@@ -35,7 +30,7 @@ public class HistoryPanel extends JPanel implements TextPanel {
 		categoriesPanelButton = new JButton("Categories");
 		categoriesPanelButton.setAlignmentY(TOP_ALIGNMENT);
 		textArea = new JTextArea(25, 25);
-		
+
 		scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
@@ -43,8 +38,8 @@ public class HistoryPanel extends JPanel implements TextPanel {
 		textArea.setFont(font.deriveFont(Font.BOLD));
 		textArea.setEditable(false);
 
-		goBackButton.addActionListener(new GoBackButtonListener());
-		categoriesPanelButton.addActionListener(new CategoriesPanelButtonListener());
+		goBackButton.addActionListener(new GoToMainPanelListener(controller));
+		categoriesPanelButton.addActionListener(new GoToCategoriesPanelListener(controller));
 
 		add(categoriesPanelButton);
 		add(goBackButton);
@@ -57,35 +52,10 @@ public class HistoryPanel extends JPanel implements TextPanel {
 
 	}
 
-	
 	@Override
 	public void repaintTextArea() {
-		textArea.setText("");
-		printAllProducts(textArea, controller.getModel().getListOfBoughtProducts());
-		textArea.append(sumExpenses(controller.getModel().getListOfBoughtProducts()));
-	}
-
-	
-	class GoBackButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			controller.changePanel(controller.getMainPanel());
-		}
-	}
-
-	
-	class CategoriesPanelButtonListener implements ActionListener {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (!categoriesPanelFlag) {
-				controller.createCategoriesPanel();
-				categoriesPanelFlag = true;
-			}
-			controller.getCategoriesPanel().repaintTextArea();
-			controller.changePanel(controller.getCategoriesPanel());
-		}
+		textArea.setText(controller.getModel().printAllProducts());
+		textArea.append(controller.getModel().sumExpenses());
 	}
 
 }

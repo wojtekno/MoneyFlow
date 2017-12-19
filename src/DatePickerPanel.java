@@ -1,3 +1,4 @@
+
 /*
  * Panel used to choose a date if it's different than today.
  */
@@ -19,40 +20,21 @@ import org.jdatepicker.impl.UtilDateModel;
 import net.codejava.swing.DateLabelFormatter;
 
 public class DatePickerPanel extends JPanel {
-	
+
 	MainController controller;
 	JDatePickerImpl datePicker;
 	JLabel label;
 	JButton okButton;
-	
+
 	public DatePickerPanel(MainController controller) {
 		this.controller = controller;
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, new Properties());
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
 		label = new JLabel("Choose a date from the callendar");
 		okButton = new JButton("OK");
-
-		okButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				controller.setDate((Date) datePicker.getModel().getValue());
-				controller.changePanel(controller.getMainPanel());
-				datePicker.getModel().setValue(null);
-				datePicker.getJFormattedTextField().setText("");
-				
-//				if (controller.getDate() == null) {
-//					controller.setDateFlag(false);
-//				} else {
-//					controller.setDateFlag(true);
-//				}
-				
-//				System.out.println(datePicker.getModel().getValue());
-				
-			}
-		});
+		okButton.addActionListener(new GoToMainPanelListener(controller));
 
 		label.setSize(200, 100);
 		setSize(300, 300);
@@ -62,6 +44,14 @@ public class DatePickerPanel extends JPanel {
 		setLayout(new FlowLayout());
 		setVisible(true);
 
+	}
+
+	/*
+	 * set date to null
+	 */
+	public void refreshDatePickerPanel() {
+		datePicker.getModel().setValue(null);
+		datePicker.getJFormattedTextField().setText("");
 	}
 
 }
