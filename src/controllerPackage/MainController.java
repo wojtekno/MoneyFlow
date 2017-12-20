@@ -1,11 +1,14 @@
-import java.awt.event.ActionEvent;
-
-import java.awt.event.ActionListener;
+package controllerPackage;
 import java.util.Date;
 
 import javax.swing.JPanel;
 
 import modelPackage.Model;
+import viewPackage.CategoriesPanel;
+import viewPackage.DatePickerPanel;
+import viewPackage.HistoryPanel;
+import viewPackage.MainPanel;
+import viewPackage.Window;
 
 public class MainController {
 

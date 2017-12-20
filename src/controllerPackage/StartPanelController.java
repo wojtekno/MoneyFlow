@@ -1,7 +1,7 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+package controllerPackage;
 import modelPackage.Model;
+import viewPackage.StartPanel;
+import viewPackage.Window;
 
 public class StartPanelController {
 	Window window;

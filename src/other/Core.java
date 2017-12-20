@@ -1,9 +1,16 @@
+package other;
 /*
  * I used to hold here references to the all panels
  * before I implemented MVC pattern
  */
 
 import javax.swing.JPanel;
+
+import viewPackage.CategoriesPanel;
+import viewPackage.HistoryPanel;
+import viewPackage.MainPanel;
+import viewPackage.StartPanel;
+import viewPackage.Window;
 
 public class Core {
 	

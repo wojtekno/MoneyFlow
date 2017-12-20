@@ -1,3 +1,4 @@
+package viewPackage;
 /*
  * Start Panel is a panel with a start button.
  * After clicking start we go to the MainPanel of application
@@ -5,6 +6,9 @@
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import controllerPackage.StartPanelController;
+import listenersPackage.ClickStartListener;
 
 
 public class StartPanel extends JPanel {

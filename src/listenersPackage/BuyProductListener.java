@@ -1,8 +1,12 @@
+package listenersPackage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
+
+import controllerPackage.MainController;
+import viewPackage.MainPanel;
 
 public class BuyProductListener implements ActionListener {
 

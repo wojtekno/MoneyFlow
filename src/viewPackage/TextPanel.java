@@ -1,3 +1,4 @@
+package viewPackage;
 /*
  * interface for panels with JtextArea
  */

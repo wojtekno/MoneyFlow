@@ -1,3 +1,4 @@
+package viewPackage;
 /*
  * Frame which is used throughout the application 
  * - just changing Panels

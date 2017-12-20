@@ -1,3 +1,4 @@
+package listenersPackage;
 
 /*
  * TODO implement this one
@@ -5,7 +6,9 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.FeatureDescriptor;
+
+import controllerPackage.MainController;
+import viewPackage.CategoriesPanel;
 
 public class PrintCategoryListener implements ActionListener {
 

@@ -1,20 +1,20 @@
+package viewPackage;
 
 /* 
  * Main  Panel
  */
-import static modelPackage.AutomaticMethod.createListOf24RandomProducts;
-
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controllerPackage.MainController;
+import listenersPackage.BuyProductListener;
+import listenersPackage.CloseButtonListener;
+import listenersPackage.GenerateRandomProductsListener;
+import listenersPackage.GoToDatePickerPanelListener;
+import listenersPackage.GoToHistoryPanelListener;
 import products.Category;
 
 public class MainPanel extends JPanel {
@@ -26,9 +26,9 @@ public class MainPanel extends JPanel {
 	JButton genRandomButton;
 	JButton historyButton;
 	JButton closeButton;
-	JLabel label;
-	JComboBox<String> chooseCategoryCB;
-	JTextField costTF;
+	public JLabel label;
+	public JComboBox<String> chooseCategoryCB;
+	public JTextField costTF;
 
 	public MainPanel(MainController controller) {
 

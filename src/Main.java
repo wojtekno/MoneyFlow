@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-
+import controllerPackage.StartPanelController;
 import modelPackage.Model;
-import products.Product;
-import products.Category;
 
 public class Main {
 

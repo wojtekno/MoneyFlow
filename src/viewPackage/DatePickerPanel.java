@@ -1,12 +1,10 @@
+package viewPackage;
 
 /*
  * Panel used to choose a date if it's different than today.
  */
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -17,12 +15,14 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import controllerPackage.MainController;
+import listenersPackage.GoToMainPanelListener;
 import net.codejava.swing.DateLabelFormatter;
 
 public class DatePickerPanel extends JPanel {
 
 	MainController controller;
-	JDatePickerImpl datePicker;
+	public JDatePickerImpl datePicker;
 	JLabel label;
 	JButton okButton;
 

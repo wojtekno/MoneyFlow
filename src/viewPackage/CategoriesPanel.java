@@ -1,14 +1,11 @@
+package viewPackage;
 
 /*
  * Panel printing products from chosen category, and its total cost
  * TODO implement PrintCategoryListener
  */
-import static modelPackage.Model.*;
-
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,14 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import controllerPackage.MainController;
+import listenersPackage.GoToHistoryPanelListener;
+import listenersPackage.PrintCategoryListener;
 import products.Category;
 
 public class CategoriesPanel extends JPanel implements TextPanel {
 
 	MainController controller;
-	JTextArea textArea;
+	public JTextArea textArea;
 	JButton goBackButton;
-	JComboBox<String> chooseCategoryCB;
+	public JComboBox<String> chooseCategoryCB;
 	JScrollPane scroll;
 	String selectedCategory;
 
