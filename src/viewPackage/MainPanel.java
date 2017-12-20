@@ -17,7 +17,7 @@ import listenersPackage.GoToDatePickerPanelListener;
 import listenersPackage.GoToHistoryPanelListener;
 import products.Category;
 
-public class MainPanel extends JPanel {
+public class MainPanel extends JPanel implements MainPanelInterface{
 
 	MainController controller;
 
@@ -53,7 +53,7 @@ public class MainPanel extends JPanel {
 		okButton.setBounds(270, 80, 100, 40);
 		genRandomButton.setBounds(300, 10, 100, 20);
 
-		okButton.addActionListener(new BuyProductListener(this, controller));
+		okButton.addActionListener(new BuyProductListener(this));
 		closeButton.addActionListener(new CloseButtonListener());
 		changeDateButton.addActionListener(new GoToDatePickerPanelListener(controller));
 		historyButton.addActionListener(new GoToHistoryPanelListener(controller));
@@ -73,10 +73,6 @@ public class MainPanel extends JPanel {
 
 	}
 
-	public float getCost() {
-		return Float.parseFloat(costTF.getText());
-	}
-
 	/*
 	 * assigning values to the ComboBox
 	 */
@@ -87,6 +83,27 @@ public class MainPanel extends JPanel {
 			products[i] = labels[i].getLabel();
 		}
 		return products;
+	}
+
+	@Override
+	public void setLabel(String text) {
+		label.setText(text);
+	}
+
+	@Override
+	public String getCostTextField() {
+		return costTF.getText();
+	}
+
+	@Override
+	public void setCostTextField(String text) {
+		costTF.setText(text);
+		
+	}
+
+	@Override
+	public String getSelectedCategory() {
+				return chooseCategoryCB.getSelectedItem().toString();
 	}
 
 }

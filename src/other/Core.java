@@ -6,6 +6,7 @@ package other;
 
 import javax.swing.JPanel;
 
+import controllerPackage.MainController;
 import viewPackage.CategoriesPanel;
 import viewPackage.HistoryPanel;
 import viewPackage.MainPanel;
@@ -21,6 +22,8 @@ public class Core {
 	public HistoryPanel historyPanel;
 	public CategoriesPanel categoriesPanel;
 	public JPanel datePickerPanel;
+//	public MainControllerInterface mainControllerInterface;
+	public MainController mainController;
 	private Core() {
 		
 	}

@@ -1,5 +1,6 @@
 package controllerPackage;
 import modelPackage.Model;
+import other.Core;
 import viewPackage.StartPanel;
 import viewPackage.Window;
 
@@ -18,7 +19,8 @@ public class StartPanelController {
 	}
 	
 	public void didClickStart() {
-		MainController mainPanelController = new MainController(model, window);
+		Core.getInstance().mainController = new MainController(model, window);
+		System.out.println(Core.getInstance().mainController);
 	}
 	
 	
