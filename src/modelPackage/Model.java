@@ -35,6 +35,8 @@ public class Model {
 
 	/*
 	 * main method, saves products to the list
+	 * TODO API, niech informuje o zmianie controller
+	 * TODO Controller niech poinformuje APIRepaintText
 	 */
 
 	public void nextPurchase(String selectedProduct, float cost, Date date1) {
