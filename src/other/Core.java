@@ -4,9 +4,11 @@ package other;
  * before I implemented MVC pattern
  */
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controllerPackage.MainController;
+import modelPackage.Model;
 import viewPackage.CategoriesPanel;
 import viewPackage.HistoryPanel;
 import viewPackage.MainPanel;
@@ -15,7 +17,8 @@ import viewPackage.Window;
 
 public class Core {
 	
-	public Window window;
+	public Model model;
+	public JFrame window;
 	public MainPanel mainPanel;
 	public JPanel panel;
 	public StartPanel startPanel;
@@ -34,5 +37,8 @@ public class Core {
 	
 	public static Core getInstance() {
 		return CoreHandler.instance;
+	}
+	public MainController getController() {
+		return mainController;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import javax.swing.JPanel;
 
 import modelPackage.Model;
+import other.Core;
 import viewPackage.CategoriesPanel;
 import viewPackage.DatePickerPanel;
 import viewPackage.HistoryPanel;
@@ -28,7 +29,7 @@ public class MainController {
 	public MainController(Model model, Window window) {
 		this.window = window;
 		this.mainPanel = new MainPanel(this);
-		this.model = model;
+		this.model = Core.getInstance().model;
 
 		window.changePanel(mainPanel);
 

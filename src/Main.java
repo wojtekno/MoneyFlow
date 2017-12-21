@@ -1,12 +1,14 @@
 import controllerPackage.StartPanelController;
 import modelPackage.Model;
+import other.Core;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		Model model = new Model();
-		StartPanelController startPanelController = new StartPanelController(model);
+		Core.getInstance().model = new Model();
+		new StartPanelController(Core.getInstance().model);
+		System.out.println("w Main. print Core.getInstance().getController()): " + Core.getInstance().getController());
 
 	}
 

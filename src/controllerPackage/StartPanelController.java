@@ -20,7 +20,7 @@ public class StartPanelController {
 	
 	public void didClickStart() {
 		Core.getInstance().mainController = new MainController(model, window);
-		System.out.println(Core.getInstance().mainController);
+		System.out.println("w StartPanelController. Core.getInstance().mainController : " + Core.getInstance().mainController);
 	}
 	
 	

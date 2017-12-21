@@ -7,21 +7,24 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import controllerPackage.MainController;
+import modelPackage.Model;
 import other.Core;
-import viewPackage.MainPanel;
 import viewPackage.MainPanelInterface;
 
 public class BuyProductListener implements ActionListener {
 
 	MainPanelInterface mainPanel;
-	MainController controller;
+	MainController hereController = Core.getInstance().mainController;
+	Model hereModel = Core.getInstance().model;
 
 	public BuyProductListener(MainPanelInterface mainPanel) {
 		this.mainPanel = mainPanel;
+//		this.hereController = Core.getInstance().getController();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		checkObjects();
 		if (costOK()) {
 			Core.getInstance().mainController.saveItem(getSelectedCategory(), getCost(), getDate());
 			resetDate();
@@ -38,18 +41,18 @@ public class BuyProductListener implements ActionListener {
 			cost = Float.parseFloat(mainPanel.getCostTextField());
 
 		} catch (java.lang.NumberFormatException a) {
-			JOptionPane.showMessageDialog(controller.getWindow(), "Wrog price format, put decimal, different than 0");
+			JOptionPane.showMessageDialog(hereController.getWindow(), "Wrog price format, put decimal, different than 0");
 			mainPanel.setLabel("Enter a price, no letters or zero");
 			mainPanel.setCostTextField("");
 			return false;
 		}
 		if (cost == 0) {
-			JOptionPane.showMessageDialog(controller.getWindow(), "Wrog price format, put decimal, different than 0");
+			JOptionPane.showMessageDialog(hereController.getWindow(), "Wrog price format, put decimal, different than 0");
 			mainPanel.setLabel("Enter a price different than 0");
 			mainPanel.setCostTextField("");
 			return false;
 		} else if (cost < 0) {
-			JOptionPane.showMessageDialog(controller.getWindow(), "Wrong price format: can't be negative");
+			JOptionPane.showMessageDialog(hereController.getWindow(), "Wrong price format: can't be negative");
 			mainPanel.setLabel("Enter a non-negative price");
 			mainPanel.setCostTextField("");
 			return false;
@@ -75,11 +78,9 @@ public class BuyProductListener implements ActionListener {
 	 * get date from DatePickerPanel
 	 */
 	private Date getDate() {
-		System.out.println("core.maincontrol" + Core.getInstance().mainController);
-//		System.out.println("buyProd:" + controller);
-//		System.out.println(controller.getDatePickerPanel());
+		
 		if (Core.getInstance().mainController.getDatePickerPanel() != null) {
-			return (Date) controller.getDatePickerPanel().datePicker.getModel().getValue();
+			return (Date) hereController.getDatePickerPanel().datePicker.getModel().getValue();
 		}
 		return null;
 	}
@@ -100,5 +101,19 @@ public class BuyProductListener implements ActionListener {
 		mainPanel.setLabel("");
 		mainPanel.setCostTextField("");
 
+	}
+	
+	/*
+	 * for sake of debbuging, prints some objects
+	 */
+	private void checkObjects() {
+		System.out.println("Sprawdzam jak zachowuja sie poszczegolne obiekty/referencje:\nw BuyProductListener: ");
+		System.out.println("Core.getInstance().mainController.getModel(): " + Core.getInstance().mainController.getModel());
+		System.out.println("hereController: " + hereController);
+		System.out.println("hereModel: " + hereModel);
+		System.out.println("hereController.getModel(): " + hereController.getModel());
+		System.out.println("Core.getInstance().mainController): " + Core.getInstance().mainController);
+		System.out.println("hereController.getDatePickerPanel(): " + hereController.getDatePickerPanel());
+		
 	}
 }

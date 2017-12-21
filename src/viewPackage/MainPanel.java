@@ -17,7 +17,7 @@ import listenersPackage.GoToDatePickerPanelListener;
 import listenersPackage.GoToHistoryPanelListener;
 import products.Category;
 
-public class MainPanel extends JPanel implements MainPanelInterface{
+public class MainPanel extends JPanel implements MainPanelInterface {
 
 	MainController controller;
 
@@ -37,7 +37,7 @@ public class MainPanel extends JPanel implements MainPanelInterface{
 		historyButton = new JButton("History");
 		closeButton = new JButton("Close");
 		label = new JLabel();
-		chooseCategoryCB = new JComboBox<>(setChooseCategoryCB());
+		chooseCategoryCB = new JComboBox<>(assignChooseCategoryComboBox());
 
 		costTF = new JTextField();
 		okButton = new JButton("OK");
@@ -76,7 +76,7 @@ public class MainPanel extends JPanel implements MainPanelInterface{
 	/*
 	 * assigning values to the ComboBox
 	 */
-	private String[] setChooseCategoryCB() {
+	private String[] assignChooseCategoryComboBox() {
 		String[] products = new String[Category.values().length];
 		Category[] labels = Category.values();
 		for (int i = 0; i < Category.values().length; i++) {
@@ -98,12 +98,18 @@ public class MainPanel extends JPanel implements MainPanelInterface{
 	@Override
 	public void setCostTextField(String text) {
 		costTF.setText(text);
-		
+
 	}
 
 	@Override
 	public String getSelectedCategory() {
-				return chooseCategoryCB.getSelectedItem().toString();
+		return chooseCategoryCB.getSelectedItem().toString();
+	}
+
+	@Override
+	public String[] setChooseCategoryComboBox() {
+		assignChooseCategoryComboBox();
+		return null;
 	}
 
 }
