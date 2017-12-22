@@ -18,16 +18,15 @@ import listenersPackage.GoToMainPanelListener;
 
 public class HistoryPanel extends JPanel implements TextPanel {
 
-	MainController controller;
+
 	JButton categoriesPanelButton;
 	JButton goBackButton;
 	public JTextArea textArea;
 	JScrollPane scroll;
 	boolean categoriesPanelFlag;
 
-	public HistoryPanel(MainController conroller) {
-		this.controller = conroller;
-
+	public HistoryPanel() {
+		
 		goBackButton = new JButton("back");
 		goBackButton.setAlignmentY(1);
 		categoriesPanelButton = new JButton("Categories");
@@ -41,8 +40,8 @@ public class HistoryPanel extends JPanel implements TextPanel {
 		textArea.setFont(font.deriveFont(Font.BOLD));
 		textArea.setEditable(false);
 
-		goBackButton.addActionListener(new GoToMainPanelListener(controller));
-		categoriesPanelButton.addActionListener(new GoToCategoriesPanelListener(controller));
+		goBackButton.addActionListener(new GoToMainPanelListener());
+		categoriesPanelButton.addActionListener(new GoToCategoriesPanelListener());
 
 		add(categoriesPanelButton);
 		add(goBackButton);
@@ -56,9 +55,21 @@ public class HistoryPanel extends JPanel implements TextPanel {
 	}
 
 	@Override
-	public void repaintTextArea() {
-		textArea.setText(controller.getModel().printAllProducts());
-		textArea.append(controller.getModel().sumExpenses());
+	public void repaintTextArea(String allProducts, String sumExpenses) {
+		textArea.setText(allProducts);
+		textArea.append(sumExpenses);
+	}
+
+	@Override
+	public void setText(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void appendText(String text) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -7,21 +7,19 @@ package viewPackage;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import controllerPackage.StartPanelController;
+import controllerPackage.StartController;
 import listenersPackage.ClickStartListener;
 
 
 public class StartPanel extends JPanel {
 	
-	StartPanelController controller;
 	JButton startButton;
 
-	public StartPanel(StartPanelController controller) {
-		this.controller = controller;
-		
+	public StartPanel() {
+				
 		startButton = new JButton("Start");
 		startButton.setBounds(150, 150, 200, 200);
-		startButton.addActionListener(new ClickStartListener(controller));
+		startButton.addActionListener(new ClickStartListener());
 		// startButton.addActionListener(new ActionListener() {
 		//
 		// @Override

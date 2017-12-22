@@ -9,16 +9,11 @@
 package modelPackage;
 
 import java.util.ArrayList;
-
 import java.util.Date;
-
-import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JTextArea;
-
-import products.Product;
 import products.Category;
+import products.Product;
 
 public class Model {
 

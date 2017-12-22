@@ -21,20 +21,18 @@ import net.codejava.swing.DateLabelFormatter;
 
 public class DatePickerPanel extends JPanel {
 
-	MainController controller;
 	public JDatePickerImpl datePicker;
 	JLabel label;
 	JButton okButton;
 
-	public DatePickerPanel(MainController controller) {
-		this.controller = controller;
+	public DatePickerPanel() {
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, new Properties());
 		datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
 		label = new JLabel("Choose a date from the callendar");
 		okButton = new JButton("OK");
-		okButton.addActionListener(new GoToMainPanelListener(controller));
+		okButton.addActionListener(new GoToMainPanelListener());
 
 		label.setSize(200, 100);
 		setSize(300, 300);

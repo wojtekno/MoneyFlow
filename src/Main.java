@@ -1,4 +1,4 @@
-import controllerPackage.StartPanelController;
+import controllerPackage.StartController;
 import modelPackage.Model;
 import other.Core;
 
@@ -6,9 +6,10 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Core.getInstance().model = new Model();
-		new StartPanelController(Core.getInstance().model);
-		System.out.println("w Main. print Core.getInstance().getController()): " + Core.getInstance().getController());
+		Core.getInstance().setModel(new Model());
+		Core.getInstance().setStartController(new StartController());
+		Core.getInstance().getStartController().createStarPanel();
+		System.out.println("1) w Main. print Core.getInstance().getController()): " + Core.getInstance().getMainController());
 
 	}
 

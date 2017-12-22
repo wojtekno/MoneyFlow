@@ -30,9 +30,7 @@ public class MainPanel extends JPanel implements MainPanelInterface {
 	public JComboBox<String> chooseCategoryCB;
 	public JTextField costTF;
 
-	public MainPanel(MainController controller) {
-
-		this.controller = controller;
+	public MainPanel() {
 
 		historyButton = new JButton("History");
 		closeButton = new JButton("Close");
@@ -55,9 +53,9 @@ public class MainPanel extends JPanel implements MainPanelInterface {
 
 		okButton.addActionListener(new BuyProductListener(this));
 		closeButton.addActionListener(new CloseButtonListener());
-		changeDateButton.addActionListener(new GoToDatePickerPanelListener(controller));
-		historyButton.addActionListener(new GoToHistoryPanelListener(controller));
-		genRandomButton.addActionListener(new GenerateRandomProductsListener(controller));
+		changeDateButton.addActionListener(new GoToDatePickerPanelListener());
+		historyButton.addActionListener(new GoToHistoryPanelListener());
+		genRandomButton.addActionListener(new GenerateRandomProductsListener());
 
 		add(genRandomButton);
 		add(historyButton);

@@ -1,8 +1,12 @@
+/*
+ * TODO do wee need MainPanel or MainPanelInterface here?
+ */
+
 package controllerPackage;
+
 import java.util.Date;
 
 import javax.swing.JPanel;
-
 import modelPackage.Model;
 import other.Core;
 import viewPackage.CategoriesPanel;
@@ -11,12 +15,12 @@ import viewPackage.HistoryPanel;
 import viewPackage.MainPanel;
 import viewPackage.Window;
 
-public class MainController {
+public class MainController implements MainControllerInterface {
 
 	// references to different panels
-	private Window window;
+	private Window window = (Window) Core.getInstance().getWindow();
 	private MainPanel mainPanel;
-	private Model model;
+	private Model model = Core.getInstance().getModel();
 	private DatePickerPanel datePickerPanel;
 	private HistoryPanel historyPanel = null;
 	private CategoriesPanel categoriesPanel;
@@ -26,12 +30,10 @@ public class MainController {
 	Date date1;
 	
 
-	public MainController(Model model, Window window) {
-		this.window = window;
-		this.mainPanel = new MainPanel(this);
-		this.model = Core.getInstance().model;
-
-		window.changePanel(mainPanel);
+	public MainController() {
+		
+		System.out.println("window i model w constructor MainController(): " + window + model);
+//		window.changePanel(mainPanel);
 
 	}
 
@@ -49,6 +51,13 @@ public class MainController {
 
 	public void setMainPanel(MainPanel mainPanel) {
 		this.mainPanel = mainPanel;
+	}
+	
+	@Override
+	public void createMainPanel() {
+		Core.getInstance().setMainPanel(new MainPanel());
+		this.mainPanel = (MainPanel) Core.getInstance().getMainPanel();
+		((Window) window).changePanel(mainPanel);
 	}
 
 	public Model getModel() {
@@ -88,21 +97,22 @@ public class MainController {
 	 * methods creating Panels
 	 */
 	public void createDatePicker() {
-		this.datePickerPanel = new DatePickerPanel(this);
+		this.datePickerPanel = new DatePickerPanel();
 	}
 
 	public void createHistoryPanel() {
-		this.historyPanel = new HistoryPanel(this);
+		this.historyPanel = new HistoryPanel();
 	}
 
 	public void createCategoriesPanel() {
-		this.categoriesPanel = new CategoriesPanel(this);
+		this.categoriesPanel = new CategoriesPanel();
 	}
 
 	public void changePanel(JPanel panel) {
 		window.changePanel(panel);
 	}
 
+	@Override
 	/*
 	 * Gets all the needed values (selectedCategory, cost, date) and invokes
 	 * method which creates the product and stores it on the listOfProducts

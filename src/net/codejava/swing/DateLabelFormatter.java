@@ -3,7 +3,7 @@ package net.codejava.swing;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
- 
+
 import javax.swing.JFormattedTextField.AbstractFormatter;
  
 public class DateLabelFormatter extends AbstractFormatter {

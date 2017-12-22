@@ -2,8 +2,6 @@
 
 package products;
 
-import java.util.Date;
-
 public enum Category {
 	FOOD ("Food"),
 	TRANSPORT ("Transportation"),

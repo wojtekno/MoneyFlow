@@ -3,13 +3,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllerPackage.MainController;
+import other.Core;
 
 public class GoToDatePickerPanelListener implements ActionListener {
 
-	MainController controller;
+	MainController controller = (MainController) Core.getInstance().getMainController();
 
-	public GoToDatePickerPanelListener(MainController controller) {
-		this.controller = controller;
+	public GoToDatePickerPanelListener() {
+		
 	}
 
 	@Override

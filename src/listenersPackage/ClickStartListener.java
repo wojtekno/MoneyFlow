@@ -3,16 +3,16 @@ package listenersPackage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import controllerPackage.StartPanelController;
+import controllerPackage.StartControllerInterface;
+import other.Core;
 
 
 public class ClickStartListener implements ActionListener {
 
-	StartPanelController controller;
+	private StartControllerInterface controller;	
 	
-	public ClickStartListener(StartPanelController controller) {
-		this.controller = controller; 
+	public ClickStartListener() {
+		this.controller = Core.getInstance().getStartController();
 	}
 	
 	@Override

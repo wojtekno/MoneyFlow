@@ -20,15 +20,13 @@ import products.Category;
 
 public class CategoriesPanel extends JPanel implements TextPanel {
 
-	MainController controller;
 	public JTextArea textArea;
 	JButton goBackButton;
 	public JComboBox<String> chooseCategoryCB;
 	JScrollPane scroll;
 	String selectedCategory;
 
-	public CategoriesPanel(MainController controller) {
-		this.controller = controller;
+	public CategoriesPanel() {
 
 		goBackButton = new JButton("back");
 		goBackButton.setAlignmentY(1);
@@ -43,8 +41,8 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 		JScrollPane scroll = new JScrollPane(textArea);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-		chooseCategoryCB.addActionListener(new PrintCategoryListener(controller, this));
-		goBackButton.addActionListener(new GoToHistoryPanelListener(controller));
+		chooseCategoryCB.addActionListener(new PrintCategoryListener(this));
+		goBackButton.addActionListener(new GoToHistoryPanelListener());
 
 		add(chooseCategoryCB);
 		add(goBackButton);
@@ -58,7 +56,7 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 	}
 
 	@Override
-	public void repaintTextArea() {
+	public void repaintTextArea(String null1, String null2) {
 		chooseCategoryCB.setSelectedIndex(0);
 		// textArea.setText(sumCategories(controller.getModel().getListOfBoughtProducts()));
 	}
@@ -73,6 +71,18 @@ public class CategoriesPanel extends JPanel implements TextPanel {
 			categories[i] = Category.values()[i - 1].getLabel();
 		}
 		return categories;
+	}
+
+	@Override
+	public void setText(String text) {
+		textArea.setText(text);
+
+	}
+
+	@Override
+	public void appendText(String text) {
+		textArea.append(text);
+
 	}
 
 }
