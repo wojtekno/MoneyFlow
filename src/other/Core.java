@@ -12,24 +12,29 @@ import controllerPackage.MainControllerInterface;
 import controllerPackage.StartControllerInterface;
 import modelPackage.Model;
 import viewPackage.CategoriesPanel;
+import viewPackage.DatePickerPanel;
 import viewPackage.HistoryPanel;
 import viewPackage.MainPanel;
 import viewPackage.MainPanelInterface;
 import viewPackage.StartPanel;
+import viewPackage.Window;
 
 public class Core {
 	
 	private Model model;
 	private StartControllerInterface startController;
-	private JFrame window;
+	private Window window;
 	private MainControllerInterface mainController;
 	private MainPanelInterface mainPanel;
+	private DatePickerPanel datePickerPanel;
+	private HistoryPanel historyPanel;
+	private CategoriesPanel categoriesPanel;
 	
 	public JPanel panel;
 	public StartPanel startPanel;
-	public HistoryPanel historyPanel;
-	public CategoriesPanel categoriesPanel;
-	public JPanel datePickerPanel;
+	
+	
+//	public JPanel datePickerPanel;
 //	
 	
 	
@@ -61,11 +66,11 @@ public class Core {
 		this.startController = startController;
 	}
 
-	public JFrame getWindow() {
+	public Window getWindow() {
 		return window;
 	}
 
-	public void setWindow(JFrame window) {
+	public void setWindow(Window window) {
 		this.window = window;
 	}
 
@@ -83,6 +88,30 @@ public class Core {
 
 	public void setMainPanel(MainPanelInterface mainPanel) {
 		this.mainPanel = mainPanel;
+	}
+
+	public DatePickerPanel getDatePickerPanel() {
+		return datePickerPanel;
+	}
+
+	public void setDatePickerPanel(DatePickerPanel datePickerPanel) {
+		this.datePickerPanel = datePickerPanel;
+	}
+
+	public HistoryPanel getHistoryPanel() {
+		return historyPanel;
+	}
+
+	public void setHistoryPanel(HistoryPanel historyPanel) {
+		this.historyPanel = historyPanel;
+	}
+
+	public CategoriesPanel getCategoriesPanel() {
+		return categoriesPanel;
+	}
+
+	public void setCategoriesPanel(CategoriesPanel categoriesPanel) {
+		this.categoriesPanel = categoriesPanel;
 	}
 
 		

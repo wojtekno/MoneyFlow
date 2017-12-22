@@ -3,23 +3,34 @@ package listenersPackage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
+
 import controllerPackage.MainController;
 import other.Core;
+import viewPackage.CategoriesPanel;
 
-public class GoToCategoriesPanelListener implements ActionListener {
+public class GoToCategoriesPanelListener implements ActionListener, GoToListenerInterface {
 
 	MainController controller = (MainController) Core.getInstance().getMainController();
+	CategoriesPanel categoriesPanel;
 
 	public GoToCategoriesPanelListener() {
-
+		categoriesPanel = Core.getInstance().getCategoriesPanel();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (controller.getCategoriesPanel() == null) {
-			controller.createCategoriesPanel();
+		if (categoriesPanel == null) {
+			Core.getInstance().setCategoriesPanel(new CategoriesPanel());
+			categoriesPanel = Core.getInstance().getCategoriesPanel();
 		}
-		controller.getCategoriesPanel().repaintTextArea(null, null);
-		controller.changePanel(controller.getCategoriesPanel());
+		categoriesPanel.repaintTextArea(null, null);
+		changePanel(categoriesPanel);
+	}
+
+	@Override
+	public void changePanel(JPanel panel) {
+		Core.getInstance().getWindow().changePanel(panel);
+
 	}
 }

@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import controllerPackage.StartController;
 import listenersPackage.ClickStartListener;
+import listenersPackage.GoToMainPanelListener;
 
 
 public class StartPanel extends JPanel {
@@ -19,7 +20,7 @@ public class StartPanel extends JPanel {
 				
 		startButton = new JButton("Start");
 		startButton.setBounds(150, 150, 200, 200);
-		startButton.addActionListener(new ClickStartListener());
+		startButton.addActionListener(new GoToMainPanelListener());
 		// startButton.addActionListener(new ActionListener() {
 		//
 		// @Override

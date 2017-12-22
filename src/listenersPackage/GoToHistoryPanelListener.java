@@ -3,28 +3,42 @@
  */
 
 package listenersPackage;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
 
 import controllerPackage.MainController;
 import controllerPackage.MainControllerInterface;
 import other.Core;
+import viewPackage.HistoryPanel;
 
-public class GoToHistoryPanelListener implements ActionListener {
+public class GoToHistoryPanelListener implements ActionListener, GoToListenerInterface {
 
-	MainController controller = (MainController) Core.getInstance().getMainController();
+	MainControllerInterface controller = Core.getInstance().getMainController();
+	HistoryPanel historyPanel;
 
 	public GoToHistoryPanelListener() {
-		
+		historyPanel = Core.getInstance().getHistoryPanel();
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (controller.getHistoryPanel() == null) {
-			controller.createHistoryPanel();
+		if (historyPanel == null) {
+			Core.getInstance().setHistoryPanel(new HistoryPanel());
+			historyPanel = Core.getInstance().getHistoryPanel();
 		}
-		controller.getHistoryPanel().repaintTextArea(controller.getModel().printAllProducts(),
-				controller.getModel().sumExpenses());
-		controller.changePanel(controller.getHistoryPanel());
+		historyPanel.repaintTextArea(controller.getAllItems().toString(),
+				controller.getSumOfExpenses(controller.getAllItems()));
+		changePanel(historyPanel);
+
+	}
+
+	@Override
+	public void changePanel(JPanel panel) {
+		Core.getInstance().getWindow().changePanel(panel);
+
 	}
 }

@@ -1,22 +1,38 @@
 package listenersPackage;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
+
 import controllerPackage.MainController;
 import other.Core;
+import viewPackage.MainPanel;
+import viewPackage.MainPanelInterface;
 
-public class GoToMainPanelListener implements ActionListener {
-	
-	MainController controller = (MainController) Core.getInstance().getMainController();
-	
-	public GoToMainPanelListener () {
-		
+public class GoToMainPanelListener implements ActionListener, GoToListenerInterface {
+
+	// MainController controller = (MainController)
+	// Core.getInstance().getMainController();
+	MainPanelInterface mainPanel;
+
+	public GoToMainPanelListener() {
+		mainPanel = Core.getInstance().getMainPanel();
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		controller.changePanel(controller.getMainPanel());
+		if (mainPanel == null) {
+			Core.getInstance().setMainPanel(new MainPanel());
+			mainPanel = Core.getInstance().getMainPanel();
+		}
+		changePanel((JPanel) mainPanel);
 	}
-	
+
+	@Override
+	public void changePanel(JPanel panel) {
+		Core.getInstance().getWindow().changePanel(panel);
+
+	}
 
 }

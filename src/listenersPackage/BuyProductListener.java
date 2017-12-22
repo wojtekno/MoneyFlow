@@ -11,23 +11,25 @@ import controllerPackage.MainControllerInterface;
 import modelPackage.Model;
 import other.Core;
 import viewPackage.MainPanelInterface;
+import viewPackage.Window;
 
 public class BuyProductListener implements ActionListener {
 
 	MainPanelInterface mainPanel;
 	MainControllerInterface controller;
-
+	Window window = Core.getInstance().getWindow();
+	
 	public BuyProductListener(MainPanelInterface mainPanel) {
 		this.mainPanel = mainPanel;
-		System.out.println("4) przed konstruktorem - hereController: " + controller);
+//		System.out.println("4) przed konstruktorem - hereController: " + controller);
 		this.controller = Core.getInstance().getMainController();
-		System.out.println("5) po konstruktorze - hereController: " + controller);
+//		System.out.println("5) po konstruktorze - hereController: " + controller);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 //		this.hereController = Core.getInstance().mainController;
-		checkObjects();
+//		checkObjects();
 		if (costOK()) {
 			controller.saveItem(getSelectedCategory(), getCost(), getDate());
 			resetDate();
@@ -44,18 +46,18 @@ public class BuyProductListener implements ActionListener {
 			cost = Float.parseFloat(mainPanel.getCostTextField());
 
 		} catch (java.lang.NumberFormatException a) {
-			JOptionPane.showMessageDialog(controller.getWindow(), "Wrog price format, put decimal, different than 0");
+			JOptionPane.showMessageDialog(window, "Wrog price format, put decimal, different than 0");
 			mainPanel.setLabel("Enter a price, no letters or zero");
 			mainPanel.setCostTextField("");
 			return false;
 		}
 		if (cost == 0) {
-			JOptionPane.showMessageDialog(controller.getWindow(), "Wrog price format, put decimal, different than 0");
+			JOptionPane.showMessageDialog(window, "Wrog price format, put decimal, different than 0");
 			mainPanel.setLabel("Enter a price different than 0");
 			mainPanel.setCostTextField("");
 			return false;
 		} else if (cost < 0) {
-			JOptionPane.showMessageDialog(controller.getWindow(), "Wrong price format: can't be negative");
+			JOptionPane.showMessageDialog(window, "Wrong price format: can't be negative");
 			mainPanel.setLabel("Enter a non-negative price");
 			mainPanel.setCostTextField("");
 			return false;
@@ -82,8 +84,8 @@ public class BuyProductListener implements ActionListener {
 	 */
 	private Date getDate() {
 		
-		if (controller.getDatePickerPanel() != null) {
-			return (Date) controller.getDatePickerPanel().datePicker.getModel().getValue();
+		if (Core.getInstance().getDatePickerPanel() != null) {
+			return (Date) Core.getInstance().getDatePickerPanel().datePicker.getModel().getValue();
 		}
 		return null;
 	}
@@ -92,8 +94,8 @@ public class BuyProductListener implements ActionListener {
 	 * set date in DatePickerPanel to null
 	 */
 	private void resetDate() {
-		if (controller.getDatePickerPanel() != null) {
-			controller.getDatePickerPanel().refreshDatePickerPanel();
+		if (Core.getInstance().getDatePickerPanel() != null) {
+			Core.getInstance().getDatePickerPanel().refreshDatePickerPanel();
 		}
 	}
 

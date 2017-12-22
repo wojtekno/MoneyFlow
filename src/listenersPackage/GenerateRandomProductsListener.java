@@ -16,12 +16,13 @@ public class GenerateRandomProductsListener implements ActionListener {
 	MainController controller = (MainController) Core.getInstance().getMainController();
 
 	public GenerateRandomProductsListener() {
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		createListOf24RandomProducts(controller.getModel().getListOfBoughtProducts());
+		Core.getInstance().getModel().createListOf24RandomProducts();
+		// createListOf24RandomProducts(controller.getModel().getListOfBoughtProducts());
 	}
 
 }

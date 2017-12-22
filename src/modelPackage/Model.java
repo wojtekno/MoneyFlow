@@ -9,6 +9,7 @@
 package modelPackage;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +30,8 @@ public class Model {
 	}
 
 	/*
-	 * main method, saves products to the list
-	 * TODO API, niech informuje o zmianie controller
-	 * TODO Controller niech poinformuje APIRepaintText
+	 * main method, saves products to the list TODO API, niech informuje o zmianie
+	 * controller TODO Controller niech poinformuje APIRepaintText
 	 */
 
 	public void nextPurchase(String selectedProduct, float cost, Date date1) {
@@ -60,9 +60,9 @@ public class Model {
 	 * 
 	 * TODO change it so it allows to save only 2 decimals
 	 */
-	public String sumExpenses() {
+	public String sumExpenses(List<Product> list) {
 		float sum = 0;
-		for (Product item : listOfBoughtProducts) {
+		for (Product item : list) {
 			sum += item.getCost();
 		}
 		return String.format("\nTotal %.2f", sum);
@@ -101,7 +101,7 @@ public class Model {
 			s += String.format("%s\t%.2f\n", cat.getLabel(), totals[j]);
 			j++;
 		}
-		s += sumExpenses();
+		s += sumExpenses(listOfBoughtProducts);
 		return s;
 	}
 
@@ -127,5 +127,14 @@ public class Model {
 			}
 		}
 		return productsFromCategory;
+	}
+
+	// creates 9*6 objects
+	public void createListOf24RandomProducts()  {
+			for (int i = 0; i < 4; i++) {
+				for (Category item : Category.values()) {
+					listOfBoughtProducts.add(new Product(item.getLabel()));	
+				}
+			}
 	}
 }
