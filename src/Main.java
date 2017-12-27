@@ -1,7 +1,7 @@
 import controllerPackage.MainController;
 import controllerPackage.StartController;
+import modelPackage.Core;
 import modelPackage.Model;
-import other.Core;
 
 public class Main {
 

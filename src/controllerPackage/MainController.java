@@ -11,9 +11,9 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import modelPackage.Category;
+import modelPackage.Core;
 import modelPackage.Model;
 import modelPackage.Product;
-import other.Core;
 import viewPackage.CategoriesPanel;
 import viewPackage.DatePickerPanel;
 import viewPackage.HistoryPanel;
@@ -54,43 +54,14 @@ public class MainController implements MainControllerInterface {
 	}
 
 	@Override
+	public void createStartPanel() {
+		startPanel = new StartPanel();
+		window.changePanel(startPanel);
+	}
+
+	@Override
 	public DatePickerPanel getDatePickerPanel() {
 		return datePickerPanel;
-	}
-
-	public void setDatePickerPanel(DatePickerPanel panel) {
-		this.datePickerPanel = panel;
-	}
-
-	public HistoryPanel getHistoryPanel() {
-		return historyPanel;
-	}
-
-	public void setHistoryPanel(HistoryPanel historyPanel) {
-		this.historyPanel = historyPanel;
-	}
-
-	public CategoriesPanel getCategoriesPanel() {
-		return categoriesPanel;
-	}
-
-	public void setCategoriesPanel(CategoriesPanel categoriesPanel) {
-		this.categoriesPanel = categoriesPanel;
-	}
-
-	/*
-	 * methods creating Panels
-	 */
-	public void createDatePicker() {
-		this.datePickerPanel = new DatePickerPanel();
-	}
-
-	public void createHistoryPanel() {
-		this.historyPanel = new HistoryPanel();
-	}
-
-	public void createCategoriesPanel() {
-		this.categoriesPanel = new CategoriesPanel();
 	}
 
 	public void changePanel(JPanel panel) {
@@ -99,18 +70,11 @@ public class MainController implements MainControllerInterface {
 
 	@Override
 	/*
-	 * Gets all the needed values (selectedCategory, cost, date) and invokes method
-	 * which creates the product and stores it on the listOfProducts
+	 * Get all the needed values (selectedCategory, cost, date) create the product
+	 * and store it in Model
 	 */
 	public void saveItem(String selectedCategory, float cost, LocalDate date) {
 		model.saveItem(selectedCategory, cost, date);
-	}
-
-	@Override
-	public void createStartPanel() {
-		startPanel = new StartPanel();
-		window.changePanel(startPanel);
-
 	}
 
 	@Override
@@ -148,27 +112,25 @@ public class MainController implements MainControllerInterface {
 
 	@Override
 	public String printGeneralOverwiev() {
-		String s = "";
+		String print = "";
 		List<Product> list = model.getListOfAllItems();
-		float[] totals = new float[Category.values().length];
+		float[] sumOfCategories = new float[Category.values().length];
 		for (Product item : list) {
 			int i = 0;
 			for (Category cat : Category.values()) {
 				if (item.getLabel().equals(cat.getLabel())) {
-					totals[i] += item.getCost();
+					sumOfCategories[i] += item.getCost();
 				}
 				i++;
 			}
 		}
-
 		int j = 0;
 		for (Category cat : Category.values()) {
-
-			s += String.format("%s\t%.2f\n", cat.getLabel(), totals[j]);
+			print += String.format("%s\t%.2f\n", cat.getLabel(), sumOfCategories[j]);
 			j++;
 		}
-		s += printSumOfAll();
-		return s;
+		print += printSumOfAll();
+		return print;
 	}
 
 	@Override

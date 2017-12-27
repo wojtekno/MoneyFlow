@@ -1,4 +1,4 @@
-package other;
+package modelPackage;
 /*
  * I used to hold here references to the all panels
  * before I implemented MVC pattern
@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import controllerPackage.MainController;
 import controllerPackage.MainControllerInterface;
 import controllerPackage.StartControllerInterface;
-import modelPackage.Model;
 import viewPackage.CategoriesPanel;
 import viewPackage.DatePickerPanel;
 import viewPackage.HistoryPanel;

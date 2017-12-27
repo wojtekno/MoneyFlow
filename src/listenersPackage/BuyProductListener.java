@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
 
 import controllerPackage.MainController;
 import controllerPackage.MainControllerInterface;
+import modelPackage.Core;
 import modelPackage.Model;
-import other.Core;
 import viewPackage.MainPanelInterface;
 import viewPackage.Window;
 

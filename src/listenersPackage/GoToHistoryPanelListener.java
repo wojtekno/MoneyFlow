@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import controllerPackage.MainController;
 import controllerPackage.MainControllerInterface;
-import other.Core;
+import modelPackage.Core;
 import viewPackage.HistoryPanel;
 
 public class GoToHistoryPanelListener implements ActionListener, GoToListenerInterface {

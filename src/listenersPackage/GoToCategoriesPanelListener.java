@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 import controllerPackage.MainController;
-import other.Core;
+import modelPackage.Core;
 import viewPackage.CategoriesPanel;
 
 public class GoToCategoriesPanelListener implements ActionListener, GoToListenerInterface {

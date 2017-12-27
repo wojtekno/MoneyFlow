@@ -1,8 +1,8 @@
 package controllerPackage;
 
 
+import modelPackage.Core;
 import modelPackage.Model;
-import other.Core;
 import viewPackage.StartPanel;
 import viewPackage.Window;
 

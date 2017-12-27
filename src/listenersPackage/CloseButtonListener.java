@@ -2,7 +2,7 @@ package listenersPackage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import other.Core;
+import modelPackage.Core;
 
 public class CloseButtonListener implements ActionListener {
 

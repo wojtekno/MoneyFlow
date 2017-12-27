@@ -6,9 +6,6 @@ package viewPackage;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
-import controllerPackage.StartController;
-import listenersPackage.ClickStartListener;
 import listenersPackage.GoToMainPanelListener;
 
 

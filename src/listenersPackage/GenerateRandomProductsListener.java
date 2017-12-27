@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import controllerPackage.MainController;
-import other.Core;
+import modelPackage.Core;
 
 public class GenerateRandomProductsListener implements ActionListener {
 
