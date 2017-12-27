@@ -16,7 +16,7 @@ import viewPackage.HistoryPanel;
 
 public class GoToHistoryPanelListener implements ActionListener, GoToListenerInterface {
 
-	MainControllerInterface controller = Core.getInstance().getMainController();
+	MainController controller = (MainController) Core.getInstance().getMainController();
 	HistoryPanel historyPanel;
 
 	public GoToHistoryPanelListener() {
@@ -30,8 +30,7 @@ public class GoToHistoryPanelListener implements ActionListener, GoToListenerInt
 			Core.getInstance().setHistoryPanel(new HistoryPanel());
 			historyPanel = Core.getInstance().getHistoryPanel();
 		}
-		historyPanel.repaintTextArea(controller.getAllItems().toString(),
-				controller.getSumOfExpenses(controller.getAllItems()));
+		historyPanel.repaintTextArea(controller.printAllItems(), controller.printSumOfAll());
 		changePanel(historyPanel);
 
 	}

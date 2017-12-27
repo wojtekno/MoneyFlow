@@ -12,8 +12,6 @@ import viewPackage.MainPanelInterface;
 
 public class GoToMainPanelListener implements ActionListener, GoToListenerInterface {
 
-	// MainController controller = (MainController)
-	// Core.getInstance().getMainController();
 	MainPanelInterface mainPanel;
 
 	public GoToMainPanelListener() {

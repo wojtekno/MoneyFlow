@@ -7,9 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import products.Category;
-import products.Product;
-
 public class AutomaticMethod {
 	static Product products;
 	static int numberOfPurchaseFinger;

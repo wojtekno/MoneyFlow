@@ -4,13 +4,16 @@
 
 package controllerPackage;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 import javax.swing.JPanel;
+
+import modelPackage.Category;
 import modelPackage.Model;
+import modelPackage.Product;
 import other.Core;
-import products.Product;
 import viewPackage.CategoriesPanel;
 import viewPackage.DatePickerPanel;
 import viewPackage.HistoryPanel;
@@ -36,26 +39,11 @@ public class MainController implements MainControllerInterface {
 	public MainController() {
 		Core.getInstance().setWindow(new Window());
 		window = Core.getInstance().getWindow();
-
-		System.out.println("window i model w constructor MainController(): " + window + model);
-		// window.changePanel(mainPanel);
-
 	}
 
+	@Override
 	public Window getWindow() {
 		return window;
-	}
-
-	public void setWindow(Window window) {
-		this.window = window;
-	}
-
-	public MainPanel getMainPanel() {
-		return mainPanel;
-	}
-
-	public void setMainPanel(MainPanel mainPanel) {
-		this.mainPanel = mainPanel;
 	}
 
 	@Override
@@ -65,14 +53,7 @@ public class MainController implements MainControllerInterface {
 		window.changePanel(mainPanel);
 	}
 
-	public Model getModel() {
-		return model;
-	}
-
-	public void setModel(Model model) {
-		this.model = model;
-	}
-
+	@Override
 	public DatePickerPanel getDatePickerPanel() {
 		return datePickerPanel;
 	}
@@ -121,8 +102,8 @@ public class MainController implements MainControllerInterface {
 	 * Gets all the needed values (selectedCategory, cost, date) and invokes method
 	 * which creates the product and stores it on the listOfProducts
 	 */
-	public void saveItem(String selectedCategory, float cost, Date date) {
-		model.nextPurchase(selectedCategory, cost, date);
+	public void saveItem(String selectedCategory, float cost, LocalDate date) {
+		model.saveItem(selectedCategory, cost, date);
 	}
 
 	@Override
@@ -134,21 +115,79 @@ public class MainController implements MainControllerInterface {
 
 	@Override
 	public List<Product> getAllItems() {
-		return model.getListOfBoughtProducts();
+		return model.getListOfAllItems();
 	}
 
 	@Override
 	public List<Product> getCategoryItems(String selectedCategory) {
-		return model.getProductsFromChoosenCategory(selectedCategory);
-	}
-
-	@Override
-	public String getSumOfExpenses(List<Product> list) {
-		return model.sumExpenses(list);
+		return model.getListOfCategoryItems(selectedCategory);
 	}
 
 	@Override
 	public String printAllItems() {
-		return model.printAllProducts();
+		String listOfAllProducts = "";
+		List<Product> list = model.getListOfAllItems();
+		for (Product item : list) {
+			listOfAllProducts += String.format("%d) %s", list.indexOf(item) + 1, item.toString());
+		}
+		return listOfAllProducts;
+
+	}
+
+	@Override
+	public String printCategoryItems(String selectedCategory) {
+		String printList = "";
+		List<Product> list = model.getListOfCategoryItems(selectedCategory);
+		for (Product item : list) {
+			printList += String.format("%d) %.2f\t%s\n", (list.indexOf(item) + 1), item.getCost(),
+					item.printDate1(null));
+
+		}
+		return printList;
+	}
+
+	@Override
+	public String printGeneralOverwiev() {
+		String s = "";
+		List<Product> list = model.getListOfAllItems();
+		float[] totals = new float[Category.values().length];
+		for (Product item : list) {
+			int i = 0;
+			for (Category cat : Category.values()) {
+				if (item.getLabel().equals(cat.getLabel())) {
+					totals[i] += item.getCost();
+				}
+				i++;
+			}
+		}
+
+		int j = 0;
+		for (Category cat : Category.values()) {
+
+			s += String.format("%s\t%.2f\n", cat.getLabel(), totals[j]);
+			j++;
+		}
+		s += printSumOfAll();
+		return s;
+	}
+
+	@Override
+	public String printSumOfAll() {
+		float sum = 0;
+		List<Product> list = getAllItems();
+		for (Product item : list) {
+			sum += item.getCost();
+		}
+		return String.format("\nTotal %.2f", sum);
+	}
+
+	@Override
+	public String printCategorySum(String selectedCategory) {
+		float sum = 0;
+		List<Product> list = getCategoryItems(selectedCategory);
+		for (Product item : list) {
+			sum += item.getCost();
+		}
+		return String.format("\nTotal %.2f", sum);
 	}
 }

@@ -26,12 +26,10 @@ public class PrintCategoryListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String selectedCategory = panel.chooseCategoryCB.getSelectedItem().toString();
 		if (selectedCategory.equals("General")) {
-			panel.setText(controller.getModel().sumCategories());
+			panel.setText(controller.printGeneralOverwiev());
 		} else {
-			panel.setText(controller.getModel().printProductsFromChoosenCategory(
-					controller.getModel().getProductsFromChoosenCategory(selectedCategory)));
-			panel.appendText(controller.getModel()
-					.sumChosenCategory(controller.getModel().getProductsFromChoosenCategory(selectedCategory)));
+			panel.setText(controller.printCategoryItems(selectedCategory));
+			panel.appendText(controller.printCategorySum(selectedCategory));
 		}
 	}
 

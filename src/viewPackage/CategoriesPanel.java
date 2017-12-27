@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import controllerPackage.MainController;
 import listenersPackage.GoToHistoryPanelListener;
 import listenersPackage.PrintCategoryListener;
-import products.Category;
+import modelPackage.Category;
 
 public class CategoriesPanel extends JPanel implements TextPanel {
 

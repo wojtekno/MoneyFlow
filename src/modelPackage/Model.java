@@ -8,40 +8,74 @@
 
 package modelPackage;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.Date;
 import java.util.List;
 
-import products.Category;
-import products.Product;
-
 public class Model {
 
 	// list that stores all the bought items
 	private ArrayList<Product> listOfBoughtProducts;
+	private Database database;
 
 	public Model() {
 		listOfBoughtProducts = new ArrayList<Product>();
+		database = new Database();
 	}
-
-	public List<Product> getListOfBoughtProducts() {
-		return listOfBoughtProducts;
+	
+	public Database getDatabase() {
+		return database;
 	}
 
 	/*
-	 * main method, saves products to the list TODO API, niech informuje o zmianie
-	 * controller TODO Controller niech poinformuje APIRepaintText
+	 * get all products
+	 */
+	public ArrayList<Product> getListOfAllItems() {
+		// return listOfBoughtProducts;
+		// return database.selectListDate();
+		listOfBoughtProducts = database.selectList();
+		return database.selectList();
+	}
+
+	/*
+	 * get all products from a category - selecetedProduct
+	 */
+	public List<Product> getListOfCategoryItems(String selectedCategory) {
+		// List<Product> productsFromCategory = new ArrayList<Product>();
+		// for (Product item : listOfBoughtProducts) {
+		// if (item.getLabel().equals(selectedProduct)) {
+		// productsFromCategory.add(item);
+		// }
+		// }
+		// return productsFromCategory;
+		return database.selectCategory(selectedCategory);
+	}
+
+	/*
+	 * save products to the list TODO API, niech informuje o zmianie controller TODO
+	 * Controller niech poinformuje APIRepaintText
 	 */
 
-	public void nextPurchase(String selectedProduct, float cost, Date date1) {
-		listOfBoughtProducts.add(new Product(selectedProduct, cost, date1));
+	public void saveItem(String selectedProduct, float cost, LocalDate date) {
+		// listOfBoughtProducts.add(new Product(selectedProduct, cost, date1));
+		database.insertItem(selectedProduct, cost, date);
+	}
 
-		// for (Category item : Category.values()) {
-		// if (selectedProduct.equals(item.getLabel())) {
-		// listOfBoughtProducts.add(new Product(item.getLabel(), cost, date1));
-		// }
-		// }
+	/*
+	 * get sum of all items
+	 */
+	public float getSumOfAll() {
+		return database.getSum();
+	}
+
+	/*
+	 * get sum of chosen category
+	 */
+	public float getCategorySum(String selectedCategory) {
+		return database.getCategorySum(selectedCategory);
 	}
 
 	/*
@@ -49,8 +83,9 @@ public class Model {
 	 */
 	public String printAllProducts() {
 		String listOfAllProducts = "";
-		for (Product item : listOfBoughtProducts) {
-			listOfAllProducts += String.format("%d) %s", (listOfBoughtProducts.indexOf(item) + 1), item.toString());
+		List<Product> list = getListOfAllItems();
+		for (Product item : list) {
+			listOfAllProducts += String.format("%d) %s", (list.indexOf(item) + 1), item.toString());
 		}
 		return listOfAllProducts;
 	}
@@ -66,6 +101,10 @@ public class Model {
 			sum += item.getCost();
 		}
 		return String.format("\nTotal %.2f", sum);
+	}
+
+	public String sumDatabase() {
+		return String.format("\nTotal %.2f,", database.getSum());
 	}
 
 	/*
@@ -112,29 +151,17 @@ public class Model {
 		String s = "";
 		for (Product item : list) {
 			s += (String.format("%d) %.2f\t%s\n", (list.indexOf(item) + 1), item.getCost(), item.printDate1(null)));
+			System.out.println(list.indexOf(item));
 		}
 		return s;
 	}
 
-	/*
-	 * get all products from a category - selecetedProduct
-	 */
-	public List<Product> getProductsFromChoosenCategory(String selectedProduct) {
-		List<Product> productsFromCategory = new ArrayList<Product>();
-		for (Product item : listOfBoughtProducts) {
-			if (item.getLabel().equals(selectedProduct)) {
-				productsFromCategory.add(item);
+	// creates 9*6 objects
+	public void createListOf24RandomProducts() {
+		for (int i = 0; i < 4; i++) {
+			for (Category item : Category.values()) {
+				listOfBoughtProducts.add(new Product(item.getLabel()));
 			}
 		}
-		return productsFromCategory;
-	}
-
-	// creates 9*6 objects
-	public void createListOf24RandomProducts()  {
-			for (int i = 0; i < 4; i++) {
-				for (Category item : Category.values()) {
-					listOfBoughtProducts.add(new Product(item.getLabel()));	
-				}
-			}
 	}
 }

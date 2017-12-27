@@ -1,6 +1,6 @@
 //create and define date, and to string
 
-package products;
+package modelPackage;
 
 public enum Category {
 	FOOD ("Food"),

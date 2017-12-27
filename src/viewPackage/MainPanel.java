@@ -15,7 +15,7 @@ import listenersPackage.CloseButtonListener;
 import listenersPackage.GenerateRandomProductsListener;
 import listenersPackage.GoToDatePickerPanelListener;
 import listenersPackage.GoToHistoryPanelListener;
-import products.Category;
+import modelPackage.Category;
 
 public class MainPanel extends JPanel implements MainPanelInterface {
 

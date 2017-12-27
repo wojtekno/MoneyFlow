@@ -2,6 +2,8 @@ package listenersPackage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -18,18 +20,18 @@ public class BuyProductListener implements ActionListener {
 	MainPanelInterface mainPanel;
 	MainControllerInterface controller;
 	Window window = Core.getInstance().getWindow();
-	
+
 	public BuyProductListener(MainPanelInterface mainPanel) {
 		this.mainPanel = mainPanel;
-//		System.out.println("4) przed konstruktorem - hereController: " + controller);
+		// System.out.println("4) przed konstruktorem - hereController: " + controller);
 		this.controller = Core.getInstance().getMainController();
-//		System.out.println("5) po konstruktorze - hereController: " + controller);
+		// System.out.println("5) po konstruktorze - hereController: " + controller);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-//		this.hereController = Core.getInstance().mainController;
-//		checkObjects();
+		// this.hereController = Core.getInstance().mainController;
+		// checkObjects();
 		if (costOK()) {
 			controller.saveItem(getSelectedCategory(), getCost(), getDate());
 			resetDate();
@@ -82,12 +84,14 @@ public class BuyProductListener implements ActionListener {
 	/*
 	 * get date from DatePickerPanel
 	 */
-	private Date getDate() {
-		
+	private LocalDate getDate() {
 		if (Core.getInstance().getDatePickerPanel() != null) {
-			return (Date) Core.getInstance().getDatePickerPanel().datePicker.getModel().getValue();
+			Date input = (Date) Core.getInstance().getDatePickerPanel().datePicker.getModel().getValue();
+			if(input != null) {
+				return input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			}
 		}
-		return null;
+		return LocalDate.now();
 	}
 
 	/*
@@ -107,18 +111,18 @@ public class BuyProductListener implements ActionListener {
 		mainPanel.setCostTextField("");
 
 	}
-	
+
 	/*
 	 * for sake of debbuging, prints some objects
 	 */
 	private void checkObjects() {
 		System.out.println("Sprawdzam jak zachowuja sie poszczegolne obiekty/referencje:\nw BuyProductListener: ");
-//		System.out.println("Core.getInstance().mainController.getModel(): " + Core.getInstance().getMainController().getModel());
+		// System.out.println("Core.getInstance().mainController.getModel(): " +
+		// Core.getInstance().getMainController().getModel());
 		System.out.println("hereController: " + controller);
-		
-		
+
 		System.out.println("Core.getInstance().mainController): " + Core.getInstance().getMainController());
 		System.out.println("hereController.getDatePickerPanel(): " + controller.getDatePickerPanel());
-		
+
 	}
 }

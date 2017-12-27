@@ -1,9 +1,10 @@
 // use the same formatter for date and time 
 
-package products;
+package modelPackage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -13,7 +14,7 @@ import java.util.Random;
 public class Product {
 	private float cost;
 	// private String date;
-	private Date date1;
+	private LocalDate date1;
 	private String time = "";
 	private String label;
 	Random generator = new Random();  // initialize it here? or in product constructor?
@@ -25,18 +26,20 @@ public class Product {
 	/*
 	 * main constructor
 	 */
-	public Product(String label, float cost, Date date1) {
+	public Product(String label, float cost, LocalDate date1) {
 		super();
 		this.cost = cost;
 		this.label = label;
 		if (date1 == null) {
 			LocalDateTime dateNow = LocalDateTime.now();
-			formatter = DateTimeFormatter.ofPattern("MMM/dd");
+			formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 			// this.date = dateNow.format(formatter);
 			formatter = DateTimeFormatter.ofPattern("hh:mm");
 			// convert time without formatter
 			this.time = dateNow.format(formatter);
-			this.date1 = calendar.getTime();
+			this.date1 = LocalDate.now();
+			System.out.println(this.date1);
+			System.out.println(LocalDate.now());
 		} else {
 			this.date1 = date1;
 		}
@@ -53,7 +56,7 @@ public class Product {
 
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
-		this.date1 = calendar.getTime();
+		this.date1 = LocalDate.now();
 		this.cost = (30 * generator.nextFloat());
 
 		// this.time = "";
@@ -72,7 +75,7 @@ public class Product {
 		formatter = DateTimeFormatter.ofPattern("hh:mm");
 		// convert time without formatter
 		this.time = dateNow.format(formatter);
-		this.date1 = calendar.getTime();
+		this.date1 = LocalDate.now();
 		this.label = label;
 	}
 
@@ -84,7 +87,7 @@ public class Product {
 	// // this.time = dateNow.format(formatter);
 	// }
 
-	public Product(float cost, Date date1) {
+	public Product(float cost, LocalDate date1) {
 		this.cost = cost;
 		this.date1 = date1;
 	}
@@ -94,8 +97,9 @@ public class Product {
 		this.label = "no Label";
 	}
 
-	public String printDate1(Date date1) {
-		return sformat.format(this.date1);
+	public String printDate1(LocalDate date1) {
+		formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+		return this.date1.format(formatter);
 	}
 
 	public Object stringToObject(String date) throws ParseException {
@@ -118,11 +122,11 @@ public class Product {
 		this.cost = cost;
 	}
 
-	Date getDate() {
+	LocalDate getDate() {
 		return date1;
 	}
 
-	void setDate(Date date1) {
+	void setDate(LocalDate date1) {
 		this.date1 = date1;
 	}
 
